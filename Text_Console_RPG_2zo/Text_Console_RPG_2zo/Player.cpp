@@ -23,11 +23,13 @@ Player::~Player()
 {
 }
 
+// getter
 string Player::getName() const { return name; }
 string Player::getJob() const { return job; }
 
 int Player::getHP() const { return HP; }
 int Player::getmaxHP() const { return maxHP; }
+
 int Player::getSAN() const { return SAN; }
 int Player::getmaxSAN() const { return maxSAN; }
 
@@ -38,47 +40,23 @@ int Player::getSanDefence() const { return sanDefence; }
 int Player::getLevel() const { return level; }
 int Player::getExp() const { return Exp; }
 int Player::getmaxExp() const { return maxExp; }
+    
+//setter
+void Player::setHP(int HP) { this->HP = HP; }
+void Player::setmaxHP(int maxHP) { this->maxHP = maxHP; }
 
-void Player::setHP(int HP)
-{
-    this->HP = HP;
-}
-void Player::setmaxHP(int maxHP)
-{
-    this->maxHP = maxHP;
-}
-void Player::setSAN(int SAN)
-{
-    this->SAN = SAN;
-}
-void Player::setmaxSAN(int maxSAN)
-{
-    this->maxSAN = maxSAN;
-}
-void Player::setPower(int power)
-{
-    this->power = power;
-}
-void Player::setDefence(int defence)
-{
-    this->defence = defence;
-}
-void Player::setSanDefence(int sanDefence)
-{
-    this->sanDefence = sanDefence;
-}
-void Player::setLevel(int level)
-{
-    this->level = level;
-}
-void Player::setExp(int Exp)
-{
-    this->Exp = Exp;
-}
-void Player::setmaxExp(int maxExp)
-{
-    this->maxExp = maxExp;
-}
+void Player::setSAN(int SAN) { this->SAN = SAN; }
+void Player::setmaxSAN(int maxSAN) { this->maxSAN = maxSAN; }
+
+void Player::setPower(int power) { this->power = power; }
+void Player::setDefence(int defence) { this->defence = defence; }
+void Player::setSanDefence(int sanDefence) { this->sanDefence = sanDefence; }
+
+void Player::setLevel(int level) { this->level = level; }
+void Player::setExp(int Exp) { this->Exp = Exp; }
+void Player::setmaxExp(int maxExp) { this->maxExp = maxExp; }
+
+// 플레이어 스탯 확인
 void Player::printPlayerStatus() const
 {
     cout << "========================================" << endl;

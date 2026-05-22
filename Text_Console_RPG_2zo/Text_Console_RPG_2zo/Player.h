@@ -24,8 +24,6 @@ public:
 
     Player(std::string name, std::string job);
 
-    virtual ~Player();
-
     std::string getName() const;
     std::string getJob() const;
 
