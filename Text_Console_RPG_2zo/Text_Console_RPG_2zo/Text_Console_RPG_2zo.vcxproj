@@ -129,7 +129,7 @@
     <ClInclude Include="Player.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="item.cpp" />
+    <ClCompile Include="Item.cpp" />
     <ClCompile Include="LevelUp.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Monster.cpp" />
