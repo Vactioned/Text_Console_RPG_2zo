@@ -25,7 +25,7 @@ public:
     ItemType getType() const;
     int getValue() const;
 
-    // Player& 대신 Player*를 받도록 수정
+    // Player& 대신 Player* 를 받도록 수정 
     void use(Player* player) const;
 
     static Item createHealPotion();
