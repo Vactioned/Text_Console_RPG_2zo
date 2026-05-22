@@ -14,14 +14,14 @@ private:
 
 public:
    
-    Monster(int maxhp, int attackPower, int SANPower);
+    Monster(int maxhp, int attackPower, int SANPower, std::string name);
 
-    void TakeDamage(int damage);  //몬스터가 받는 데미지
-    void Attack(); // 몬스터가 주는 데미지
+    virtual ~Monster() {}
 
     
+    void Attack(); // 몬스터가 주는 데미지
+    void TakeDamage(int damage);
     void SanAttack(Player* player, int SanDamage); //몬스터가 플레이어에게 주는 정신공격데미지
-
     void setname(std::string name);
 
    
@@ -29,6 +29,5 @@ public:
     int GetMaxhp() { return maxhp; }
     int GetAttackPower() { return attackPower; }
     int GetSANPower() { return SANPower; }
-
     std::string Getname() { return name; } 
 };

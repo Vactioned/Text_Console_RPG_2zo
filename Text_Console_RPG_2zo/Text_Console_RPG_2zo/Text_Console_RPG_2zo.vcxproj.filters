@@ -27,6 +27,9 @@
     <ClInclude Include="Monster.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="OtherMonster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
     <ClInclude Include="BattleSystem.h">
       <Filter>Header Files</Filter>
     </ClInclude>
