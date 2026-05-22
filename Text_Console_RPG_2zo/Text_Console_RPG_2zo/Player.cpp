@@ -12,6 +12,7 @@ Player::Player(std::string name, std::string job)
     SAN = 100;
     power = 30;
     defence = 10;
+    sanDefence = 5;
 
     level = 1;
     Exp = 0;
