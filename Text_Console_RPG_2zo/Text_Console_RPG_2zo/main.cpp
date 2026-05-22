@@ -1,24 +1,9 @@
-#include <iostream>
+﻿#include <iostream>
 #include <string>
 
+#include "LogManager.h"
+
 using namespace std;
-
-// 화면을 깔끔하게 지워주는 함수
-void ClearScreen()
-{
-#ifdef _WIN32
-    system("cls");
-#else
-    system("clear");
-#endif
-}
-
-// 엔터를 누르면 넘어가는 함수
-void PressEnterToContinue()
-{
-    std::cout << "\n[ 엔터(Enter)를 누르면 계속합니다... ]";
-    std::cin.get(); // 사용자가 엔터를 누를 때까지 대기
-}
 
 int main()
 {
@@ -29,22 +14,21 @@ int main()
     cout << " 또한 인간이 느끼는 가장 강력하고 오래된 공포는, 미지에 대한 공포이다. " << endl;
     cout << "							        		- 러브크래프트 -		" << endl;
     cout << "================================================================" << endl;
-    PressEnterToContinue();
+    LogManager::PressEnter();
 
-    ClearScreen();
+    LogManager::Clear();
     cout << "================================================================" << endl;
     cout << "                       나의 이름은 무엇인가                        " << endl;
     cout << "================================================================" << endl;
     // 이름 입력 변수 추가 예정
 
-    ClearScreen();
+    LogManager::Clear();
     cout << "================================================================" << endl;
     cout << "                      나의 직업은 무엇인가                         " << endl;
     cout << "================================================================" << endl;
     // 직업 선택 함수 추가 예정
 
-
-    ClearScreen();
+    LogManager::Clear();
     cout << "================================================================" << endl;
     cout << " 세상은 생각보다 쉽게 무너진다." << endl;
     cout << " 법과 질서가 아닌, 피와 광기에 의해서." << endl;
@@ -61,10 +45,9 @@ int main()
     cout << " 공기 중에 감도는 기분 나쁜 비린내." << endl;
     cout << " 직감이 경고하고 있다. 이번 의뢰는 결코 만만치 않을 것이라고." << endl;
     cout << "================================================================" << endl;
-    PressEnterToContinue();
+    LogManager::PressEnter();
 
-    ClearScreen();
-
+    LogManager::Clear();
 
     return 0;
 }
