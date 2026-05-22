@@ -13,6 +13,12 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
+    <Filter Include="Header Files\Class.h">
+      <UniqueIdentifier>{fec0751e-25f4-4517-a721-ea63f1359cfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes.cpp">
+      <UniqueIdentifier>{570c748c-c523-4e08-aaa3-fde1db3ad173}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -36,6 +42,21 @@
     <ClInclude Include="LogManager.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Berserker.h">
+      <Filter>Header Files\Class.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Warlock.h">
+      <Filter>Header Files\Class.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Monk.h">
+      <Filter>Header Files\Class.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Thief.h">
+      <Filter>Header Files\Class.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes.h">
+      <Filter>Header Files\Class.h</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -58,6 +79,18 @@
     </ClCompile>
     <ClCompile Include="LogManager.cpp">
       <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Berserker.cpp">
+      <Filter>Source Files\Classes.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Warlock.cpp">
+      <Filter>Source Files\Classes.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Monk.cpp">
+      <Filter>Source Files\Classes.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Thief.cpp">
+      <Filter>Source Files\Classes.cpp</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

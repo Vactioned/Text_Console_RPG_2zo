@@ -124,21 +124,30 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClInclude Include="BattleSystem.h" />
+    <ClInclude Include="Berserker.h" />
+    <ClInclude Include="Classes.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="LevelUp.h" />
     <ClInclude Include="LogManager.h" />
+    <ClInclude Include="Monk.h" />
     <ClInclude Include="Monster.h" />
     <ClInclude Include="OtherMonster.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Thief.h" />
+    <ClInclude Include="Warlock.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BattleSystem.cpp" />
+    <ClCompile Include="Berserker.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="LevelUp.cpp" />
     <ClCompile Include="LogManager.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Monk.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Thief.cpp" />
+    <ClCompile Include="Warlock.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
