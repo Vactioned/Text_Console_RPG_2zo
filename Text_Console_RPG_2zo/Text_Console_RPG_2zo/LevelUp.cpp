@@ -16,6 +16,7 @@ void LevelUp::CheckLevelUp(Player* player)
         player->setPower(player->getPower() + 5);
         player->setHP(player->getmaxHP());        
         LevelUpEffect(player);
+        player->setSAN(player->getmaxSAN());
         break;
         }
         break;
