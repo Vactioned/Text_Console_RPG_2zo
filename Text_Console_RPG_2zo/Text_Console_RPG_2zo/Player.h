@@ -1,5 +1,6 @@
 ﻿#pragma once
 
+#include "Monster.h"
 #include <iostream>
 #include <string>
 
@@ -55,6 +56,6 @@ public:
 
     void printPlayerStatus() const;
 
-    virtual void attack() = 0;    
+    virtual void attack(Monster* monster) = 0;
 };
 
