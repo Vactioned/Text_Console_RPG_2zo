@@ -8,19 +8,24 @@ void LevelUp::CheckLevelUp(Player* player)
     while (player->getExp() >= player->getmaxExp())
     {
         int maxLevel = 10;
-        if (maxLevel >= player->getLevel())
+        if (maxLevel > player->getLevel())
         {
-        player->setExp(player->getExp() - player->getmaxExp());
-        player->setLevel(player->getLevel() + 1);
-        player->setmaxHP(player->getmaxHP() + 20);
-        player->setPower(player->getPower() + 5);
-        player->setHP(player->getmaxHP());        
-        LevelUpEffect(player);
-        break;
+            player->setExp(player->getExp() - player->getmaxExp());
+            player->setLevel(player->getLevel() + 1);
+            player->setmaxHP(player->getmaxHP() + 20);
+            player->setPower(player->getPower() + 5);
+            player->setHP(player->getmaxHP());
+            LevelUpEffect(player);
+            player->setSAN(player->getmaxSAN());
         }
-        break;
+        else
+        {
+            player->setExp(player->getmaxExp());
+            break;
+        }
     }
 }
+
 
 void LevelUp::AddExp(Player* player, int amount)
 {
