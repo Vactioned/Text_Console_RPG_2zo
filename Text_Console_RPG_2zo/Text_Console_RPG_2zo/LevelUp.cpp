@@ -12,8 +12,8 @@ void LevelUp::CheckLevelUp(Player* player)
         {
         player->setExp(player->getExp() - player->getmaxExp());
         player->setLevel(player->getLevel() + 1);
-        player->setmaxHP(player->getLevel() * 20);
-        player->setPower(player->getLevel() * 5);
+        player->setmaxHP(player->getmaxHP() + 20);
+        player->setPower(player->getPower() + 5);
         player->setHP(player->getmaxHP());
         break;
         }
