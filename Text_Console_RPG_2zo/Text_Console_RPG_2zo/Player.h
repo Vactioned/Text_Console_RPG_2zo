@@ -41,9 +41,11 @@ public:
 
     int getPower() const;
     int getDefence() const;
+    int getSanDefence() const;
 
     void setPower(int power);
     void setDefence(int defence);
+    void setSanDefence(int sanDefence);
   
     int getLevel() const;
     int getExp() const;
