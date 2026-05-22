@@ -16,7 +16,29 @@ void LevelUp::CheckLevelUp(Player* player)
             player->setPower(player->getPower() + 5);
             player->setHP(player->getmaxHP());
             LevelUpEffect(player);
-            player->setSAN(player->getmaxSAN());
+            
+            int choice = 0;
+            cout << "획득할 스탯을 선택해주세요" << endl;
+            cout << "1. 방어력     2. 정신 방어력    3. 정신력 회복" << endl;
+            cin >> choice;
+            switch (choice)
+            {
+            case 1:
+                player->setDefence(player->getDefence() + 2);
+                break;
+
+            case 2:
+                player->setSanDefence(player->getSanDefence() + 1);
+                break;
+
+            case 3:
+                player->setSAN(player->getSAN() + 20);
+                break;
+
+            default:
+                cout << endl << "잘못 입력되었습니다. 다시 입력해주세요" << endl;
+                break;
+            }
         }
         else
         {
@@ -41,11 +63,4 @@ void LevelUp::LevelUpEffect(Player* player)
     cout << "   HP + 20" << endl;
     cout << "   공격력 + 5" << endl;
     cout << "================" << endl;
-}
-
-// 테스트용
-void LevelUp::PrintLevelInfo(Player* player)
-{
-    cout << "Level : " << player->getLevel() << endl;
-    cout << "Exp : " << player->getExp() << " / " << player->getmaxExp() << endl;
 }
