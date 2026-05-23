@@ -7,6 +7,6 @@ class Berserker : public Player
 public:
     Berserker(std::string name, std::string job);
 
-    void attack(Monster* monster);
+    void Attack(Monster* monster);
 
 };
