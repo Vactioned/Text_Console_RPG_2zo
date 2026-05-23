@@ -10,16 +10,16 @@ protected:
 
     std::string name;
     std::string job;
-    int HP;
-    int maxHP;
-    int SAN;
-    int maxSAN;
+    int hp;
+    int maxhp;
+    int san;
+    int maxsan;
     int power;
     int defence;
-    int sanDefence;
+    int sandefence;
     int level;
-    int Exp;
-    int maxExp;
+    int exp;
+    int maxexp;
 
 public:
 
@@ -28,15 +28,15 @@ public:
     std::string getName() const;
     std::string getJob() const;
 
-    int getHP() const;
-    int getmaxHP() const;
-    int getSAN() const;
-    int getmaxSAN() const;
+    int getHp() const;
+    int getMaxHp() const;
+    int getSan() const;
+    int getMaxSan() const;
 
-    void setHP(int HP);
-    void setmaxHP(int maxHP);
-    void setSAN(int SAN);
-    void setmaxSAN(int maxSAN);
+    void setHp(int hp);
+    void setMaxHp(int maxhp);
+    void setSan(int sna);
+    void setMaxSan(int maxsan);
 
     int getPower() const;
     int getDefence() const;
@@ -44,18 +44,18 @@ public:
 
     void setPower(int power);
     void setDefence(int defence);
-    void setSanDefence(int sanDefence);
+    void setSanDefence(int sandefence);
   
     int getLevel() const;
     int getExp() const;
-    int getmaxExp() const;
+    int getMaxExp() const;
 
     void setLevel(int level);
     void setExp(int Exp);
-    void setmaxExp(int maxExp);
+    void setMaxExp(int maxExp);
 
-    void printPlayerStatus() const;
+    void PrintPlayerStatus() const;
 
-    virtual void attack(Monster* monster) = 0;
+    virtual void Attack(Monster* monster) = 0;
 };
 

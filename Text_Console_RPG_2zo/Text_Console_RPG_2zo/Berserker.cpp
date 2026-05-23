@@ -8,8 +8,9 @@ Berserker::Berserker(string name, string job)
     : Player(name, job)
 {
 }
-    void Berserker::attack(Monster * monster)
+    void Berserker::Attack(Monster * monster)
     {
-        cout << monster->Getname() << "에게 도끼를 휘두릅니다!" << endl;
+    // gatname 소문자로 수정되면 마저 작성할 것.
+        cout << monster->getname() << "에게 도끼를 휘두릅니다!" << endl;
     }
     
