@@ -5,16 +5,16 @@ using namespace std;
 
 void LevelUp::CheckLevelUp(Player* player)
 {
-    while (player->getExp() >= player->getmaxExp())
+    while (player->getExp() >= player->getMaxExp())
     {
         int maxLevel = 10;
         if (maxLevel > player->getLevel())
         {
-            player->setExp(player->getExp() - player->getmaxExp());
+            player->setExp(player->getExp() - player->getMaxExp());
             player->setLevel(player->getLevel() + 1);
-            player->setmaxHP(player->getmaxHP() + 20);
+            player->setMaxHp(player->getMaxHp() + 20);
             player->setPower(player->getPower() + 5);
-            player->setHP(player->getmaxHP());
+            player->setHp(player->getMaxHp());
             LevelUpEffect(player);
             
             int choice = 0;
@@ -32,7 +32,7 @@ void LevelUp::CheckLevelUp(Player* player)
                 break;
 
             case 3:
-                player->setSAN(player->getSAN() + 20);
+                player->setSan(player->getSan() + 20);
                 break;
 
             default:
@@ -42,7 +42,7 @@ void LevelUp::CheckLevelUp(Player* player)
         }
         else
         {
-            player->setExp(player->getmaxExp());
+            player->setExp(player->getMaxExp());
             break;
         }
     }
