@@ -133,6 +133,7 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="OtherMonster.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="Skill.h" />
     <ClInclude Include="Thief.h" />
     <ClInclude Include="Warlock.h" />
   </ItemGroup>
@@ -146,6 +147,7 @@
     <ClCompile Include="Monk.cpp" />
     <ClCompile Include="Monster.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="Skill.cpp" />
     <ClCompile Include="Thief.cpp" />
     <ClCompile Include="Warlock.cpp" />
   </ItemGroup>
