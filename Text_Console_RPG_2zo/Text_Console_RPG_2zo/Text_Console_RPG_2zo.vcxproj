@@ -126,6 +126,7 @@
     <ClInclude Include="BattleSystem.h" />
     <ClInclude Include="Berserker.h" />
     <ClInclude Include="Classes.h" />
+    <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="LevelUp.h" />
     <ClInclude Include="LogManager.h" />
