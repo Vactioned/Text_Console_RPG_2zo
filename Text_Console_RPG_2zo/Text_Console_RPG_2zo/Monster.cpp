@@ -5,25 +5,31 @@
 
 using namespace std;
 
-Monster::Monster(int maxhp, int attackPower, int SANPower, std::string name) {
+Monster::Monster(int maxhp, int attackPower, int SANPower,int defense, std::string name) {
     this->maxhp = maxhp;
     this->hp = maxhp;
     this->attackPower = attackPower;
     this->SANPower = SANPower;
+    this->defense = defense; //방어력 추가
     this->name = name;
 }
 
-void Monster::setname(std::string name) {
+void Monster::SetName(std::string name) {
     this->name = name;
 }
 
 void Monster::TakeDamage(int damage) {
-    hp -= damage;
+    int finaldamage = damage - this->defense; // 데미지에서 방어력 뺴기 = 최종데미지
+
+    if (finaldamage < 1) {
+        finaldamage = 1; //최소데미지 1
+    }
+    hp -= finaldamage;
     if (hp < 0) hp = 0;
 
 
 
-    cout << name << "이" << damage << "피해를 입었습니다." << endl;
+    cout << name << "이" << finaldamage << "피해를 입었습니다." << endl;
 }
 
 void Monster::Attack() {
