@@ -8,14 +8,14 @@ class Monster {
 private:
     int hp;
     int maxhp;
-    int attackPower;
-    int SANPower;
+    int attackpower;
+    int sanpower;
     int defense;
     std::string name; 
 
 public:
    
-    Monster(int maxhp, int attackPower, int SANPower,int defense, std::string name);
+    Monster(int maxhp, int attackpower, int sanpower,int defense, std::string name);
 
     virtual ~Monster() {}
 
@@ -28,8 +28,8 @@ public:
    
     int getHp() { return hp; }
     int getMaxhp() { return maxhp; }
-    int getAttackPower() { return attackPower; }
-    int getSANPower() { return SANPower; }
+    int getAttackPower() { return attackpower; }
+    int getSanPower() { return sanpower; }
     int getDefense() { return defense; }
     std::string getName() { return name; } 
 };
