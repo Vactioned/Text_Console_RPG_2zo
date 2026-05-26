@@ -3,7 +3,6 @@
 #include <string>
 #include <iostream>
 #include "Inventory.h"
-#include "Item.h"
 #include "Player.h"
 
 class InventoryUI
