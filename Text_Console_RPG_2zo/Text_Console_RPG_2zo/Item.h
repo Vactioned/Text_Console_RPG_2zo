@@ -21,12 +21,16 @@ private:
     int value;
 
 public:
+    // 생성자
     Item(const std::string& name, ItemType type, int value);
 
     // getter
     std::string getName() const;
     ItemType getType() const;
     int getValue() const;
+
+    // 아이템 정보 출력
+    void PrintInfo() const;
 
     // 아이템 사용
     void Use(Player* player) const;

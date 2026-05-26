@@ -11,21 +11,43 @@ Item::Item(const string& name, ItemType type, int value)
 {
 }
 
-string Item::getName() const
+// getter
+string Item::getName() const { return name; }
+ItemType Item::getType() const { return type; }
+int Item::getValue() const { return value; }
+
+// 아이템 정보 출력
+void Item::PrintInfo() const
 {
-    return name;
+    switch (type)
+    {
+    case ItemType::HealPotion:
+        cout << name << " | 체력 +" << value << '\n';
+        break;
+
+    case ItemType::SanPotion:
+        cout << name << " | 정신력 +" << value << '\n';
+        break;
+
+    case ItemType::AttackBoost:
+        cout << name << " | 공격력 +" << value << " (이번 전투 동안)" << '\n';
+        break;
+
+    case ItemType::WeaknessPotion:
+        cout << name << " | 3턴 동안 적 공격력 " << value << "% 감소" << '\n';
+        break;
+
+    case ItemType::VulnerabilityPotion:
+        cout << name << " | 3턴 동안 적이 받는 데미지 " << value << "% 증가" << '\n';
+        break;
+
+    default:
+        cout << "알 수 없는 아이템" << '\n';
+        break;
+    }
 }
 
-ItemType Item::getType() const
-{
-    return type;
-}
-
-int Item::getValue() const
-{
-    return value;
-}
-
+// 아이템 사용
 void Item::Use(Player* player) const
 {
     if (player == nullptr)
@@ -59,13 +81,13 @@ void Item::Use(Player* player) const
         player->setPower(aftervalue);
         cout << "[아이템 사용] " << name << " | 공격력 증가: " << beforevalue << " -> " << aftervalue << " (이번 전투 동안 적용)" << '\n';
         break;
-
+            
     case ItemType::WeaknessPotion:
-        cout << "[아이템 사용] " << name << " | 적 공격력 " << value << "% 감소" << '\n';
+        cout << "[아이템 사용] " << name << " | 3턴 동안 적 공격력 " << value << "% 감소" << '\n';
         break;
 
     case ItemType::VulnerabilityPotion:
-        cout << "[아이템 사용] " << name << " | 적이 받는 데미지 " << value << "% 증가" << '\n';
+        cout << "[아이템 사용] " << name << " | 3턴 동안 적이 받는 데미지 " << value << "% 증가" << '\n';
         break;
 
     default:
@@ -74,27 +96,28 @@ void Item::Use(Player* player) const
     }
 }
 
+// 아이템 생성 함수
 Item Item::CreateHealPotion()
 {
-    return Item("체력 포션", ItemType::HealPotion, 50); // 자신에게 체력 50 회복
+    return Item("체력 포션", ItemType::HealPotion, 50);
 }
 
 Item Item::CreateSanPotion()
 {
-    return Item("정신력 포션", ItemType::SanPotion, 50); // 자신에게 정신력 50 회복
+    return Item("정신력 포션", ItemType::SanPotion, 50);
 }
 
 Item Item::CreateAttackBoost()
 {
-    return Item("공격력 증가 포션", ItemType::AttackBoost, 10); // 자신에게 이번 전투동안 적용
+    return Item("공격력 증가 포션", ItemType::AttackBoost, 10);
 }
 
 Item Item::CreateWeaknessPotion()
 {
-    return Item("약화 포션", ItemType::WeaknessPotion, 30); // 3턴동안 적의 공격력 30% 감소 
+    return Item("약화 포션", ItemType::WeaknessPotion, 30);
 }
 
 Item Item::CreateVulnerabilityPotion()
 {
-    return Item("취약 포션", ItemType::VulnerabilityPotion, 30); // 3턴동안 적에게 가하는 피해량 30% 증가 
+    return Item("취약 포션", ItemType::VulnerabilityPotion, 30);
 }
