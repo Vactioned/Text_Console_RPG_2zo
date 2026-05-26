@@ -23,9 +23,9 @@ private:
     {
         if (name == "체력 포션") return "HP Potion\n+50 HP.";
         if (name == "정신력 포션") return "SAN Potion\n+50 SAN.";
-        if (name == "공격력 증가") return "ATK Increase\nAttack + 10 during this battle.";
-        if (name == "약화 포션") return "Weak Potion\nenemy's attack - 30% for 3 turns.";
-        if (name == "취약 포션") return "Damage Increase\nDamage + 30% for 3 turns.";
+        if (name == "공격력 증가") return "ATK Increase\nAttack + 10 this battle.";
+        if (name == "약화 포션") return "Weak Potion\nenemy's attack - 20% this battle.";
+        if (name == "취약 포션") return "Damage Increase\nDamage + 20% this battle.";
 
         return "";
     }
