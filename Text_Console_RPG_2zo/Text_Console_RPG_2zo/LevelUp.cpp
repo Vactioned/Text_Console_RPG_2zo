@@ -12,8 +12,22 @@ void LevelUp::CheckLevelUp(Player* player)
         {
             player->setExp(player->getExp() - player->getMaxExp());
             player->setLevel(player->getLevel() + 1);
-            player->setMaxHp(player->getMaxHp() + 20);
-            player->setPower(player->getPower() + 5);
+            if (player->getJob() == "버서커")
+            {
+                player->setMaxHp(player->getMaxHp() + 20);
+                player->setPower(player->getPower() + 10);
+            }
+            else if (player->getJob() == "부랑자")
+            {
+                player->setMaxHp(player->getMaxHp() + 18);
+                player->setPower(player->getPower() + 4);
+            }
+            else
+            {
+                player->setMaxHp(player->getMaxHp() + 20);
+                player->setPower(player->getPower() + 5);
+            }
+            
             player->setHp(player->getMaxHp());
             LevelUpEffect(player);
             
@@ -57,10 +71,24 @@ void LevelUp::AddExp(Player* player, int amount)
 
 void LevelUp::LevelUpEffect(Player* player)
 {
+
     cout << "================" << endl;
     cout << "   LEVLE UP!!" << endl;
     cout << "   Lv " << player->getLevel() - 1 << "->" << "Lv " << player->getLevel() << endl;
-    cout << "   HP + 20" << endl;
-    cout << "   공격력 + 5" << endl;
+    if (player->getJob() == "버서커")
+    {
+        cout << "   HP + 20" << endl;
+        cout << "   공격력 + 10" << endl;
+    }
+    else if (player->getJob() == "부랑자")
+    {
+        cout << "   HP + 18" << endl;
+        cout << "   공격력 + 4" << endl;
+    }
+    else
+    {
+        cout << "   HP + 20" << endl;
+        cout << "   공격력 + 5" << endl;
+    }
     cout << "================" << endl;
 }
