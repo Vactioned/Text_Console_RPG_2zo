@@ -69,6 +69,9 @@
     <ClInclude Include="Gambler.h">
       <Filter>Header Files\Class.h</Filter>
     </ClInclude>
+    <ClInclude Include="InventoryUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
