@@ -32,7 +32,7 @@ private:
 
 public:
     template<typename T>
-    void Open(Inventory<T>& inventory, Player* player, bool isBattle)
+    bool Open(Inventory<T>& inventory, Player* player, bool isBattle)
     {
         // 아이템 칸 픽셀 크기
         const int slotSize = 70;
@@ -313,5 +313,6 @@ public:
             // draw마다 display를 하면 과정이 보일 수 있겠지만 코드 진행이 빨라서 못 볼 가능성이 큼
             window.display();
         }
+        return useItem;
     }
 };
