@@ -16,4 +16,6 @@ public:
     // 타이핑 효과 함수
     // delayMs: 글자 사이의 간격 (밀리초 단위)
     static void TypePrint(const std::string& message, int delayMs = 30);
+
+    static void CH1();
 };
