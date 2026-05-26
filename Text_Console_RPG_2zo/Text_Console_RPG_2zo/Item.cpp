@@ -78,10 +78,18 @@ void Item::use(Player* player) const
     case ItemType::AttackBoost:
         beforevalue = player->getPower();
         aftervalue = beforevalue + value;
+
         player->setPower(aftervalue);
+
+        player->setAttackBoostAmount(
+            player->getAttackBoostAmount() + value
+        );
+
+        player->setAttackBoostApplied(true);
+
         cout << "[아이템 사용] " << name << " | 공격력 증가: " << beforevalue << " -> " << aftervalue << " (이번 전투 동안 적용)" << '\n';
         break;
-            
+
     case ItemType::WeaknessPotion:
         cout << "[아이템 사용] " << name << " | 3턴 동안 적 공격력 " << value << "% 감소" << '\n';
         break;
@@ -120,4 +128,25 @@ Item Item::CreateWeaknessPotion()
 Item Item::CreateVulnerabilityPotion()
 {
     return Item("취약 포션", ItemType::VulnerabilityPotion, 30);
+}
+
+// 공격력 증가 효과 해제
+void Item::ResetAttackBoost(Player* player)
+{
+    if (player == nullptr)
+    {
+        return;
+    }
+
+    if (player->isAttackBoostApplied())
+    {
+        int totalBoost = player->getAttackBoostAmount();
+
+        player->setPower(
+            player->getPower() - totalBoost
+        );
+
+        player->setAttackBoostAmount(0);
+        player->setAttackBoostApplied(false);
+    }
 }
