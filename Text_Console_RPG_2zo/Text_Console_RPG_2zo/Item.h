@@ -33,7 +33,7 @@ public:
     void PrintInfo() const;
 
     // 아이템 사용
-    void Use(Player* player) const;
+    void use(Player* player) const;
 
     // 아이템 생성 함수
     static Item CreateHealPotion();
