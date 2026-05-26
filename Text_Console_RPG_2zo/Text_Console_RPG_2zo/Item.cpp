@@ -48,7 +48,7 @@ void Item::PrintInfo() const
 }
 
 // 아이템 사용
-void Item::Use(Player* player) const
+void Item::use(Player* player) const
 {
     if (player == nullptr)
     {
@@ -109,7 +109,7 @@ Item Item::CreateSanPotion()
 
 Item Item::CreateAttackBoost()
 {
-    return Item("공격력 증가 포션", ItemType::AttackBoost, 10);
+    return Item("공격력 증가", ItemType::AttackBoost, 10);
 }
 
 Item Item::CreateWeaknessPotion()
