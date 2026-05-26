@@ -15,20 +15,22 @@ void Gambler::Attack(Monster* monster)
 
     cout << "당신은 공격할 때마저 도박을 합니다. " << monster->getName()
          << "에게 주사위를 던지며 목숨을 건 베팅을 시작합니다!" << endl;
+}
 
-    monster->TakeDamage(this->getPower() - monster->getDefence);
-
-    SkillData Gambler::getSkillData(int skillIndex)
+SkillData Gambler::getSkillData(int skillIndex)
+{
+    if (skillIndex == 1)
     {
-        if (skillIndex == 1)
-            return
+        return
         {
             SkillID::GAMBLER, "승부사",
             "[일반공격]시, 항상 무작위 피해를 입힙니다."
             , true, 0
         };
-        else
-            return
+    }
+    else
+    {
+        return
         {
             SkillID::RUSSIAN_ROULETTE, "러시안 룰렛",
             "[실탄 1발]이 장전된 리볼버로 목숨을 건 도박을 시작합니다.\n"
@@ -37,5 +39,8 @@ void Gambler::Attack(Monster* monster)
             , false, 0
         };
     }
-    void Gambler::useSkill(int skillIndex, Monster * monster, int& turn_cycle)
+}
+
+void Gambler::useSkill(int skillIndex, Monster* monster, int& turn_cycle)
+{
 }
