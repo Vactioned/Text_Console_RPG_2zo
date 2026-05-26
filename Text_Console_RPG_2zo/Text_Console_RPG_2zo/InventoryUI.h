@@ -21,11 +21,11 @@ private:
 
     std::string GetItemDescription(const std::string& name)
     {
-        if (name == "체력 포션") return "Recovers 50 HP.";
-        if (name == "정신력 포션") return "Recovers 50 SAN.";
-        if (name == "공격력 증가") return "Attack increases by 10 during this battle.";
-        if (name == "약화 포션") return "Reduces the enemy's attack power by 30% for 3 turns.";
-        if (name == "취약 포션") return "Damage dealt to enemies increases by 30% for 3 turns.";
+        if (name == "체력 포션") return "HP Potion\n+50 HP.";
+        if (name == "정신력 포션") return "SAN Potion\n+50 SAN.";
+        if (name == "공격력 증가") return "ATK Increase\nAttack + 10 during this battle.";
+        if (name == "약화 포션") return "Weak Potion\nenemy's attack - 30% for 3 turns.";
+        if (name == "취약 포션") return "Damage Increase\nDamage + 30% for 3 turns.";
 
         return "";
     }
@@ -258,7 +258,7 @@ public:
                     {
                         if (cIndex == tooltipindex)
                         {
-                            sf::RectangleShape tooltipBox(sf::Vector2f(300, 100));
+                            sf::RectangleShape tooltipBox(sf::Vector2f(230, 50));
                             tooltipBox.setFillColor(sf::Color(80, 60, 50));
                             tooltipBox.setOutlineColor(sf::Color::White);
                             tooltipBox.setOutlineThickness(1);
@@ -266,7 +266,7 @@ public:
 
                             sf::Text tooltipText;
                             tooltipText.setFont(font);
-                            tooltipText.setString(GetItemName(item.getName()) + "\n" + GetItemDescription(item.getName()));
+                            tooltipText.setString(GetItemDescription(item.getName()));
                             tooltipText.setCharacterSize(12);
                             tooltipText.setFillColor(sf::Color::White);
                             tooltipText.setPosition(static_cast<float>(mousePos.x + 18), static_cast<float>(mousePos.y + 18));
