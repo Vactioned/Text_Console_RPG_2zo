@@ -29,6 +29,8 @@ private:
 
 public:
 
+    virtual ~Player() {}
+
     Player(std::string name, std::string job);
 
     std::string getName() const;
