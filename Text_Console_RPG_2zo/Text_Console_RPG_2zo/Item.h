@@ -35,6 +35,9 @@ public:
     // 아이템 사용
     void use(Player* player) const;
 
+    // 공격력 증가 효과 초기화
+    static void ResetAttackBoost(Player* player);
+
     // 아이템 생성 함수
     static Item CreateHealPotion();
     static Item CreateSanPotion();
