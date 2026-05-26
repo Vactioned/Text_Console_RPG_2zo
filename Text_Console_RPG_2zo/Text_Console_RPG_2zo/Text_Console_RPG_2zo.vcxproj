@@ -136,6 +136,7 @@ sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClInclude Include="BattleSystem.h" />
     <ClInclude Include="Berserker.h" />
     <ClInclude Include="Classes.h" />
+    <ClInclude Include="CorpseGolem.h" />
     <ClInclude Include="Gambler.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryUI.h" />
@@ -144,11 +145,13 @@ sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClInclude Include="LogManager.h" />
     <ClInclude Include="Monk.h" />
     <ClInclude Include="Monster.h" />
+    <ClInclude Include="MutatedSlime.h" />
     <ClInclude Include="OtherMonster.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="Thief.h" />
     <ClInclude Include="Poor.h" />
+    <ClInclude Include="VoidHound.h" />
     <ClInclude Include="Warlock.h" />
   </ItemGroup>
   <ItemGroup>
