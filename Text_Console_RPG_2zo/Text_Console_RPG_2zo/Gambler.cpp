@@ -43,4 +43,5 @@ SkillData Gambler::getSkillData(int skillIndex)
 
 void Gambler::useSkill(int skillIndex, Monster* monster, int& turn_cycle)
 {
+    if (skillIndex == 2) RUSSIAN_ROULETTE(this, monster, turn_cycle);
 }

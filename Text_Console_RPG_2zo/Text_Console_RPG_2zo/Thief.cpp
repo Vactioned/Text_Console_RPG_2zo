@@ -21,7 +21,8 @@ SkillData Thief::getSkillData(int skillIndex)
 {
     if (skillIndex == 1)
     {
-        {
+        return
+        {   
             SkillID::PLUNDER, "약탈",
                 "[아이템 드랍률]확률이 증가합니다.",
                 true, 0
@@ -40,4 +41,5 @@ SkillData Thief::getSkillData(int skillIndex)
 
 void Thief::useSkill(int skillIndex, Monster* monster, int& turn_cycle)
 {
+    if (skillIndex == 2) MIST_WALK(this, monster, turn_cycle);
 }
