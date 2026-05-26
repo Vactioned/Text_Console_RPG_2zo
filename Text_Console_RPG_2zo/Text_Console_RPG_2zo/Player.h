@@ -22,6 +22,11 @@ protected:
     int exp;
     int maxexp;
 
+private:
+
+    int attackBoostAmount;
+    bool attackBoostApplied;
+
 public:
 
     Player(std::string name, std::string job);
@@ -64,5 +69,11 @@ public:
 
     // 스킬 사용(액티브 스킬)
     virtual void useSkill(int skillIndex, Monster* monster, int& turn_cycle) = 0;
+
+    int getAttackBoostAmount() const;
+    bool isAttackBoostApplied() const;
+
+    void setAttackBoostAmount(int amount);
+    void setAttackBoostApplied(bool value);
 };
 

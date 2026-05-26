@@ -17,6 +17,9 @@ Player::Player(std::string name, std::string job)
     level = 1;
     exp = 0;
     maxexp = 100;
+
+    attackBoostAmount = 0;
+    attackBoostApplied = false;
 }
 
 Player::~Player()
@@ -40,6 +43,9 @@ int Player::getSanDefence() const { return sandefence; }
 int Player::getLevel() const { return level; }
 int Player::getExp() const { return exp; }
 int Player::getMaxExp() const { return maxexp; }
+
+int Player::getAttackBoostAmount() const { return attackBoostAmount; }
+bool Player::isAttackBoostApplied() const { return attackBoostApplied; }
     
 //setter
 void Player::setHp(int HP) { this->hp = HP; }
@@ -55,6 +61,9 @@ void Player::setSanDefence(int sanDefence) { this->sandefence = sanDefence; }
 void Player::setLevel(int level) { this->level = level; }
 void Player::setExp(int Exp) { this->exp = Exp; }
 void Player::setMaxExp(int maxExp) { this->maxexp = maxExp; }
+
+void Player::setAttackBoostAmount(int amount) { attackBoostAmount = amount; }
+void Player::setAttackBoostApplied(bool value) { attackBoostApplied = value; }
 
 // 플레이어 스탯 확인
 void Player::PrintPlayerStatus() const
