@@ -1,11 +1,18 @@
 ﻿#include "LogManager.h"
 #include "Player.h"
-#include "thread"       // 컴퓨터를 잠깐 지연시키기 위한 라이브러리
-#include "chrono"       // 시간 단위를 쓰기 위한 라이브러리
+#include <thread>       // 컴퓨터를 잠깐 지연시키기 위한 라이브러리
+#include <chrono>       // 시간 단위를 쓰기 위한 라이브러리
+#include <fstream>      // .txt 파일을 업로드 하기 위해 필요한 라이브러리
+#include <windows.h>    // 색 변경을 위해 필요한 라이브러리
 
 #include <iostream>
 
 using namespace std;
+
+void SetColor(int colorCode)
+{
+    SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorCode);
+}
 
 void LogManager::Clear()
 {
@@ -24,15 +31,27 @@ void LogManager::PressEnter()
 
 void LogManager::TypePrint(const string& message, int delayMs)
 {
-    // 문자열의 처음부터 끝까지 한 글자(char)씩 돌면서 출력
-    for (char c : message)
+    for (size_t i = 0; i < message.length(); ++i)
     {
-        cout << c << flush;     // flush를 해줘야 모았다가 한 번에 출력하지 않고 한 번에 한 글자씩 출력함
+        // 만약 '&' 기호를 만나고, 그 뒤에 숫자가 더 있다면 (색상 코드 파싱)
+        if (message[i] == '&' && i + 1 < message.length() && isdigit(message[i + 1]))
+        {
+            int color = message[i + 1] - '0'; // 문자를 숫자로 변경 (0~9번 색상)
 
-        // 컴퓨터가 지정한 밀리초(ms)만큼 잠깐 멈춘다.
+            // 만약 두 자리 수 색상(10~14)까지 지원하고 싶다면 추가 처리가 필요하지만,
+            // 간단하게 한 자리 수(0~9)만 쓸 때는 이렇게 처리합니다.
+            // 더 정교하게 하려면 &14처럼 뒤에 두 자리를 읽게 만들면 됩니다.
+
+            SetColor(color);
+            i++; // 숫자 부분은 출력하지 않고 건너뜁니다.
+            continue;
+        }
+
+        cout << message[i] << flush;
         this_thread::sleep_for(chrono::milliseconds(delayMs));
     }
-    cout << endl;   
+    cout << endl;
+    SetColor(7); // 한 줄 출력이 끝나면 안전하게 기본 흰색으로 리셋
 }
 
 void LogManager::MainMenu(Player& player)
@@ -58,7 +77,7 @@ void LogManager::MainMenu(Player& player)
             // 전투 시스템 호출 예정 (추후에 임무를 선택할 수 있도록 하면 좋을듯)
             break;
         case 2:
-            player.printPlayerStatus();
+            player.PrintPlayerStatus();
             PressEnter();
             break;
         case 3:
@@ -73,4 +92,22 @@ void LogManager::MainMenu(Player& player)
             break;
         }
     }
+}
+
+void LogManager::CH1()
+{
+    ifstream file("CH1.txt");
+
+    if (!file.is_open())
+    {
+        cout << "파일을 열 수 없습니다.\n";
+    }
+
+    string line;
+    while (getline(file, line))
+    {
+        TypePrint(line);
+    }
+
+    file.close();
 }
