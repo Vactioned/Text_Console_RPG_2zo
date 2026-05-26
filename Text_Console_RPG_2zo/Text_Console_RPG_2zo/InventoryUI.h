@@ -74,7 +74,22 @@ public:
             std::cout << "InventoryUI Font Load Fail\n";
         }
 
+        // 인벤토리 사용 취소 버튼
+        sf::RectangleShape cancelButton(sf::Vector2f(80, 35));
+        cancelButton.setFillColor(sf::Color(90, 70, 60));
+        cancelButton.setOutlineColor(sf::Color::White);
+        cancelButton.setOutlineThickness(1);
+        cancelButton.setPosition(8.f, static_cast<float>(windowHeight - 43));
+
+        sf::Text cancelText;
+        cancelText.setFont(font);
+        cancelText.setString("Cancel");
+        cancelText.setCharacterSize(14);
+        cancelText.setFillColor(sf::Color::White);
+        cancelText.setPosition(25.f, static_cast<float>(windowHeight - 35));
+
         bool printed = false;
+        bool useItem = false;
 
         // 창이 열려있는동안 반복
         while (window.isOpen())
@@ -90,14 +105,14 @@ public:
             // 이벤트가 발생하면 반복문 실행 / pollEvent가 bool타입을 반환하기 때문에 break가 없어도 무한루프는 발생하지 않음
             while (window.pollEvent(event))
             {
-                // 창의 X키에 입력이 들어갔을 때
+                /*// 창의 X키에 입력이 들어갔을 때
                 if (event.type == sf::Event::Closed)
                     window.close();
 
                 // and 조건문 키입력 발생 and 그 키가 esc인 경우
                 if (event.type == sf::Event::KeyPressed &&
                     event.key.code == sf::Keyboard::Escape)
-                    window.close();
+                    window.close();*/
 
                 // and 조건문 마우스 입력 발생 and 그 입력이 좌클릭인 경우
                 if (event.type == sf::Event::MouseButtonPressed &&
@@ -114,6 +129,12 @@ public:
 
                     // row 몇 번째 행, col 몇 번째 열, columns 열의 총 갯수 cf) 행열 0부터 시작
                     int index = row * columns + col;
+
+                    if (cancelButton.getGlobalBounds().contains(static_cast<float>(mouseX), static_cast<float>(mouseY)))
+                    {
+                        window.close();
+                        break;
+                    }
 
                     if (index >= 0 && index < inventory.getSize())
                     {
@@ -139,6 +160,8 @@ public:
                                 std::cout << "SAN : " << player->getSan() << " / " << player->getMaxSan() << '\n';
                                 std::cout << "ATK : " << player->getPower() << '\n';
                                 removeIndex = index;
+                                window.close();
+                                useItem = true;
                                 break;
                             }
 
@@ -281,6 +304,9 @@ public:
                     }
                 }
             }
+
+            window.draw(cancelButton);
+            window.draw(cancelText);
 
             // 앞서 draw로 만든 창들을 보여주기
             // 혹시 display가 앞에 있으면 그리는 과정이 보이는지 의문이 들었지만 아님 그냥 빈 창만 보일 뿐
