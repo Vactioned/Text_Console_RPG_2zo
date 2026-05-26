@@ -1,5 +1,6 @@
 ﻿#pragma once
 #include "Monster.h"
+#include "Player.h"
 #include <cstdlib>
 
 class OtherMonster : public Monster {
@@ -12,6 +13,13 @@ public:
                  "몬스터 이름") // 몬스터이름
 
     {
+    }
 
+    void NormalAttack(Player* player) override {
+        Monster::NormalAttack(player);
+    }
+
+    void SpecialAttack(Player* player) override {
+        //각 몬스터의 특수공격 컨셉 구현칸
     }
 };

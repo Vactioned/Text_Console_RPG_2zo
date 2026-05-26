@@ -10,7 +10,7 @@ private:
     int maxhp;
     int attackpower;
     int sanpower;
-    int defense;
+    int defence;
     std::string name; 
 
 public:
@@ -19,17 +19,17 @@ public:
 
     virtual ~Monster() {}
 
-    
-    void Attack(); // 몬스터가 주는 데미지
-    void TakeDamage(int damage);
-    void SanAttack(Player* player, int SanDamage); //몬스터가 플레이어에게 주는 정신공격데미지
-    void SetName(std::string name);
+    virtual void NormalAttack(Player* player);      // 1.일반공격 
+
+    virtual void SpecialAttack(Player* player) = 0; // 2. 특수공격
+
+    void SetName(std::string name); //이름변경용 함수
 
    
     int getHp() { return hp; }
     int getMaxhp() { return maxhp; }
     int getAttackPower() { return attackpower; }
     int getSanPower() { return sanpower; }
-    int getDefense() { return defense; }
+    int getDefence() { return defence; }
     std::string getName() { return name; } 
 };
