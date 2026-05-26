@@ -54,7 +54,7 @@ public:
 
     void RemoveItem(int index)
     {
-        if (index < 1 || index > items_.size())
+        if (index < 0 || index >= items_.size())
         {
             std::cout << "잘못된 번호입니다.\n";
             return;
@@ -62,17 +62,14 @@ public:
 
         auto it = items_.begin();
 
-        for (int i = 1; i < index; i++)
+        for (int i = 0; i < index; i++)
         {
             ++it;
         }
 
         items_.erase(it);
-
-        std::cout << "아이템을 제거했습니다.\n";
     }
-
-    // item쪽에서 PrintInfo 작성안하면 내가 직접 작성해야함 조정 필요
+    
     void PrintAllItems()
     {
         std::cout << "\n[ Inventory (" << items_.size() << "/" << capacity_ << ") ]\n";
@@ -80,9 +77,7 @@ public:
         int index = 1;
         for (T& item : items_)
         {
-            std::cout << index << ". ";
-            // item.PrintInfo();
-            std::cout << item.getName() << "\n";
+            item.PrintInfo();
             index++;
         }
     }
