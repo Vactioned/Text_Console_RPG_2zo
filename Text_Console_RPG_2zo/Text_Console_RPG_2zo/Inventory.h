@@ -93,11 +93,11 @@ public:
         }
     }
 
-    void SortByPrice()
+    void SortByName()
     {
         items_.sort([](const Item& a, const Item& b)
             {
-                return a.price < b.price;
+                return a.getName() < b.getName();
             });
     }
 };
