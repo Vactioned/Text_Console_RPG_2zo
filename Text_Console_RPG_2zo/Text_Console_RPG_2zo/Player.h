@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "Monster.h"
+#include "Skill.h"
 #include <iostream>
 #include <string>
 
@@ -57,5 +58,11 @@ public:
     void PrintPlayerStatus() const;
 
     virtual void Attack(Monster* monster) = 0;
+
+    // 스킬 정보 반환
+    virtual SkillData getSkillData(int skillIndex) = 0;
+
+    // 스킬 사용(액티브 스킬)
+    virtual void useSkill(int skillIndex, Monster* monster, int& turn_cycle) = 0;
 };
 
