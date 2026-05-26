@@ -25,6 +25,19 @@ public:
 
     void SetName(std::string name); //이름변경용 함수
 
+    void setHp(int newhp) {
+        this->hp = newhp;
+
+        if (this->hp < 0) {
+            this->hp = 0;
+        }
+
+        if (this->hp > maxhp) {
+            this->hp = maxhp;
+        }
+    }
+    
+
    
     int getHp() { return hp; }
     int getMaxhp() { return maxhp; }
