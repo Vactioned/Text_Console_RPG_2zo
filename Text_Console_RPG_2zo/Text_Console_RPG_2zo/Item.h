@@ -7,8 +7,10 @@ class Player;
 enum class ItemType
 {
     HealPotion,
-    SANPotion,
-    AttackBoost
+    SanPotion,
+    AttackBoost,
+    WeaknessPotion,
+    VulnerabilityPotion
 };
 
 class Item
@@ -21,14 +23,18 @@ private:
 public:
     Item(const std::string& name, ItemType type, int value);
 
+    // getter
     std::string getName() const;
     ItemType getType() const;
     int getValue() const;
 
-    // Player& 대신 Player* 를 받도록 수정 
-    void use(Player* player) const;
+    // 아이템 사용
+    void Use(Player* player) const;
 
-    static Item createHealPotion();
-    static Item createSANPotion();
-    static Item createAttackBoost();
+    // 아이템 생성 함수
+    static Item CreateHealPotion();
+    static Item CreateSanPotion();
+    static Item CreateAttackBoost();
+    static Item CreateWeaknessPotion();
+    static Item CreateVulnerabilityPotion();
 };
