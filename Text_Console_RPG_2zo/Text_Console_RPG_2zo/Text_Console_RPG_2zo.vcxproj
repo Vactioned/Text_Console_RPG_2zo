@@ -126,6 +126,7 @@
     <ClInclude Include="BattleSystem.h" />
     <ClInclude Include="Berserker.h" />
     <ClInclude Include="Classes.h" />
+    <ClInclude Include="Gambler.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="Item.h" />
     <ClInclude Include="LevelUp.h" />
@@ -136,11 +137,13 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="Thief.h" />
+    <ClInclude Include="Poor.h" />
     <ClInclude Include="Warlock.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BattleSystem.cpp" />
     <ClCompile Include="Berserker.cpp" />
+    <ClCompile Include="Gambler.cpp" />
     <ClCompile Include="Item.cpp" />
     <ClCompile Include="LevelUp.cpp" />
     <ClCompile Include="LogManager.cpp" />
@@ -150,6 +153,7 @@
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Skill.cpp" />
     <ClCompile Include="Thief.cpp" />
+    <ClCompile Include="Poor.cpp" />
     <ClCompile Include="Warlock.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

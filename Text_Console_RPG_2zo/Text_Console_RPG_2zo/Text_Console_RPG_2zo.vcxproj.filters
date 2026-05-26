@@ -60,6 +60,15 @@
     <ClInclude Include="Inventory.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Skill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Poor.h">
+      <Filter>Header Files\Class.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Gambler.h">
+      <Filter>Header Files\Class.h</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -93,6 +102,15 @@
       <Filter>Source Files\Classes.cpp</Filter>
     </ClCompile>
     <ClCompile Include="Thief.cpp">
+      <Filter>Source Files\Classes.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Skill.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Gambler.cpp">
+      <Filter>Source Files\Classes.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Poor.cpp">
       <Filter>Source Files\Classes.cpp</Filter>
     </ClCompile>
   </ItemGroup>

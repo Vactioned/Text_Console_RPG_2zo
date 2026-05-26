@@ -36,7 +36,7 @@ public:
 
     void setHp(int hp);
     void setMaxHp(int maxhp);
-    void setSan(int sna);
+    void setSan(int san);
     void setMaxSan(int maxsan);
 
     int getPower() const;
