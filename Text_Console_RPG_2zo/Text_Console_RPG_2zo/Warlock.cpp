@@ -42,7 +42,7 @@ SkillData Warlock::getSkillData(int skillIndex)
 
 void Warlock::useSkill(int skillIndex, Monster* monster, int& turn_cycle)
 {
-    if (skillIndex == 1) HELLFIRE(this, monster, turn_cycle);
-    else if (skillIndex == 2) MIND_OVERLOAD(this, monster, turn_cycle);
+    if (skillIndex == 1) Skill_Hellfire(this, monster);
+    else if (skillIndex == 2) Skill_MindOverload(this, monster);
 }
 

@@ -41,5 +41,5 @@ SkillData Monk::getSkillData(int skillIndex)
 
 void Monk::useSkill(int skillIndex, Monster* monster, int& turn_cycle)
 {
-    if (skillIndex == 2) MIND_STRIKE(this, monster, turn_cycle);
+    if (skillIndex == 2) Skill_MindStrike(this, monster, turn_cycle);
 }
