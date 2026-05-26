@@ -19,6 +19,9 @@
     <Filter Include="Source Files\Classes.cpp">
       <UniqueIdentifier>{570c748c-c523-4e08-aaa3-fde1db3ad173}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Act1Monster.h">
+      <UniqueIdentifier>{8f3ceda9-a272-47a7-909c-5707c405ae34}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -71,6 +74,15 @@
     </ClInclude>
     <ClInclude Include="InventoryUI.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VoidHound.h">
+      <Filter>Header Files\Act1Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="MutatedSlime.h">
+      <Filter>Header Files\Act1Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="CorpseGolem.h">
+      <Filter>Header Files\Act1Monster.h</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
