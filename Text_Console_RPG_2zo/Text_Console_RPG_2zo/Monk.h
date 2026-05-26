@@ -1,10 +1,14 @@
 ﻿#pragma once
 #include "Player.h"
+#include "Monster.h"
+#include <string>
 
 class Monk : public Player
 {
 public:
-    Monk(std::string name);
+    Monk(std::string name, std::string job = "파계승");
 
+    virtual ~Monk() {}
 
+    virtual void Attack(Monster* monster) override;
 };
