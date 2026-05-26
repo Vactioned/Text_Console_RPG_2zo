@@ -41,5 +41,5 @@ SkillData Thief::getSkillData(int skillIndex)
 
 void Thief::useSkill(int skillIndex, Monster* monster, int& turn_cycle)
 {
-    if (skillIndex == 2) MIST_WALK(this, monster, turn_cycle);
+    if (skillIndex == 2) Skill_MistWalk(this, turn_cycle);
 }
