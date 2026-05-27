@@ -102,6 +102,9 @@
     <ClInclude Include="Oblivion.h">
       <Filter>Header Files\Act2Monster.h</Filter>
     </ClInclude>
+    <ClInclude Include="ImageManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
