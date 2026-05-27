@@ -18,22 +18,23 @@ public:
     {
     }
 
-    void NormalAttack(Player* player) override {
+    int NormalAttack(Player* player) override {
         std::cout << getName() << "이 오염된 손톱으로 찌르기를 시전합니다!" << std::endl;
+        int damage = getAttackPower() - player->getDefence();
+        if (damage < 1) damage = 1;
 
         if (player != nullptr) {
 
-            int damage = getAttackPower() - player->getDefence();
-            if (damage < 1) damage = 1;
-
-            player->setHp(player->getHp() - damage);
             std::cout << "->" << damage << "의 물리 피해를 입혔습니다!" << std::endl;
         }
+        return damage;
     }
     //플레이어에게 방어력은 빼앗아 자신의 방어력을 올리는 특수공격을 실행
-    void SpecialAttack(Player* player) override {
+    int SpecialAttack(Player* player) override {
         int armorstealamount = 4; //방어력을 뺴앗아올 수치
         int initialdamage = getAttackPower() * 1.3;
+        int finaldamage = 0;
+        
 
         std::cout << getName() << "이 비명을 지르며 역병을 퍼트립니다!" << std::endl;
 
@@ -50,9 +51,10 @@ public:
             int finaldamage = initialdamage = player->getDefence();
             if (finaldamage < 1) finaldamage = 1;
 
-            player->setHp(player->getHp() - finaldamage);
+            
             std::cout << "->" << finaldamage << "의 역병피해를 입혔습니다!" << std::endl;
 
         }
+        return finaldamage;
     }
 };

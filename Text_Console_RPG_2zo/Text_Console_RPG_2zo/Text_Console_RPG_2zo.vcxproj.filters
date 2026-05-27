@@ -22,6 +22,9 @@
     <Filter Include="Header Files\Act1Monster.h">
       <UniqueIdentifier>{8f3ceda9-a272-47a7-909c-5707c405ae34}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Act2Monster.h">
+      <UniqueIdentifier>{b8a8b3b3-d942-42e9-8df7-e13b4159e4a0}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -86,6 +89,18 @@
     </ClInclude>
     <ClInclude Include="plagueServant.h">
       <Filter>Header Files\Act1Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="DimensionEye.h">
+      <Filter>Header Files\Act2Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="AbyssRemnant.h">
+      <Filter>Header Files\Act2Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="AbyssHive.h">
+      <Filter>Header Files\Act2Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Oblivion.h">
+      <Filter>Header Files\Act2Monster.h</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

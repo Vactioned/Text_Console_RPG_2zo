@@ -16,22 +16,23 @@ public:
     {
     }
 
-    void NormalAttack(Player* player) override {
+    int NormalAttack(Player* player) override {
         std::cout << getName() << "이 끈적이는 촉수를 후려칩니다!" << std::endl;
-        
+        int damage = getAttackPower() - player->getDefence();
+        if (damage < 1) damage = 1;
+
 
         if (player != nullptr) {
-            int damage = getAttackPower() - player->getDefence();
-            if (damage < 1) damage = 1;
-
-            player->setHp(player->getHp() - damage);
+         
             std::cout << "->" << damage << "의 데미지를 입혔습니다!" << std::endl;
         }
+        return damage;
     }
 
-    void SpecialAttack(Player* player) override {
+    int SpecialAttack(Player* player) override {
         int initialdamage = getAttackPower() * 1.2; //부식액으로 살짝 더 강한 피해
-        int armorreduction = 3;                     //깎아낼 플레이어 방어력 수치
+        int armorreduction = 3; //깎아낼 플레이어 방어력 수치
+        int damage = 0;
 
         std::cout << getName() << "이(가) 몸을 부풀리더니 강산성 점액을 사방으로 뿜어냅니다!" << std::endl;
         std::cout << "강한산성에 의해 플레이어의 방어력이 녹아내립니다!(방어력 " << armorreduction << "감소)" << std::endl;
@@ -40,12 +41,13 @@ public:
             int currentarmor = player->getDefence();
             player->setDefence(currentarmor - armorreduction);
 
-            int damage = initialdamage - player->getDefence();
+            damage = initialdamage - player->getDefence();
             if (damage < 1) damage = 1;
 
-            player->setHp(player->getHp() - damage);
-            std::cout << "->" << damage << "의 물리 피해를 입었습니다." << std::endl;
+            
+            std::cout << "->" << damage << "의 물리 피해를 입혔습니다!" << std::endl;
         }
+        return damage;
     }
 };
 
