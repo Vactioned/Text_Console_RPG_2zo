@@ -1,4 +1,6 @@
 ﻿#include "LogManager.h"
+#include "BattleSystem.h"
+
 #include <thread>       // 컴퓨터를 잠깐 지연시키기 위한 라이브러리
 #include <chrono>       // 시간 단위를 쓰기 위한 라이브러리
 #include <fstream>      // .txt 파일을 업로드 하기 위해 필요한 라이브러리
@@ -24,8 +26,15 @@ void LogManager::Clear()
 
 void LogManager::PressEnter()
 {
-        std::cout << "\n[ 엔터(Enter)를 누르면 계속합니다... ]";
-        std::cin.get(); // 사용자가 엔터를 누를 때까지 대기
+    if (cin.rdbuf()->in_avail() > 0 || cin.fail())
+    {
+        cin.clear();
+        cin.ignore(10000, '\n');
+    }
+
+    cout << "\n[ 엔터(Enter)를 누르면 계속합니다... ]";
+
+    cin.get(); // 사용자가 엔터를 누를 때까지 대기
 }
 
 void LogManager::TypePrint(const string& message, int delayMs)
@@ -55,11 +64,15 @@ void LogManager::TypePrint(const string& message, int delayMs)
 
 void LogManager::MainMenu(Player& player, Inventory<Item>& inventory)
 {
+    static BattleSystem bs;
+
     int select;
     bool isGameStart = true;    // 현재 게임이 진행 중인지 판단
 
     while (isGameStart)
     {
+        LogManager::Clear();
+
         cout << "================================================================" << endl;
         cout << "                       당신은 무엇을 할까                         " << endl;
         cout << "================================================================" << endl;
@@ -73,7 +86,8 @@ void LogManager::MainMenu(Player& player, Inventory<Item>& inventory)
         switch (select)
         {
         case 1:
-            // 전투 시스템 호출 예정 (추후에 임무를 선택할 수 있도록 하면 좋을듯)
+            bs.EnterMissionMenu(player, inventory);
+            LogManager::PressEnter();
             break;
         case 2:
             player.PrintPlayerStatus();
@@ -86,6 +100,7 @@ void LogManager::MainMenu(Player& player, Inventory<Item>& inventory)
             break;
         case 4:
             isGameStart = false;
+            cout << "게임을 종료합니다." << endl;
             break;
         default:
             cout << "   잘못된 선택입니다. 다시 선택해주세요." << endl;
@@ -94,7 +109,7 @@ void LogManager::MainMenu(Player& player, Inventory<Item>& inventory)
     }
 }
 
-void LogManager::CH1()
+void LogManager::CH1()      // 1막 메인 스토리
 {
     ifstream file("CH1.txt");
 
@@ -110,4 +125,76 @@ void LogManager::CH1()
     }
 
     file.close();
+}
+
+void LogManager::CH1_Boss()     // 1막 보스전
+{
+    ifstream file("CH1_Boss.txt");
+
+    if (!file.is_open())
+    {
+        cout << "파일을 열 수 없습니다.\n";
+    }
+
+    string line;
+    while (getline(file, line))
+    {
+        TypePrint(line);
+    }
+
+    file.close();
+}
+
+string LogManager::InputPlayerName()        // 이름 입력 함수
+{
+    string name;
+    cout << "================================================================" << endl;
+    cout << "                       나의 이름은 무엇인가                        " << endl;
+    cout << "================================================================" << endl;
+    cout << "입력 : ";
+    cin >> name;
+
+    return name;
+}
+
+string LogManager::SelectJob()              // 직업 입력 함수
+{
+    int choice;
+    string job = "";
+
+    while (true)
+    {
+        cout << "================================================================" << endl;
+        cout << "                      나의 직업은 무엇인가                         " << endl;
+        cout << "================================================================" << endl;
+        cout << " [선택 1] : 버서커" << endl;
+        cout << " [선택 2] : 흑마법사" << endl;
+        cout << " [선택 3] : 도적" << endl;
+        cout << " [선택 4] : 수도승" << endl;
+        cout << " [선택 5] : 도파민 상자 (당신의 운을 시험하세요)" << endl;
+        cout << "입력 : ";
+        cin >> choice;
+
+        switch (choice)
+        {
+        case 1: job = "Beserker"; break;
+        case 2: job = "Warlock"; break;
+        case 3: job = "Thief"; break;
+        case 4: job = "Monk"; break;
+        case 5:
+        {
+            srand(static_cast<unsigned int>(time(NULL)));
+
+            // 1~100 사이의 난수를 발생
+            int chance = (rand() % 100) + 1;
+            job = (chance <= 80) ? "Poor" : "Gambler";
+            break;
+        }
+        default:
+            cout << "\n [오류] 잘못된 선택입니다. 다시 입력해주세요." << endl;
+            continue;
+        }
+        if (job != "") break;
+    }
+    return job;
 }
