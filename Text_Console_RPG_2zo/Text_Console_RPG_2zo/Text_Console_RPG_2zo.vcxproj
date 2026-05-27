@@ -141,6 +141,7 @@ sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClInclude Include="CorpseGolem.h" />
     <ClInclude Include="DimensionEye.h" />
     <ClInclude Include="Gambler.h" />
+    <ClInclude Include="ImageManager.h" />
     <ClInclude Include="Inventory.h" />
     <ClInclude Include="InventoryUI.h" />
     <ClInclude Include="Item.h" />
