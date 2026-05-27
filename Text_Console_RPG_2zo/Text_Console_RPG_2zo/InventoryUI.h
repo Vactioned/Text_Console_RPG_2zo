@@ -34,6 +34,7 @@ private:
         return "";
     }
 
+    // 아이템 슬롯
     void DrawSlots(sf::RenderWindow& window, sf::RectangleShape& slot,
         int capacity, int columns, int padding, int slotSize, int gap)
     {
@@ -50,6 +51,7 @@ private:
         }
     }
 
+    // 슬롯 내부 아이템 이름
     template<typename T>
     void DrawItems(sf::RenderWindow& window, Inventory<T>& inventory, sf::Font& font,
         int capacity, int columns, int padding, int slotSize, int gap)
@@ -82,6 +84,7 @@ private:
         }
     }
 
+    // 툴팁
     template<typename T>
     void DrawTooltip(sf::RenderWindow& window, Inventory<T>& inventory, sf::Font& font,
         int columns, int padding, int slotSize, int gap)
@@ -125,6 +128,7 @@ private:
         {
             if (currentIndex == tooltipIndex)
             {
+                // 툴팁 박스
                 sf::RectangleShape tooltipBox(sf::Vector2f(230, 50));
                 tooltipBox.setFillColor(sf::Color(80, 60, 50));
                 tooltipBox.setOutlineColor(sf::Color::White);
@@ -134,6 +138,7 @@ private:
                     static_cast<float>(mousePos.y + 10)
                 );
 
+                // 툴팁 텍스트
                 sf::Text tooltipText;
                 tooltipText.setFont(font);
                 tooltipText.setString(GetItemDescription(item.getName()));
@@ -154,6 +159,7 @@ private:
         }
     }
 
+    // 취소 버튼
     void DrawCancelButton(sf::RenderWindow& window,
         sf::RectangleShape& cancelButton, sf::Text& cancelText)
     {
@@ -161,6 +167,7 @@ private:
         window.draw(cancelText);
     }
 
+    // 골드
     void DrawGold(sf::RenderWindow& window, sf::Font& font, sf::Texture& goldTexture, int width, int height/*, int gold*/)
     {
         // 좌표 설정
@@ -213,6 +220,7 @@ public:
         int windowWidth = (padding * 2 + columns * slotSize + (columns - 1) * gap) * 2;
         int windowHeight = (padding * 2 + rows * slotSize + (rows - 1) * gap) * 2;
 
+        // 창 생성
         sf::RenderWindow window(
             sf::VideoMode(windowWidth, windowHeight),
             "Inventory",
@@ -238,12 +246,14 @@ public:
             std::cout << "Gold Texture Load Fail\n";
         }
 
+        // 취소 버튼
         sf::RectangleShape cancelButton(sf::Vector2f(80, 35));
         cancelButton.setFillColor(sf::Color(90, 70, 60));
         cancelButton.setOutlineColor(sf::Color::White);
         cancelButton.setOutlineThickness(1);
         cancelButton.setPosition(8.f, static_cast<float>(windowHeight - 43));
 
+        // 취소 텍스트
         sf::Text cancelText;
         cancelText.setFont(font);
         cancelText.setString("Cancel");
@@ -277,6 +287,7 @@ public:
 
                     int index = row * columns + col;
 
+                    // 취소 버튼 클릭 시 창 닫기
                     if (cancelButton.getGlobalBounds().contains(
                         static_cast<float>(mouseX),
                         static_cast<float>(mouseY)))
@@ -294,6 +305,7 @@ public:
                         {
                             if (currentIndex == index)
                             {
+                                // 비 전투 시 사용 불가 항목
                                 bool onlyBattleItem =
                                     item.getName() == "공격력 증가" ||
                                     item.getName() == "취약 포션" ||
@@ -305,6 +317,7 @@ public:
                                     break;
                                 }
 
+                                // 아이템 사용
                                 item.use(player);
                                 removeIndex = index;
                                 window.close();
@@ -322,6 +335,7 @@ public:
                     }
                 }
 
+                // 우클릭 시 아이템 삭제
                 if (event.type == sf::Event::MouseButtonPressed &&
                     event.mouseButton.button == sf::Mouse::Right)
                 {

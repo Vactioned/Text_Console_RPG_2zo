@@ -53,7 +53,7 @@ void LogManager::TypePrint(const string& message, int delayMs)
     SetColor(7); // 한 줄 출력이 끝나면 안전하게 기본 흰색으로 리셋
 }
 
-void LogManager::MainMenu(Player& player)
+void LogManager::MainMenu(Player& player, Inventory<Item>& inventory)
 {
     int select;
     bool isGameStart = true;    // 현재 게임이 진행 중인지 판단
@@ -80,7 +80,8 @@ void LogManager::MainMenu(Player& player)
             PressEnter();
             break;
         case 3:
-            // 인벤토리 확인 함수 호출 예정
+            InventoryUI inventoryUI;
+            inventoryUI.Open(inventory, &player, false);
             PressEnter();
             break;
         case 4:
