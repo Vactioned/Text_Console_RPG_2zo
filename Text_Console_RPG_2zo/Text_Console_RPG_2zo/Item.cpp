@@ -34,11 +34,19 @@ void Item::PrintInfo() const
         break;
 
     case ItemType::WeaknessPotion:
-        cout << name << " | 3턴 동안 적 공격력 " << value << "% 감소" << '\n';
+        cout << name << " | 이번 전투 동안 적 공격력 " << value << "% 감소" << '\n';
         break;
 
     case ItemType::VulnerabilityPotion:
-        cout << name << " | 3턴 동안 적이 받는 데미지 " << value << "% 증가" << '\n';
+        cout << name << " | 이번 전투 동안 적이 받는 데미지 " << value << "% 증가" << '\n';
+        break;
+
+    case ItemType::MaxHpPotion:
+        cout << name << " | 최대 체력 +" << value << '\n';
+        break;
+
+    case ItemType::MaxSanPotion:
+        cout << name << " | 최대 정신력 +" << value << '\n';
         break;
 
     default:
@@ -78,24 +86,32 @@ void Item::use(Player* player) const
     case ItemType::AttackBoost:
         beforevalue = player->getPower();
         aftervalue = beforevalue + value;
-
         player->setPower(aftervalue);
-
-        player->setAttackBoostAmount(
-            player->getAttackBoostAmount() + value
-        );
-
-        player->setAttackBoostApplied(true);
-
         cout << "[아이템 사용] " << name << " | 공격력 증가: " << beforevalue << " -> " << aftervalue << " (이번 전투 동안 적용)" << '\n';
         break;
 
     case ItemType::WeaknessPotion:
-        cout << "[아이템 사용] " << name << " | 3턴 동안 적 공격력 " << value << "% 감소" << '\n';
+        cout << "[아이템 사용] " << name << " | 이번 전투 동안 적 공격력 " << value << "% 감소" << '\n';
         break;
 
     case ItemType::VulnerabilityPotion:
-        cout << "[아이템 사용] " << name << " | 3턴 동안 적이 받는 데미지 " << value << "% 증가" << '\n';
+        cout << "[아이템 사용] " << name << " | 이번 전투 동안 적이 받는 데미지 " << value << "% 증가" << '\n';
+        break;
+
+    case ItemType::MaxHpPotion:
+        beforevalue = player->getMaxHp();
+        aftervalue = beforevalue + value;
+        player->setMaxHp(aftervalue);
+        player->setHp(min(player->getHp() + value, player->getMaxHp()));
+        cout << "[아이템 사용] " << name << " | 최대 체력 증가: " << beforevalue << " -> " << aftervalue << " | 체력 +" << value << '\n';
+        break;
+
+    case ItemType::MaxSanPotion:
+        beforevalue = player->getMaxSan();
+        aftervalue = beforevalue + value;
+        player->setMaxSan(aftervalue);
+        player->setSan(min(player->getSan() + value, player->getMaxSan()));
+        cout << "[아이템 사용] " << name << " | 최대 정신력 증가: " << beforevalue << " -> " << aftervalue << " | 정신력 +" << value << '\n';
         break;
 
     default:
@@ -122,31 +138,20 @@ Item Item::CreateAttackBoost()
 
 Item Item::CreateWeaknessPotion()
 {
-    return Item("약화 포션", ItemType::WeaknessPotion, 30);
+    return Item("약화 포션", ItemType::WeaknessPotion, 20);
 }
 
 Item Item::CreateVulnerabilityPotion()
 {
-    return Item("취약 포션", ItemType::VulnerabilityPotion, 30);
+    return Item("취약 포션", ItemType::VulnerabilityPotion, 20);
 }
 
-// 공격력 증가 효과 해제
-void Item::ResetAttackBoost(Player* player)
+Item Item::CreateMaxHpPotion()
 {
-    if (player == nullptr)
-    {
-        return;
-    }
+    return Item("최대 체력 포션", ItemType::MaxHpPotion, 20);
+}
 
-    if (player->isAttackBoostApplied())
-    {
-        int totalBoost = player->getAttackBoostAmount();
-
-        player->setPower(
-            player->getPower() - totalBoost
-        );
-
-        player->setAttackBoostAmount(0);
-        player->setAttackBoostApplied(false);
-    }
+Item Item::CreateMaxSanPotion()
+{
+    return Item("최대 정신력 포션", ItemType::MaxSanPotion, 15);
 }
