@@ -2,31 +2,39 @@
 #include <string>
 
 #include "LogManager.h"
+#include "Player.h"
+#include "Inventory.h"
+#include "Classes.h"
 
 using namespace std;
 
 int main()
 {
     cout << "================================================================" << endl;
-    cout << "					   금단의 의식: 이형의 당도                    " << endl;
+    cout << "                       금단의 의식: 이형의 당도                    " << endl;
     cout << "================================================================" << endl;
     cout << " 인간이 느끼는 가장 강력하고 오래된 감정은 공포이다.    	            " << endl;
     cout << " 또한 인간이 느끼는 가장 강력하고 오래된 공포는, 미지에 대한 공포이다. " << endl;
-    cout << "							        		- 러브크래프트 -		" << endl;
+    cout << "                                          - 러브크래프트 -		" << endl;
     cout << "================================================================" << endl;
     LogManager::PressEnter();
 
     LogManager::Clear();
-    cout << "================================================================" << endl;
-    cout << "                       나의 이름은 무엇인가                        " << endl;
-    cout << "================================================================" << endl;
-    // 이름 입력 변수 추가 예정
+
+    string playerName = LogManager::InputPlayerName();  // 이름 입력 함수
 
     LogManager::Clear();
-    cout << "================================================================" << endl;
-    cout << "                      나의 직업은 무엇인가                         " << endl;
-    cout << "================================================================" << endl;
-    // 직업 선택 함수 추가 예정
+
+    string jobName = LogManager::SelectJob();   // 직업 입력 함수
+
+    Player* player = nullptr;
+
+    if (jobName == "Berserker") player = new Berserker(playerName, "광전사");
+    else if (jobName == "Warlock") player = new Warlock(playerName, "흑마법사");
+    else if (jobName == "Thief")   player = new Thief(playerName, "도적");
+    else if (jobName == "Monk")    player = new Monk(playerName, "수도승");
+    else if (jobName == "Gambler") player = new Gambler(playerName, "도박사");
+    else                           player = new Poor(playerName, "거지");
 
     LogManager::Clear();
     cout << "================================================================" << endl;
@@ -48,6 +56,14 @@ int main()
     LogManager::PressEnter();
 
     LogManager::Clear();
+
+    Inventory<Item> inventory(30);
+
+    LogManager::MainMenu(*player, inventory);
+
+   
+
+
 
     return 0;
 }

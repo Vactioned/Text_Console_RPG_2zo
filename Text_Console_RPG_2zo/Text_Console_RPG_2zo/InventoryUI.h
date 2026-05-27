@@ -10,26 +10,26 @@ class InventoryUI
 private:
     std::string GetItemName(const std::string& name)
     {
-        if (name == "체력 포션") return "HP\nPotion";
-        if (name == "정신력 포션") return "SAN\nPotion";
-        if (name == "공격력 증가") return "ATK\nIncrease";
-        if (name == "약화 포션") return "Weak\nPotion";
-        if (name == "취약 포션") return "Enemy Armor\nDecrease";
-        if (name == "최대 체력 포션") return "Max HP\nPotion";
-        if (name == "최대 정신력 포션") return "Max SAN\nPotion";
+        if (name == "체력 포션") return "HP\n포션";
+        if (name == "정신력 포션") return "정신력\n포션";
+        if (name == "공격력 증가") return "공격력\n증가";
+        if (name == "약화 포션") return "약화\n포션";
+        if (name == "취약 포션") return "취약\n포션";
+        if (name == "최대 체력 포션") return "최대 체력\n포션";
+        if (name == "최대 정신력 포션") return "최대 정신력\n포션";
 
         return "?";
     }
 
     std::string GetItemDescription(const std::string& name)
     {
-        if (name == "체력 포션") return "HP Potion\nHP +50";
-        if (name == "정신력 포션") return "SAN Potion\nSAN +50";
-        if (name == "공격력 증가") return "ATK Increase\nAttack +10 this battle.";
-        if (name == "약화 포션") return "Weak Potion\nenemy's attack -20% this battle.";
-        if (name == "취약 포션") return "Enemy Armor Decrease\nEnemy Armor -20% this battle.";
-        if (name == "최대 체력 포션") return "Max HP Potion\nMax HP +20";
-        if (name == "최대 정신력 포션") return "Max SAN\nMax SAN +20";
+        if (name == "체력 포션") return "HP 포션\nHP +50";
+        if (name == "정신력 포션") return "SAN 포션\nSAN +50";
+        if (name == "공격력 증가") return "공격력 증가\n이번 전투 동안 공력력 +10";
+        if (name == "약화 포션") return "약화 포션\n이번 전투 동안 적의 공격력 -20%";
+        if (name == "취약 포션") return "취약 포션\n이번 전투 동안 적의 방어력 -20%";
+        if (name == "최대 체력 포션") return "최대 체력 포션\n최대 체력 +20";
+        if (name == "최대 정신력 포션") return "최대 정신력 포션\n최대 정신력 +20";
 
         return "";
     }
