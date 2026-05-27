@@ -15,6 +15,6 @@ Monster::Monster(int maxhp, int attackpower, int sanpower,int defence, std::stri
 }
 
 
-void Monster::NormalAttack(Player* player) {
-
+int Monster::NormalAttack(Player* player) {
+    
 }

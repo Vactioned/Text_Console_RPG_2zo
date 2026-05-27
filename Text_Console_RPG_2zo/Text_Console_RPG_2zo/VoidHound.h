@@ -19,23 +19,25 @@ public:
     {
     }
 
-    void NormalAttack(Player* player) override {
+    int NormalAttack(Player* player) override {
         std::cout << getName() << "이 날카로운 이빨로 물어뜯습니다!" << std::endl;
-        
+        int damage = getAttackPower() - player->getDefence();
 
         if (player != nullptr) {
-            int damage = getAttackPower() - player->getDefence();
+            
             if (damage < 1) damage = 1; //최소데미지 보장
 
-            player->setHp(player->getHp() - damage);
+            
             std::cout << "->" << getAttackPower() << "의 물리 피해를 입혔습니다!" << std::endl;
         }
+        return damage;
     }
 
-    void SpecialAttack(Player* player) override {
+    int SpecialAttack(Player* player) override {
         int initialdamage = getAttackPower()* 1.5; // 즉시 들어가는 타격 피해
         int buffamount = 4;                // 증가할 공격력수치
-                   
+        int damage = initialdamage - player->getDefence();
+        if (damage < 1) damage = 1;
 
         std::cout << getName() << "이 붉은 눈을 드러내며 깊숙이 상처를 냅니다![잔혹한 할퀴기]" << std::endl;;
 
@@ -46,12 +48,10 @@ public:
        
 
         if (player != nullptr) {
-            int damage = initialdamage - player->getDefence();
-            if (damage < 1) damage = 1;
-
-            player->setHp(player->getHp() - damage);
+           
             std::cout << "->" << initialdamage << "의 물리 피해를 입혔습니다!" << std::endl;
         }
+        return damage;
     }
 };
 

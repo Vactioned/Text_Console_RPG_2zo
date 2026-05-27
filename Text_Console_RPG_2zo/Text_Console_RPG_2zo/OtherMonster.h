@@ -18,11 +18,11 @@ public:
     {
     }
 
-    void NormalAttack(Player* player) override {
+    int NormalAttack(Player* player) override {
         Monster::NormalAttack(player);
     }
 
-    void SpecialAttack(Player* player) override {
+    int SpecialAttack(Player* player) override {
         //각 몬스터의 특수공격 컨셉 구현칸
     }
 };
