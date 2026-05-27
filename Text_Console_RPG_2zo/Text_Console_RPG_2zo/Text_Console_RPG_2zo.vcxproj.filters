@@ -25,6 +25,9 @@
     <Filter Include="Header Files\Act2Monster.h">
       <UniqueIdentifier>{b8a8b3b3-d942-42e9-8df7-e13b4159e4a0}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Act3Monster.h">
+      <UniqueIdentifier>{89555b12-9549-48df-b91a-8181edd363ff}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -101,6 +104,18 @@
     </ClInclude>
     <ClInclude Include="Oblivion.h">
       <Filter>Header Files\Act2Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="BloodFanatic.h">
+      <Filter>Header Files\Act3Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="AbyssFanatic.h">
+      <Filter>Header Files\Act3Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="FanaticLeader.h">
+      <Filter>Header Files\Act3Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Malachai.h">
+      <Filter>Header Files\Act3Monster.h</Filter>
     </ClInclude>
     <ClInclude Include="ImageManager.h">
       <Filter>Header Files</Filter>

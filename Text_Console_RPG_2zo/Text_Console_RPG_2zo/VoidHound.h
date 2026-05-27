@@ -28,7 +28,7 @@ public:
             if (damage < 1) damage = 1; //최소데미지 보장
 
             
-            std::cout << "->" << getAttackPower() << "의 물리 피해를 입혔습니다!" << std::endl;
+            std::cout << "->" << damage << "의 물리 피해를 입혔습니다!" << std::endl;
         }
         return damage;
     }
@@ -49,7 +49,7 @@ public:
 
         if (player != nullptr) {
            
-            std::cout << "->" << initialdamage << "의 물리 피해를 입혔습니다!" << std::endl;
+            std::cout << "->" << damage << "의 물리 피해를 입혔습니다!" << std::endl;
         }
         return damage;
     }

@@ -19,7 +19,7 @@ public:
 
     virtual ~Monster() {}
 
-    virtual int NormalAttack(Player* player);      // 1.일반공격 
+    virtual int NormalAttack(Player* player) = 0;  // 1.일반공격 
 
     virtual int SpecialAttack(Player* player) = 0; // 2. 특수공격
 
