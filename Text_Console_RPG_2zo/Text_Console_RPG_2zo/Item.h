@@ -5,6 +5,7 @@
 using namespace std;
 
 class Player;
+class Monster;
 
 enum class ItemType
 {
@@ -33,7 +34,12 @@ public:
     int getValue() const;
 
     void PrintInfo() const;
+
+    // 일반 아이템 사용
     void use(Player* player) const;
+
+    // 전투 중 아이템 사용
+    void use(Player* player, Monster* monster) const;
 
     // 아이템 생성 함수
     static Item CreateHealPotion();

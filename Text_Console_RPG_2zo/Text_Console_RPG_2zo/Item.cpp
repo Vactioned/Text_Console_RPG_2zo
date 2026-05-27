@@ -1,5 +1,6 @@
 ﻿#include "Item.h"
 #include "Player.h"
+#include "Monster.h"
 
 #include <iostream>
 #include <algorithm>
@@ -56,7 +57,7 @@ void Item::PrintInfo() const
         break;
 
     case ItemType::VulnerabilityPotion:
-        cout << name << " | 이번 전투 동안 적이 받는 데미지 " << value << "% 증가\n";
+        cout << name << " | 이번 전투 동안 적 방어력 " << value << "% 감소\n";
         break;
 
     case ItemType::MaxHpPotion:
@@ -109,11 +110,11 @@ void Item::use(Player* player) const
         break;
 
     case ItemType::WeaknessPotion:
-        cout << "[아이템 사용] " << name << " | 적 공격력 감소 효과 적용\n";
+        cout << "[아이템 사용] " << name << " | 전투 중에만 사용할 수 있습니다.\n";
         break;
 
     case ItemType::VulnerabilityPotion:
-        cout << "[아이템 사용] " << name << " | 적 취약 효과 적용\n";
+        cout << "[아이템 사용] " << name << " | 전투 중에만 사용할 수 있습니다.\n";
         break;
 
     case ItemType::MaxHpPotion:
@@ -134,6 +135,46 @@ void Item::use(Player* player) const
 
     default:
         cout << "[오류] 정의되지 않은 ItemType\n";
+        break;
+    }
+}
+
+// 전투 중 아이템 사용
+void Item::use(Player* player, Monster* monster) const
+{
+    if (player == nullptr)
+    {
+        cout << "[오류] Player가 존재하지 않습니다.\n";
+        return;
+    }
+
+    if (monster == nullptr)
+    {
+        cout << "[오류] Monster가 존재하지 않습니다.\n";
+        return;
+    }
+
+    int beforeValue = 0;
+    int afterValue = 0;
+
+    switch (type)
+    {
+    case ItemType::WeaknessPotion:
+        beforeValue = monster->getAttackPower();
+        afterValue = beforeValue - beforeValue * value / 100;
+        monster->setAttackPower(afterValue);
+        cout << "[아이템 사용] " << name << " | 적 공격력 감소: " << beforeValue << " -> " << afterValue << '\n';
+        break;
+
+    case ItemType::VulnerabilityPotion:
+        beforeValue = monster->getDefence();
+        afterValue = beforeValue - beforeValue * value / 100;
+        monster->setDefence(afterValue);
+        cout << "[아이템 사용] " << name << " | 적 방어력 감소: " << beforeValue << " -> " << afterValue << '\n';
+        break;
+
+    default:
+        use(player);
         break;
     }
 }
@@ -219,8 +260,7 @@ Item Item::CreateChapterClearReward()
 
     case 4:
         return CreateMaxSanPotion();
-
-    default:
-        return CreateAttackBoost();
     }
+
+    return CreateMaxHpPotion(); // return 없이 끝나면 경고날수도있다고함
 }
