@@ -140,7 +140,7 @@ public:
                     {
                         int currentIndex = 0;
                         int removeIndex = -1;
-
+                        
                         // 모든 아이템을 불러올 때 까지 반복
                         // 하지만 아래의 if문에 break를 걸어둬서 탈출 가능
                         for (const T& item : inventory.GetItems())
@@ -148,6 +148,13 @@ public:
                             // 클릭한 인벤토리칸과 현재 검사하는 인벤토리칸이 일치하면 실행되는 조건문
                             if (currentIndex == index)
                             {
+                                bool onlyBattleItem = item.getName() == "공격력 증가" || item.getName() == "취약 포션" || item.getName() == "약화 포션";
+
+                                if (!isBattle && onlyBattleItem)
+                                {
+                                    std::cout << "전투 중에만 사용할 수 있는 아이템입니다.";
+                                    break;
+                                }
                                 std::cout << "\n[사용 전]\n";
                                 std::cout << "HP  : " << player->getHp() << " / " << player->getMaxHp() << '\n';
                                 std::cout << "SAN : " << player->getSan() << " / " << player->getMaxSan() << '\n';
@@ -164,7 +171,6 @@ public:
                                 useItem = true;
                                 break;
                             }
-
                             currentIndex++;
                         }
                         if (removeIndex != -1)
