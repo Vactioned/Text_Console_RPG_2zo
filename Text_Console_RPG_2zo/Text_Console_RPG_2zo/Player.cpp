@@ -22,10 +22,6 @@ Player::Player(std::string name, std::string job)
     attackBoostApplied = false;
 }
 
-Player::~Player()
-{
-}
-
 // getter
 string Player::getName() const { return name; }
 string Player::getJob() const { return job; }
