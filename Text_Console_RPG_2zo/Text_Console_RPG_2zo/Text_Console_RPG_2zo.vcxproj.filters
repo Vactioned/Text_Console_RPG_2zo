@@ -117,6 +117,9 @@
     <ClInclude Include="Malachai.h">
       <Filter>Header Files\Act3Monster.h</Filter>
     </ClInclude>
+    <ClInclude Include="ImageManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
