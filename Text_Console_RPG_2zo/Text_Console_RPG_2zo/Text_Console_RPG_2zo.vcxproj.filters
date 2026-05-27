@@ -84,6 +84,9 @@
     <ClInclude Include="CorpseGolem.h">
       <Filter>Header Files\Act1Monster.h</Filter>
     </ClInclude>
+    <ClInclude Include="plagueServant.h">
+      <Filter>Header Files\Act1Monster.h</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">

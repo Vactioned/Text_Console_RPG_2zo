@@ -11,17 +11,21 @@ public:
             rand() % (playerlevel * 3 + 1) + (playerlevel * 3),  // 공격력
             0, // 정신공격력
             8, // 몬스터 방어력
-            "변이된 슬라임") // 몬스터이름
+            "[변이된 슬라임]") // 몬스터이름
 
     {
     }
 
     void NormalAttack(Player* player) override {
         std::cout << getName() << "이 끈적이는 촉수를 후려칩니다!" << std::endl;
-        std::cout << "->" << getAttackPower() << "의 물리 피해를 입혔습니다!" << std::endl;
+        
 
         if (player != nullptr) {
+            int damage = getAttackPower() - player->getDefence();
+            if (damage < 1) damage = 1;
 
+            player->setHp(player->getHp() - damage);
+            std::cout << "->" << damage << "의 데미지를 입혔습니다!" << std::endl;
         }
     }
 
@@ -30,11 +34,17 @@ public:
         int armorreduction = 3;                     //깎아낼 플레이어 방어력 수치
 
         std::cout << getName() << "이(가) 몸을 부풀리더니 강산성 점액을 사방으로 뿜어냅니다!" << std::endl;
-        std::cout << "->" << initialdamage << "의 물리 피해를 입었습니다." << std::endl;
         std::cout << "강한산성에 의해 플레이어의 방어력이 녹아내립니다!(방어력 " << armorreduction << "감소)" << std::endl;
 
         if (player != nullptr) {
+            int currentarmor = player->getDefence();
+            player->setDefence(currentarmor - armorreduction);
 
+            int damage = initialdamage - player->getDefence();
+            if (damage < 1) damage = 1;
+
+            player->setHp(player->getHp() - damage);
+            std::cout << "->" << damage << "의 물리 피해를 입었습니다." << std::endl;
         }
     }
 };
