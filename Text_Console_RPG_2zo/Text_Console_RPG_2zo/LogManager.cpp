@@ -1,5 +1,4 @@
 ﻿#include "LogManager.h"
-#include "Player.h"
 #include <thread>       // 컴퓨터를 잠깐 지연시키기 위한 라이브러리
 #include <chrono>       // 시간 단위를 쓰기 위한 라이브러리
 #include <fstream>      // .txt 파일을 업로드 하기 위해 필요한 라이브러리
