@@ -15,17 +15,21 @@ private:
         if (name == "공격력 증가") return "ATK\nIncrease";
         if (name == "약화 포션") return "Weak\nPotion";
         if (name == "취약 포션") return "Damage\nIncrease";
+        if (name == "최대 체력 포션") return "Max HP\nPotion";
+        if (name == "최대 정신력 포션") return "Max SAN\nPotion";
 
         return "?";
     }
 
     std::string GetItemDescription(const std::string& name)
     {
-        if (name == "체력 포션") return "HP Potion\n+50 HP.";
-        if (name == "정신력 포션") return "SAN Potion\n+50 SAN.";
-        if (name == "공격력 증가") return "ATK Increase\nAttack + 10 this battle.";
-        if (name == "약화 포션") return "Weak Potion\nenemy's attack - 20% this battle.";
-        if (name == "취약 포션") return "Damage Increase\nDamage + 20% this battle.";
+        if (name == "체력 포션") return "HP Potion\nHP +50";
+        if (name == "정신력 포션") return "SAN Potion\nSAN +50";
+        if (name == "공격력 증가") return "ATK Increase\nAttack +10 this battle.";
+        if (name == "약화 포션") return "Weak Potion\nenemy's attack -20% this battle.";
+        if (name == "취약 포션") return "Damage Increase\nDamage +20% this battle.";
+        if (name == "최대 체력 포션") return "Max HP Potion\nMax HP +20";
+        if (name == "최대 정신력 포션") return "Max SAN\nMax SAN +20";
 
         return "";
     }
@@ -301,18 +305,7 @@ public:
                                     break;
                                 }
 
-                                std::cout << "\n[사용 전]\n";
-                                std::cout << "HP  : " << player->getHp() << " / " << player->getMaxHp() << '\n';
-                                std::cout << "SAN : " << player->getSan() << " / " << player->getMaxSan() << '\n';
-                                std::cout << "ATK : " << player->getPower() << '\n' << '\n';
-
                                 item.use(player);
-
-                                std::cout << "\n[사용 후]\n";
-                                std::cout << "HP  : " << player->getHp() << " / " << player->getMaxHp() << '\n';
-                                std::cout << "SAN : " << player->getSan() << " / " << player->getMaxSan() << '\n';
-                                std::cout << "ATK : " << player->getPower() << '\n';
-
                                 removeIndex = index;
                                 window.close();
                                 useItem = true;
