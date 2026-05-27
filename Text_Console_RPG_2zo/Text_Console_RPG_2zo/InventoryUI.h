@@ -14,7 +14,7 @@ private:
         if (name == "정신력 포션") return "SAN\nPotion";
         if (name == "공격력 증가") return "ATK\nIncrease";
         if (name == "약화 포션") return "Weak\nPotion";
-        if (name == "취약 포션") return "Damage\nIncrease";
+        if (name == "취약 포션") return "Enemy Armor\nDecrease";
         if (name == "최대 체력 포션") return "Max HP\nPotion";
         if (name == "최대 정신력 포션") return "Max SAN\nPotion";
 
@@ -27,7 +27,7 @@ private:
         if (name == "정신력 포션") return "SAN Potion\nSAN +50";
         if (name == "공격력 증가") return "ATK Increase\nAttack +10 this battle.";
         if (name == "약화 포션") return "Weak Potion\nenemy's attack -20% this battle.";
-        if (name == "취약 포션") return "Damage Increase\nDamage +20% this battle.";
+        if (name == "취약 포션") return "Enemy Armor Decrease\nEnemy Armor -20% this battle.";
         if (name == "최대 체력 포션") return "Max HP Potion\nMax HP +20";
         if (name == "최대 정신력 포션") return "Max SAN\nMax SAN +20";
 
@@ -168,7 +168,7 @@ private:
     }
 
     // 골드
-    void DrawGold(sf::RenderWindow& window, sf::Font& font, sf::Texture& goldTexture, int width, int height/*, int gold*/)
+    void DrawGold(sf::RenderWindow& window, sf::Font& font, sf::Texture& goldTexture, int width, int height, Player* player)
     {
         // 좌표 설정
         float x = static_cast<float>(width);
@@ -198,7 +198,7 @@ private:
         // 골드 텍스트
         sf::Text nameText;
         nameText.setFont(font);
-        nameText.setString(": 500");
+        nameText.setString(to_string(player->getGold()));
         nameText.setCharacterSize(14);
         nameText.setFillColor(sf::Color::Black);
         nameText.setPosition(x + 40, y + 6);
@@ -207,7 +207,7 @@ private:
 
 public:
     template<typename T>
-    bool Open(Inventory<T>& inventory, Player* player, bool isBattle)
+    bool Open(Inventory<T>& inventory, Player* player, bool isBattle, Monster* monster = nullptr)
     {
         const int slotSize = 70;
         const int columns = 4;
@@ -318,7 +318,14 @@ public:
                                 }
 
                                 // 아이템 사용
-                                item.use(player);
+                                if (isBattle && monster != nullptr)
+                                {
+                                    item.use(player, monster);
+                                }
+                                else
+                                {
+                                    item.use(player);
+                                }
                                 removeIndex = index;
                                 window.close();
                                 useItem = true;
@@ -368,7 +375,7 @@ public:
             DrawItems(window, inventory, font, capacity, columns, padding, slotSize, gap);
             DrawTooltip(window, inventory, font, columns, padding, slotSize, gap);
             DrawCancelButton(window, cancelButton, cancelText);
-            DrawGold(window, font, goldTexture, windowWidth - 90, windowHeight - 40);
+            DrawGold(window, font, goldTexture, windowWidth - 90, windowHeight - 40, player);
 
             window.display();
         }
