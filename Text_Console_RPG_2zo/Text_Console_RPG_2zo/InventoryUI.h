@@ -157,6 +157,43 @@ private:
         window.draw(cancelText);
     }
 
+    void DrawGold(sf::RenderWindow& window, sf::Font& font, sf::Texture& goldTexture, int width, int height/*, int gold*/)
+    {
+        // 좌표 설정
+        float x = static_cast<float>(width);
+        float y = static_cast<float>(height);
+
+        // 골드 슬롯
+        sf::RectangleShape goldBox(sf::Vector2f(80, 30));
+        goldBox.setFillColor(sf::Color(240, 210, 190));
+        goldBox.setOutlineColor(sf::Color::White);
+        goldBox.setOutlineThickness(2);
+        goldBox.setPosition(static_cast<float>(x), static_cast<float>(y));
+        window.draw(goldBox);
+
+        // 골드 이미지 출력
+        sf::Sprite goldSprite;
+        goldSprite.setTexture(goldTexture);
+        goldSprite.setPosition(x + 6, y + 4);
+
+        // 이미지 크기 조절
+        sf::Vector2u textureSize = goldTexture.getSize();
+        if (textureSize.x > 0 && textureSize.y > 0)
+        {
+            goldSprite.setScale(22.f / textureSize.x, 22.f / textureSize.y);
+        }
+        window.draw(goldSprite);
+
+        // 골드 텍스트
+        sf::Text nameText;
+        nameText.setFont(font);
+        nameText.setString(": 500");
+        nameText.setCharacterSize(14);
+        nameText.setFillColor(sf::Color::Black);
+        nameText.setPosition(x + 40, y + 6);
+        window.draw(nameText);
+    }
+
 public:
     template<typename T>
     bool Open(Inventory<T>& inventory, Player* player, bool isBattle)
@@ -174,7 +211,8 @@ public:
 
         sf::RenderWindow window(
             sf::VideoMode(windowWidth, windowHeight),
-            "Inventory"
+            "Inventory",
+            sf::Style::Titlebar
         );
         std::cout << "window 생성 완료\n";
 
@@ -188,6 +226,12 @@ public:
         if (!font.loadFromFile("C:/Windows/Fonts/malgun.ttf"))
         {
             std::cout << "InventoryUI Font Load Fail\n";
+        }
+
+        sf::Texture goldTexture;
+        if (!goldTexture.loadFromFile("Image/Gold.png"))
+        {
+            std::cout << "Gold Texture Load Fail\n";
         }
 
         sf::RectangleShape cancelButton(sf::Vector2f(80, 35));
@@ -317,6 +361,7 @@ public:
             DrawItems(window, inventory, font, capacity, columns, padding, slotSize, gap);
             DrawTooltip(window, inventory, font, columns, padding, slotSize, gap);
             DrawCancelButton(window, cancelButton, cancelText);
+            DrawGold(window, font, goldTexture, windowWidth - 90, windowHeight - 40);
 
             window.display();
         }
