@@ -214,6 +214,7 @@ public:
             "Inventory",
             sf::Style::Titlebar
         );
+        std::cout << "window 생성 완료\n";
 
         sf::RectangleShape slot(sf::Vector2f(slotSize, slotSize));
         slot.setFillColor(sf::Color(240, 210, 190));

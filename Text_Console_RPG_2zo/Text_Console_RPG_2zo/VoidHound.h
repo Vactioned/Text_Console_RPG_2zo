@@ -2,6 +2,10 @@
 #include "Monster.h"
 #include "Player.h"
 #include <cstdlib>
+#include <iostream>
+
+
+
 
 class VoidHound : public Monster {
 public:
@@ -10,17 +14,21 @@ public:
             rand() % (playerlevel * 5 + 1) + (playerlevel * 5),  // 공격력
             0, // 정신공격력
             5, // 몬스터 방어력
-            "공허의 파수견") // 몬스터이름
+            "[공허의 파수견]") // 몬스터이름
 
     {
     }
 
     void NormalAttack(Player* player) override {
         std::cout << getName() << "이 날카로운 이빨로 물어뜯습니다!" << std::endl;
-        std::cout << "->" << getAttackPower() << "의 물리 피해를 입혔습니다!" << std::endl;
+        
 
         if (player != nullptr) {
+            int damage = getAttackPower() - player->getDefence();
+            if (damage < 1) damage = 1; //최소데미지 보장
 
+            player->setHp(player->getHp() - damage);
+            std::cout << "->" << getAttackPower() << "의 물리 피해를 입혔습니다!" << std::endl;
         }
     }
 
@@ -30,14 +38,19 @@ public:
                    
 
         std::cout << getName() << "이 붉은 눈을 드러내며 깊숙이 상처를 냅니다![잔혹한 할퀴기]" << std::endl;;
-        std::cout << "->" << initialdamage << "의 물리 피해를 입혔습니다!" << std::endl;
 
         setAttackPower(getAttackPower() + buffamount);
         std::cout << getName() << "의 이빨이 공허 에너지로 강화되어 공격력이" << buffamount << "영구 증가합니다!" << std::endl;
+
+        
        
 
         if (player != nullptr) {
-            
+            int damage = initialdamage - player->getDefence();
+            if (damage < 1) damage = 1;
+
+            player->setHp(player->getHp() - damage);
+            std::cout << "->" << initialdamage << "의 물리 피해를 입혔습니다!" << std::endl;
         }
     }
 };

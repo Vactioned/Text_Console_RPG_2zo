@@ -2,6 +2,9 @@
 #include "Monster.h"
 #include "Player.h"
 #include <cstdlib>
+#include <iostream>
+
+
 
 class OtherMonster : public Monster {
 public:

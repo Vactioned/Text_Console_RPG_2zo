@@ -147,6 +147,7 @@ sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MutatedSlime.h" />
     <ClInclude Include="OtherMonster.h" />
+    <ClInclude Include="plagueServant.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Skill.h" />
     <ClInclude Include="Thief.h" />
