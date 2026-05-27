@@ -17,6 +17,7 @@ Player::Player(std::string name, std::string job)
     level = 1;
     exp = 0;
     maxexp = 100;
+    gold = 0;
 
     attackBoostAmount = 0;
     attackBoostApplied = false;

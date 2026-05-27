@@ -21,6 +21,7 @@ protected:
     int level;
     int exp;
     int maxexp;
+    int gold;
 
 private:
 
@@ -57,6 +58,9 @@ public:
     int getLevel() const;
     int getExp() const;
     int getMaxExp() const;
+
+    int getGold() const;
+    void setGold(int gold); 
 
     void setLevel(int level);
     void setExp(int Exp);
