@@ -16,7 +16,7 @@ public:
     {
     }
 
-    int getSize()
+    typename std::list<T>::size_type getSize() const
     {
         return items_.size();
     }
