@@ -43,7 +43,7 @@ public:
     void use(Player* player, Monster* monster) const;
 
     // 아이템 생성 함수
-    static Item CreateHealPotion();
+    static Item CreateHealPotion(int playerLevel = 1);
     static Item CreateSanPotion();
     static Item CreateAttackBoost();
     static Item CreateWeaknessPotion();

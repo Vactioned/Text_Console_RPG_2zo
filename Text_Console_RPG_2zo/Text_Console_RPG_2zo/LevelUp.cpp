@@ -7,7 +7,7 @@ void LevelUp::CheckLevelUp(Player* player)
 {
     while (player->getExp() >= player->getMaxExp())
     {
-        int maxLevel = 10;
+        int maxLevel = 35;
         if (maxLevel > player->getLevel())
         {
             player->setExp(player->getExp() - player->getMaxExp());
@@ -57,7 +57,7 @@ void LevelUp::CheckLevelUp(Player* player)
                 break;
 
             case 3:
-                player->setSan(player->getSan() + 20);
+                player->setSan(min(player->getSan() + 20, player->getMaxSan()));
                 break;
 
             default:

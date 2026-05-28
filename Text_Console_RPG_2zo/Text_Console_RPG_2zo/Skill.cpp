@@ -6,6 +6,7 @@
 #include "Player.h"
 #include "Monster.h"
 #include "BattleSystem.h"   // DamageCalculate 사용
+#include "LogManager.h"
 
 using namespace std;
 
@@ -26,7 +27,7 @@ void Skill_Hellfire(Player* player, Monster* monster)
 {
     if (player->getSan() < 10)
     {
-        cout << "정신이 한계에 다다랐다. 지금 이 힘을 쓰면 돌아올 수 없을 것 같다.\n";
+        LogManager::TypePrint("정신이 한계에 다다랐다. 지금 이 힘을 쓰면 돌아올 수 없을 것 같다.", 5);
         return;
     }
 
@@ -37,8 +38,8 @@ void Skill_Hellfire(Player* player, Monster* monster)
     if (damage < 1) damage = 1;
 
     TakeDamage(monster, damage);
-    cout << "입술 사이로 낯선 언어가 흘러나온다. 손바닥 위에 지옥의 불꽃이 맺혔다.\n";
-    cout << monster->getName() << "에게 " << damage << "의 피해를 입혔다.\n";
+    LogManager::TypePrint("입술 사이로 낯선 언어가 흘러나온다. 손바닥 위에 지옥의 불꽃이 맺혔다.", 5);
+    LogManager::TypePrint(monster->getName() + " 에게 " + to_string(damage) + "의 피해를 입혔다.", 5);
 }
 
 // ── 흑마법사 : 정신 과부화 
@@ -48,7 +49,7 @@ void Skill_MindOverload(Player* player, Monster* monster)
 {
     if (player->getSan() < 15)
     {
-        cout << "정신이 한계에 다다랐다. 지금 이 힘을 쓰면 돌아올 수 없을 것 같다.\n";
+        LogManager::TypePrint("정신이 한계에 다다랐다. 지금 이 힘을 쓰면 돌아올 수 없을 것 같다.", 5);
         return;
     }
 
@@ -64,9 +65,9 @@ void Skill_MindOverload(Player* player, Monster* monster)
     if (newHp > player->getMaxHp()) newHp = player->getMaxHp();
     player->setHp(newHp);
 
-    cout << "당신은 자신의 정신을 무기로 삼았다. 과부하된 의식의 파편이 " << monster->getName() << "를 향해 쏟아진다.\n";
-    cout << monster->getName() << "에게 " << damage << "의 피해를 입혔다.\n";
-    cout << monster->getName() << "의 생명력이 당신에게로 흘러든다. " << heal << "만큼 회복됐다.\n";
+    LogManager::TypePrint("당신은 자신의 정신을 무기로 삼았다. 과부하된 의식의 파편이 " + monster->getName() + " 를 향해 쏟아진다.", 5);
+    LogManager::TypePrint(monster->getName() + " 에게 " + to_string(damage) + "의 피해를 입혔다.", 5);
+    LogManager::TypePrint(monster->getName() + " 의 생명력이 당신에게로 흘러든다. " + to_string(heal) + "만큼 회복됐다.", 5);
 }
 
 
@@ -77,13 +78,13 @@ void Skill_MindStrike(Player* player, Monster* monster, int& turn_cycle)
     int newSan = player->getSan() + 10;
     if (newSan > player->getMaxSan()) newSan = player->getMaxSan();
     player->setSan(newSan);
-    cout << "당신은 눈을 감는다. 세상의 소음이 사라지고, 오직 " << monster->getName() << "만이 남는다.\n";
+    LogManager::TypePrint("당신은 눈을 감는다. 세상의 소음이 사라지고, 오직 " + monster->getName() + " 만이 남는다.", 5);
 
     player->Attack(monster);
 
     int damage = DamageCalculate(player->getPower(), monster->getDefence());
     TakeDamage(monster, damage);
-    cout << monster->getName() << "에게 " << damage << "의 피해를 입혔다.\n";
+    LogManager::TypePrint(monster->getName() + " 에게 " + to_string(damage) + "의 피해를 입혔다.", 5);
     
 }
 
@@ -92,7 +93,7 @@ void Skill_MindStrike(Player* player, Monster* monster, int& turn_cycle)
 // 1턴 무적. 쿨타임 있음
 void Skill_MistWalk(Player* player, int& turn_cycle)
 {
-    cout << "당신의 몸이 안개 속으로 녹아든다. 존재가 희미해지는 감각이 온몸을 감싼다.\n";
+    LogManager::TypePrint("당신의 몸이 안개 속으로 녹아든다. 존재가 희미해지는 감각이 온몸을 감싼다.", 5);
 }
 
 // ── 도박꾼 : 러시안 룰렛
@@ -100,14 +101,14 @@ void Skill_MistWalk(Player* player, int& turn_cycle)
 // 적한테 쏘면 총알 나가든 안 나가든 턴 종료
 void Skill_RussianRoulette(Player* player, Monster* monster)
 {
-    cout << "리볼버가 손에 쥐어진다. 차가운 금속의 감촉이 오히려 머리를 맑게 한다. 부디 행운의 여신이 미소를 짓고 있기를.\n";
+    LogManager::TypePrint("리볼버가 손에 쥐어진다. 차가운 금속의 감촉이 오히려 머리를 맑게 한다. 부디 행운의 여신이 미소를 짓고 있기를.", 5);
 
     float multiplier = 1.0f;
     int remainingChambers = 6;
 
     for (int shot = 0; shot < 6; shot++)
     {
-        cout << "\n총신의 그림이 희미하게 빛난다. 리볼버가 천천히 돌아간다. 확률은 1/" << remainingChambers << ".\n";
+        LogManager::TypePrint("\n총신의 그림이 희미하게 빛난다. 리볼버가 천천히 돌아간다. 확률은 1/" + to_string(remainingChambers) + ".", 5);
         cout << "1. 나에게 방아쇠를 당긴다.\n";
         cout << "2. 적에게 방아쇠를 당긴다.\n";
         cout << "선택 : ";
@@ -131,15 +132,15 @@ void Skill_RussianRoulette(Player* player, Monster* monster)
             {
                 int selfDamage = player->getHp() / 2;
                 TakeDamage(player, selfDamage);
-                cout << "총알이 쏘아졌고, 내 몸을 강타하는 충격이 느껴진다. 불운의 여신이 조소를 보낸다.\n";
-                cout << "선혈이 " << selfDamage << "만큼 흘러내렸다.\n";
+                LogManager::TypePrint("총알이 쏘아졌고, 내 몸을 강타하는 충격이 느껴진다. 불운의 여신이 조소를 보낸다.", 5);
+                LogManager::TypePrint("선혈이 " + to_string(selfDamage) + "만큼 흘러내렸다.", 5);
                 return;
             }
             else
             {
                 remainingChambers--;   // 약실 하나 소진 → 확률 상승
                 multiplier += 1.2f;
-                cout << "총은 침묵했다. 총신에 아름다운 그림이 그려진다.\n";
+                LogManager::TypePrint("총은 침묵했다. 총신에 아름다운 그림이 그려진다.", 5);
             }
         }
         else if (choice == 2) // 적에게
@@ -149,12 +150,12 @@ void Skill_RussianRoulette(Player* player, Monster* monster)
                 int damage = static_cast<int>(
                     DamageCalculate(player->getPower(), monster->getDefence()) * multiplier);
                 TakeDamage(monster, damage);
-                cout << "총은 겨누어졌고, 총알은 발사되었다. 오늘의 행운은 " << monster->getName() << "의 것이 아니었다.\n";
-                cout << monster->getName() << "에게 " << damage << "의 피해를 입혔다.\n";
+                LogManager::TypePrint("총은 겨누어졌고, 총알은 발사되었다. 오늘의 행운은 " + monster->getName() + " 의 것이 아니었다.", 5);
+                LogManager::TypePrint(monster->getName() + " 에게 " + to_string(damage) + "의 피해를 입혔다.", 5);
             }
             else
             {
-                cout << "총은 겨누어졌고, 침묵했다. 과감하지 못한 나에게 질책이 들리는 듯 하다. 총신의 그림이 흐릿해진다.\n";
+                LogManager::TypePrint("총은 겨누어졌고, 침묵했다. 과감하지 못한 나에게 질책이 들리는 듯 하다. 총신의 그림이 흐릿해진다.", 5);
             }
             return;
         }
@@ -165,7 +166,7 @@ void Skill_RussianRoulette(Player* player, Monster* monster)
         }
     }
 
-    cout << "탄창이 비었다.\n";
+    LogManager::TypePrint("탄창이 비었다.", 5);
 }
 
 
@@ -202,7 +203,7 @@ int Skill_PassiveOnHit(SkillID id, Player* player, Monster* monster, int damage)
     case SkillID::ADRENALINE:
         if (player->getHp() <= player->getMaxHp() * 0.5)
         {
-            cout << "죽음의 냄새가 몸을 일깨운다. 고통이 점점 희미해져 간다.\n";
+            LogManager::TypePrint("죽음의 냄새가 몸을 일깨운다. 고통이 점점 희미해져 간다.", 5);
             return damage / 2;
         }
         return damage;
@@ -213,7 +214,7 @@ int Skill_PassiveOnHit(SkillID id, Player* player, Monster* monster, int damage)
         {
             int newDamage = monster->getAttackPower() - static_cast<int>(player->getDefence() * 1.5);
             if (newDamage < 1) newDamage = 1;
-            cout << "정신이 고요하다. 충격이 밀려오지만, 고요함이 그것을 받아낸다.\n";
+            LogManager::TypePrint("정신이 고요하다. 충격이 밀려오지만, 고요함이 그것을 받아낸다.", 5);
             return newDamage;
         }
         return damage;

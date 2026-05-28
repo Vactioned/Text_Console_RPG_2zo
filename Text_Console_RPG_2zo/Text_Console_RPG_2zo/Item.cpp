@@ -180,9 +180,10 @@ void Item::use(Player* player, Monster* monster) const
 }
 
 // 아이템 생성 함수
-Item Item::CreateHealPotion()
+Item Item::CreateHealPotion(int playerLevel)
 {
-    return Item("체력 포션", ItemType::HealPotion, 50);
+    int healValue = 50 + (playerLevel / 10) * 100;
+    return Item("체력 포션", ItemType::HealPotion, healValue);
 }
 
 Item Item::CreateSanPotion()

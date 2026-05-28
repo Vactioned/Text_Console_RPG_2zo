@@ -1,6 +1,7 @@
-﻿#pragma once
+#pragma once
 #include "Monster.h"
 #include "Player.h"
+#include "LogManager.h"
 #include <cstdlib>
 #include <iostream>
 
@@ -17,23 +18,19 @@ public:
             "[공허의 파수견]") // 몬스터이름
 
     {
-        
+
     }
 
     void Encounter() override {
-        std::cout << "\n(출력대사) " << getName() << "이(가) 앞을 가로막습니다!\n" << std::endl;
+        std::cout << "\n어둠 속에서 낮은 숨소리가 들려온다. [공허의 파수견] 이(가) 붉은 눈을 빛내며 천천히 모습을 드러낸다.\n" << std::endl;
     }
 
     int NormalAttack(Player* player) override {
-        std::cout << getName() << "이 날카로운 이빨로 물어뜯습니다!" << std::endl;
+        LogManager::TypePrint(getName() + " 이 날카로운 이빨로 물어뜯습니다.", 5);
         int damage = getAttackPower() - player->getDefence();
 
         if (player != nullptr) {
-            
-            if (damage < 1) damage = 1; //최소데미지 보장
-
-            
-            std::cout << "->" << damage << "의 물리 피해를 입혔습니다!" << std::endl;
+            if (damage < 1) damage = 1;
         }
         return damage;
     }
@@ -44,19 +41,11 @@ public:
         int damage = initialdamage - player->getDefence();
         if (damage < 1) damage = 1;
 
-        std::cout << getName() << "이 붉은 눈을 드러내며 깊숙이 상처를 냅니다![잔혹한 할퀴기]" << std::endl;;
+        LogManager::TypePrint(getName() + " 이 붉은 눈을 드러내며 이빨을 피부 깊숙하게 쑤셔 넣습니다.", 5);
 
         setAttackPower(getAttackPower() + buffamount);
-        std::cout << getName() << "의 이빨이 공허 에너지로 강화되어 공격력이" << buffamount << "영구 증가합니다!" << std::endl;
+        LogManager::TypePrint("\n" + getName() + " 의 이빨이 공허 에너지로 강화되어 공격력이 영구히 " + std::to_string(buffamount) + "만큼 증가합니다.", 5);
 
-        
-       
-
-        if (player != nullptr) {
-           
-            std::cout << "->" << damage << "의 물리 피해를 입혔습니다!" << std::endl;
-        }
         return damage;
     }
 };
-
