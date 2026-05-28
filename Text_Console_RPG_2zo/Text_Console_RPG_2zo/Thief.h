@@ -7,7 +7,7 @@
 class Thief : public Player
 {
 public:
-    Thief(std::string name, std::string job = "도적/약탈꾼");
+    Thief(std::string name, std::string job = "도적");
 
     virtual ~Thief() {}
 
