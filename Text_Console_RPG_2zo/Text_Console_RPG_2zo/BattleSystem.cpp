@@ -87,23 +87,23 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
 
         if (player->getSan() == 0 && sanPanicTurns == 0)
         {
-            cout << "\n[광기] 정신이 완전히 무너졌다!\n";
+            cout << "\n당신의 정신은 현실을 감당하지 못하고 무너져 내린다.\n";
             int roll = rand() % 100;
 
             if (roll < 5) // 5%: 즉사
             {
-                cout << "극도의 공포가 심장을 멈추게 했다... 당신은 쓰러졌다.\n";
+                cout << "공포가 심장에게 종언을 고한다. 고통은 잦아들고 영원한 안식이 당신을 맞이한다.\n";
                 player->setHp(0);
                 skipPlayerTurn = true;
             }
             else if (roll < 35) // 30%: 3턴 랜덤행동
             {
-                cout << "[패닉] 공포에 사로잡혀 스스로를 제어할 수 없다! (3턴간 랜덤 행동)\n";
+                cout << "공포가 의식을 잠식한다. 당신은 본능만이 남은 짐승이 되었다.\n";
                 sanPanicTurns = 3;
             }
             else if (roll < 65) // 30%: 1턴 행동불가
             {
-                cout << "[공포] 극도의 공포로 몸이 굳어 행동할 수 없다!\n";
+                cout << "압도적인 공포가 온몸을 옥죄어 온다. 손가락 하나 움직일 수 없다.\n";
                 player->setSan(10);
                 skipPlayerTurn = true;
             }
@@ -113,7 +113,8 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
                 if (selfDmg < 1) selfDmg = 1;
                 int newHp = player->getHp() - selfDmg;
                 if (newHp < 1) newHp = 1;
-                cout << "[자해] 공포에 스스로를 해쳤다! " << selfDmg << "의 피해!\n";
+                cout << "몸속의 피가 자유를 갈망한다. 당신은 정신이 들기도 전에 칼을 쥐고 스스로를 찔렀다.\n";
+                cout << "선혈이 " << selfDmg << "만큼 흘러내렸다.\n";
                 player->setHp(newHp);
                 player->setSan(10);
             }
@@ -122,13 +123,13 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
         if (!skipPlayerTurn && sanPanicTurns > 0)
         {
             skipPlayerTurn = true;
-            cout << "\n[광기] (" << (4 - sanPanicTurns) << "/3) 공포에 사로잡혀 제멋대로 행동한다!\n";
+            cout << "\n당신은 공포에 잠식된 짐승이 되어 몸이 이끄는 대로 움직인다. (" << (4 - sanPanicTurns) << "턴 남음)\n";
 
             switch (rand() % 3)
             {
                 case 0: // 공격
                 {
-                    cout << "정신 없이 공격한다!\n";
+                    cout << "눈앞의 괴물밖에 보이지 않는다. 본능적으로 달려든다.\n";
                     int damage = DamageCalculate(player->getPower(), monster->getDefence());
                     for (int i = 1; i <= 2; ++i)
                     {
@@ -143,7 +144,7 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
                 }
                 case 1: // 방어
                 {
-                    cout << "공포에 질려 웅크린다!\n";
+                    cout << "눈앞의 괴물밖에 보이지 않는다. 몸은 본능적으로 방어 자세를 취한다.\n";
                     isDefending = true;
                     break;
                 }
@@ -152,13 +153,13 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
                     int escapeChance = 30 + static_cast<int>((player->getSan() / 100.0) * 70);
                     if ((rand() % 100 + 1) <= escapeChance)
                     {
-                        cout << "당신은 패닉에 빠져 자신이 어디로 가는지도 모른 채 넘어지고 기어가며 적으로부터 달아나는 데 성공했다.\n";
+                        cout << "당신은 어디로 가는지도 모른 채 달아났다. 본능만이 당신을 살렸다.\n";
                         player->setPower(OriginalAtk);
                         player->setDefence(OriginalDef);
                         player->setSanDefence(OriginalSanDef);
                         return;
                     }
-                    cout << "당신은 패닉에 빠져 도망치려 했지만 다리가 꼬여 넘어졌다. 벌벌 떠는 당신을 향해 " << monster->getName() << "(이)가 압도적인 공포와 함께 천천히 다가온다.\n";
+                    cout << "아무것도 보이지 않는다. 다리는 땅을 내달렸으나, 활로를 찾지 못했다. 압도적인 공포와 함께 " << monster->getName() << "(이)가 천천히 다가온다.\n";
                     break;
                 }
             }
@@ -167,7 +168,7 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
             if (sanPanicTurns == 0)
             {
                 player->setSan(10);
-                cout << "[회복] 정신을 차렸다.\n";
+                cout << "머리를 뒤덮던 공포가 조금 가신다. 당신은 다시 자신을 되찾았다.\n";
             }
         }
 
@@ -179,6 +180,7 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
 
         while (true)
         {
+            player->PrintPlayerStatus();
             cout << "1. 적에게 공격을 가한다.\n";
             cout << "2. 방어 자세를 취한다.\n";
             cout << "3. 기술을 사용한다.\n";
@@ -186,6 +188,13 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
             cout << "5. 도주를 시도한다.\n";
             cout << "선택 : ";
             cin >> select;
+            if (cin.fail())
+            {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                cout << "올바른 행동이 아니다. 다시 한번 생각해보자.(숫자를 입력해 주세요)\n";
+                continue;
+            }
             cout << "\n\n";
 
             switch (select)
@@ -207,7 +216,7 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
 
                 case 2: // 방어
                 {
-                    cout << "방어 자세를 취했다. 이번 몬스터 공격의 피해가 절반으로 줄어든다.\n";
+                    cout << "당신은 괴물의 다음 공격에 대비해 방어 자세를 취했다.\n";
                     isDefending = true;
                     break;
                 }
@@ -229,6 +238,13 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
 
                     int skillSelect;
                     cin >> skillSelect;
+                    if (cin.fail())
+                    {
+                        cin.clear();
+                        cin.ignore(10000, '\n');
+                        cout << "올바른 행동이 아니다. 다시 한번 생각해보자.(숫자를 입력해 주세요)\n";
+                        continue;
+                    }
                     if (skillSelect == 0)
                     {
                         continue;
@@ -239,14 +255,14 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
 
                         if (sd.isPassive)
                         {
-                            cout << "[" << sd.name << "](은)는 전투 중 자동으로 발동될 것 이다.\n";
+                            cout << sd.name << "... 때가 되면 저절로 발휘될 것이다.\n";
                             continue;
                         }
 
                         if (sd.cooltime > 0 && turn_cycle - skillLastUsed[skillSelect] < sd.cooltime)
                         {
                             int remaining = sd.cooltime - (turn_cycle - skillLastUsed[skillSelect]);
-                            cout << "[" << sd.name << "] 재사용 대기 중. ("
+                            cout << sd.name << "... 아직은 때가 아닌 것 같다. ("
                                 << remaining << "턴 남음)\n";
                             continue;
                         }
@@ -289,33 +305,33 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
                     if (player->getSan() > 80)
                     {
                         if (escaped)
-                            cout << "당신은 침착하게 어둠 속에 몸을 숨기고 후퇴하였다.\n";
+                            cout << "당신은 침착하게 어둠 속에 몸을 숨기고 후퇴했다.\n";
                         else
-                            cout << "당신은 침착하게 어둠 속에 몸을 숨기고 후퇴하려 했으나 " << monster->getName() << "에게 들켜 실패하였다.\n";
+                            cout << "당신은 침착하게 어둠 속에 몸을 숨기려 했으나, " << monster->getName() << "에게 들켜버렸다.\n";
                     }
                     else if (player->getSan() > 50)
                     {
                         if (escaped)
-                            cout << "당신은 떨리는 몸을 부여잡고 달려서 간신히 도주하였다.\n";
+                            cout << "떨리는 몸을 부여잡고 달렸다. 간신히 벗어났다.\n";
                         else
-                            cout << "당신은 떨리는 몸을 부여잡고 달려서 도주하려 했으나 길을 헤매는 사이 " << monster->getName() << "에게 따라잡혔다.\n";
+                            cout << "떨리는 몸을 부여잡고 달렸으나, 길을 헤매는 사이 " << monster->getName() << "에게 따라잡혔다.\n";
                     }
                     else if (player->getSan() > 10)
                     {
                         if (escaped)
-                            cout << "당신은 거의 제정신이 아닌 상태로 꼴사납게 도망치는 데 성공하였다.\n";
+                            cout << "거의 제정신이 아닌 채로 달아났다. 어떻게 살아남았는지조차 알 수 없다.\n";
                         else
                         {
-                            cout << "당신은 거의 제정신이 아닌 상태로 도망치려 하였으나 돌부리에 걸려 넘어지고 말았다.\n";
-                            cout << monster->getName() << "(이)가 공포의 냄새를 맡고 당신에게 다가온다.\n";
+                            cout << "거의 제정신이 아닌 채로 달아나려 했으나, 돌부리에 걸려 쓰러졌다.\n";
+                            cout << monster->getName() << "(이)가 공포의 냄새를 맡고 다가온다.\n";
                         }
                     }
                     else
                     {
                         if (escaped)
-                            cout << "당신은 패닉에 빠져 자신이 어디로 가는지도 모른 채 넘어지고 기어가며 적으로부터 달아나는 데 성공했다.\n";
+                            cout << "당신은 어디로 가는지도 모른 채 달아났다. 본능만이 당신을 살렸다.\n";
                         else
-                            cout << "당신은 패닉에 빠져 도망치려 했지만 다리가 꼬여 넘어졌다. 벌벌 떠는 당신을 향해 " << monster->getName() << "(이)가 압도적인 공포와 함께 천천히 다가온다.\n";
+                            cout << "아무것도 보이지 않는다. 다리는 땅을 내달렸으나, 활로를 찾지 못했다. 압도적인 공포와 함께 " << monster->getName() << "(이)가 천천히 다가온다.\n";
                     }
 
                     if (escaped)
@@ -342,7 +358,7 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
 
         if (monster->getHp() <= 0)
         {
-            cout << "\n" << monster->getName() << "(이)가 쓰러졌다!\n";
+            cout << "\n" << monster->getName() << "(이)가 쓰러진다. 전장에 고요가 찾아왔다.\n";
             break;
         }
 
@@ -350,11 +366,11 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
 
         if (isInvincible)
         {
-            cout << "안개 속에 몸을 숨긴 당신에게 " << monster->getName() << "의 공격이 빗나갔다.\n";
+            cout << "안개 속에 숨어든 당신을 향한 " << monster->getName() << "의 공격이 허공을 가른다.\n";
 
             int counterDamage = DamageCalculate(player->getPower(), monster->getDefence());
             TakeDamage(monster, counterDamage);
-            cout << "반격! " << monster->getName() << "에게 " << counterDamage << "의 피해!\n";
+            cout << "허공을 가른 틈을 놓치지 않는다. " << monster->getName() << "에게 " << counterDamage << "의 피해!\n";
 
             isInvincible = false;
         }
@@ -378,7 +394,7 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
                 if (isDefending)
                 {
                     monsterDamage /= 2;
-                    cout << "방어 자세! 받는 피해가 절반으로 줄었다.\n";
+                    cout << "단단히 몸을 세운 방어 자세가 괴물의 충격을 흘려냈다.\n";
                 }
 
                 TakeDamage(player, monsterDamage);
@@ -395,7 +411,7 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
 
     if (player->getHp() <= 0)
     {
-        cout << "\n당신은 쓰러졌다...\n";
+        cout << "\n당신은 더 이상 몸을 가눌 수 없다. 의식이 흐려지는 가운데, 심연이 천천히 당신을 집어삼킨다.\n";
         cout << "\n========================================\n";
         cout << "               GAME  OVER               \n";
         cout << "========================================\n";
@@ -406,7 +422,11 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
     }
     else
     {
-        cout << "\n전투에서 승리하였다!\n";
+        cout << "\n전투의 흔적이 여실한 전장에 침묵이 내려앉는다. 괴물은 쓰러졌고, 당신은 아직 살아 숨쉬고 있다.\n";
+
+        player->setPower(OriginalAtk);
+        player->setDefence(OriginalDef);
+        player->setSanDefence(OriginalSanDef);
 
         LevelUp levelUp;
         levelUp.AddExp(player, 50);
@@ -425,19 +445,18 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
         if (rand() % 100 < dropChance)
         {
             if (dropChance > 30)
-                cout << "[약탈] 예리한 손놀림으로 전리품을 챙겼다!\n";
+                cout << "예리한 눈썰미로 괴물의 시체를 훑었다. 쓸 만한 것이 눈에 띈다.\n";
+            else
+                cout << "쓸 만한 것이 눈에 띈다.\n";
 
             Item drop = (rand() % 2 == 0)
                 ? Item::CreateHealPotion()
                 : Item::CreateSanPotion();
-            cout << "[아이템 획득] " << drop.getName() << "!\n";
+            cout << drop.getName() << "을 손에 넣었다.\n";
             inventory.AddItem(drop);
         }
     }
 
-    player->setPower(OriginalAtk);
-    player->setDefence(OriginalDef);
-    player->setSanDefence(OriginalSanDef);
 }
 
 void BattleSystem::EnterMissionMenu(Player& player, Inventory<Item>& inventory)
@@ -454,6 +473,13 @@ void BattleSystem::EnterMissionMenu(Player& player, Inventory<Item>& inventory)
         cout << " 1. 메인 스토리 진행 / 2. 지역 토벌(자유 전투) / 3. 돌아가기 \n";
         cout << "선택 : ";
         cin >> choice;
+        if (cin.fail())
+        {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "올바른 행동이 아니다. 다시 한번 생각해보자.(숫자를 입력해 주세요)\n";
+            continue;
+        }
 
         if (choice == 1)
         {
