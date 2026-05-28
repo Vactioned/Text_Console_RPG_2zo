@@ -60,10 +60,10 @@ void Player::setGold(int gold) { this->gold = gold; }
 // 플레이어 스탯 확인
 void Player::PrintPlayerStatus() const
 {
-    cout << "========================================" << endl;
-    cout << "이름: " << name << "| 직업: " << job << "| Lv. " << level << "Exp: " << exp << " / " << maxexp << endl;
-    cout << "HP: " << hp << " / " << maxhp << "| 정신력: " << san << " / " << maxsan << endl;
-    cout << "공격력: " << power << "| 방어력: " << defence << "| 정신방어력: " << sandefence << endl;
-    cout << "========================================" << endl;
+    cout << "================================================================" << endl;
+    cout << "이름: " << name << " | 직업: " << job << " | Lv. " << level << " | Exp : " << exp << " / " << maxexp << endl;
+    cout << "HP: " << hp << " / " << maxhp << " | 정신력: " << san << " / " << maxsan << endl;
+    cout << "공격력: " << power << " | 방어력: " << defence << " | 정신방어력: " << sandefence << endl;
+    cout << "================================================================" << endl;
 }
 
