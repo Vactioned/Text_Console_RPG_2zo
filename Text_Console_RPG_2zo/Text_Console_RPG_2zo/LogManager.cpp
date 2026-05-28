@@ -26,13 +26,15 @@ void LogManager::Clear()
 
 void LogManager::PressEnter()
 {
-    if (cin.rdbuf()->in_avail() > 0 || cin.fail())
+    if (cin.fail())
     {
         cin.clear();
         cin.ignore(10000, '\n');
     }
 
     cout << "\n[ 엔터(Enter)를 누르면 계속합니다... ]";
+
+    cin.ignore(cin.rdbuf()->in_avail(), '\n');
 
     cin.get(); // 사용자가 엔터를 누를 때까지 대기
 }
@@ -177,7 +179,7 @@ string LogManager::SelectJob()              // 직업 입력 함수
 
         switch (choice)
         {
-        case 1: job = "Beserker"; break;
+        case 1: job = "Berserker"; break;
         case 2: job = "Warlock"; break;
         case 3: job = "Thief"; break;
         case 4: job = "Monk"; break;
