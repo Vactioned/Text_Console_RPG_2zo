@@ -3,22 +3,7 @@
 #include "InventoryUI.h"
 #include "LogManager.h"
 
-#include "VoidHound.h"
-#include "MutatedSlime.h"
-#include "plagueServant.h"
-#include "CorpseGolem.h"
-#include "AbyssHive.h"
-#include "AbyssRemnant.h"
-#include "DimensionEye.h"
-#include "Oblivion.h"
-#include "AbyssFanatic.h"
-#include "BloodFanatic.h"
-#include "FanaticLeader.h"
-#include "Malachai.h"
-#include "Arkadia.h"
-#include "TwistedGuard.h"
-#include "FleshFusion.h"
-#include "CorruptedKnight.h"
+#include "Allmonster.h"
 
 #include <iostream>
 #include <cstdlib>
@@ -34,7 +19,7 @@ int DamageCalculate(int attack, int defence)
 
 void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
 {
-    // TODO: 몬스터 조우 대사 출력 (몬스터 담당자 협업 예정)
+    monster->Encounter();
 
     int OriginalAtk    = player->getPower();
     int OriginalDef    = player->getDefence();
@@ -87,23 +72,26 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
 
         if (player->getSan() == 0 && sanPanicTurns == 0)
         {
-            cout << "\n당신의 정신은 현실을 감당하지 못하고 무너져 내린다.\n";
+            LogManager::TypePrint("\n당신의 정신은 현실을 감당하지 못하고 무너져 내린다.", 5);
             int roll = rand() % 100;
 
             if (roll < 5) // 5%: 즉사
             {
-                cout << "공포가 심장에게 종언을 고한다. 고통은 잦아들고 영원한 안식이 당신을 맞이한다.\n";
+                LogManager::TypePrint("공포가 심장에게 종언을 고한다. 고통은 잦아들고 영원한 안식이 당신을 맞이한다.", 5);
+                LogManager::PressEnter();
                 player->setHp(0);
                 skipPlayerTurn = true;
             }
             else if (roll < 35) // 30%: 3턴 랜덤행동
             {
-                cout << "공포가 의식을 잠식한다. 당신은 본능만이 남은 짐승이 되었다.\n";
+                LogManager::TypePrint("공포가 의식을 잠식한다. 당신은 본능만이 남은 짐승이 되었다.", 5);
+                LogManager::PressEnter();
                 sanPanicTurns = 3;
             }
             else if (roll < 65) // 30%: 1턴 행동불가
             {
-                cout << "압도적인 공포가 온몸을 옥죄어 온다. 손가락 하나 움직일 수 없다.\n";
+                LogManager::TypePrint("압도적인 공포가 온몸을 옥죄어 온다. 손가락 하나 움직일 수 없다.", 5);
+                LogManager::PressEnter();
                 player->setSan(10);
                 skipPlayerTurn = true;
             }
@@ -113,8 +101,9 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
                 if (selfDmg < 1) selfDmg = 1;
                 int newHp = player->getHp() - selfDmg;
                 if (newHp < 1) newHp = 1;
-                cout << "몸속의 피가 자유를 갈망한다. 당신은 정신이 들기도 전에 칼을 쥐고 스스로를 찔렀다.\n";
-                cout << "선혈이 " << selfDmg << "만큼 흘러내렸다.\n";
+                LogManager::TypePrint("몸속의 피가 자유를 갈망한다. 당신은 정신이 들기도 전에 칼을 쥐고 스스로를 찔렀다.", 5);
+                LogManager::TypePrint("선혈이 " + to_string(selfDmg) + "만큼 흘러내렸다.", 5);
+                LogManager::PressEnter();
                 player->setHp(newHp);
                 player->setSan(10);
             }
@@ -123,13 +112,13 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
         if (!skipPlayerTurn && sanPanicTurns > 0)
         {
             skipPlayerTurn = true;
-            cout << "\n당신은 공포에 잠식된 짐승이 되어 몸이 이끄는 대로 움직인다. (" << (4 - sanPanicTurns) << "턴 남음)\n";
+            LogManager::TypePrint("\n당신은 공포에 잠식된 짐승이 되어 몸이 이끄는 대로 움직인다. (" + to_string(4 - sanPanicTurns) + "턴 남음)", 5);
 
             switch (rand() % 3)
             {
                 case 0: // 공격
                 {
-                    cout << "눈앞의 괴물밖에 보이지 않는다. 본능적으로 달려든다.\n";
+                    LogManager::TypePrint("눈앞의 괴물밖에 보이지 않는다. 본능적으로 달려든다.", 5);
                     int damage = DamageCalculate(player->getPower(), monster->getDefence());
                     for (int i = 1; i <= 2; ++i)
                     {
@@ -139,12 +128,12 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
                     }
                     player->Attack(monster);
                     TakeDamage(monster, damage);
-                    cout << "→ " << monster->getName() << "에게 " << damage << "의 피해!\n";
+                    LogManager::TypePrint("→ " + monster->getName() + " 에게 " + to_string(damage) + "의 피해!", 5);
                     break;
                 }
                 case 1: // 방어
                 {
-                    cout << "눈앞의 괴물밖에 보이지 않는다. 몸은 본능적으로 방어 자세를 취한다.\n";
+                    LogManager::TypePrint("눈앞의 괴물밖에 보이지 않는다. 몸은 본능적으로 방어 자세를 취한다.", 5);
                     isDefending = true;
                     break;
                 }
@@ -153,13 +142,13 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
                     int escapeChance = 30 + static_cast<int>((player->getSan() / 100.0) * 70);
                     if ((rand() % 100 + 1) <= escapeChance)
                     {
-                        cout << "당신은 어디로 가는지도 모른 채 달아났다. 본능만이 당신을 살렸다.\n";
+                        LogManager::TypePrint("당신은 어디로 가는지도 모른 채 달아났다. 본능만이 당신을 살렸다.", 5);
                         player->setPower(OriginalAtk);
                         player->setDefence(OriginalDef);
                         player->setSanDefence(OriginalSanDef);
                         return;
                     }
-                    cout << "아무것도 보이지 않는다. 다리는 땅을 내달렸으나, 활로를 찾지 못했다. 압도적인 공포와 함께 " << monster->getName() << "(이)가 천천히 다가온다.\n";
+                    LogManager::TypePrint("아무것도 보이지 않는다. 다리는 땅을 내달렸으나, 활로를 찾지 못했다. 압도적인 공포와 함께 " + monster->getName() + " (이)가 천천히 다가온다.", 5);
                     break;
                 }
             }
@@ -168,13 +157,13 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
             if (sanPanicTurns == 0)
             {
                 player->setSan(10);
-                cout << "머리를 뒤덮던 공포가 조금 가신다. 당신은 다시 자신을 되찾았다.\n";
+                LogManager::TypePrint("머리를 뒤덮던 공포가 조금 가신다. 당신은 다시 자신을 되찾았다.", 5);
             }
         }
 
         if (!skipPlayerTurn)
         {
-        cout << "당신의 차례가 되었다. 당신은...\n";
+        LogManager::TypePrint("당신의 차례가 되었다. 당신은...", 5);
 
         int select;
 
@@ -211,13 +200,13 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
                     }
                     player->Attack(monster);
                     TakeDamage(monster, damage);
-                    cout << "\n→ " << monster->getName() << "에게 " << damage << "의 피해!\n";
+                    LogManager::TypePrint("\n→ " + monster->getName() + " 에게 " + to_string(damage) + "의 피해!", 5);
                     break;
                 }
 
                 case 2: // 방어
                 {
-                    cout << "당신은 괴물의 다음 공격에 대비해 방어 자세를 취했다.\n";
+                    LogManager::TypePrint("당신은 괴물의 다음 공격에 대비해 방어 자세를 취했다.", 5);
                     isDefending = true;
                     break;
                 }
@@ -256,15 +245,14 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
 
                         if (sd.isPassive)
                         {
-                            cout << sd.name << "... 때가 되면 저절로 발휘될 것이다.\n";
+                            LogManager::TypePrint(sd.name + "... 때가 되면 저절로 발휘될 것이다.", 5);
                             continue;
                         }
 
                         if (sd.cooltime > 0 && turn_cycle - skillLastUsed[skillSelect] < sd.cooltime)
                         {
                             int remaining = sd.cooltime - (turn_cycle - skillLastUsed[skillSelect]);
-                            cout << sd.name << "... 아직은 때가 아닌 것 같다. ("
-                                << remaining << "턴 남음)\n";
+                            LogManager::TypePrint(sd.name + "... 아직은 때가 아닌 것 같다. (" + to_string(remaining) + "턴 남음)", 5);
                             continue;
                         }
 
@@ -297,7 +285,7 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
 
                 case 5: // 도주
                 {
-                    cout << "당신은 도주를 시도했다.\n";
+                    LogManager::TypePrint("당신은 도주를 시도했다.", 5);
 
                     int  escapeChance = 30 + static_cast<int>((player->getSan() / 100.0) * 70);
                     int  randomCall   = rand() % 100 + 1;
@@ -306,33 +294,33 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
                     if (player->getSan() > 80)
                     {
                         if (escaped)
-                            cout << "당신은 침착하게 어둠 속에 몸을 숨기고 후퇴했다.\n";
+                            LogManager::TypePrint("당신은 침착하게 어둠 속에 몸을 숨기고 후퇴했다.", 5);
                         else
-                            cout << "당신은 침착하게 어둠 속에 몸을 숨기려 했으나, " << monster->getName() << "에게 들켜버렸다.\n";
+                            LogManager::TypePrint("당신은 침착하게 어둠 속에 몸을 숨기려 했으나, " + monster->getName() + " 에게 들켜버렸다.", 5);
                     }
                     else if (player->getSan() > 50)
                     {
                         if (escaped)
-                            cout << "떨리는 몸을 부여잡고 달렸다. 간신히 벗어났다.\n";
+                            LogManager::TypePrint("떨리는 몸을 부여잡고 달렸다. 간신히 벗어났다.", 5);
                         else
-                            cout << "떨리는 몸을 부여잡고 달렸으나, 길을 헤매는 사이 " << monster->getName() << "에게 따라잡혔다.\n";
+                            LogManager::TypePrint("떨리는 몸을 부여잡고 달렸으나, 길을 헤매는 사이 " + monster->getName() + " 에게 따라잡혔다.", 5);
                     }
                     else if (player->getSan() > 10)
                     {
                         if (escaped)
-                            cout << "거의 제정신이 아닌 채로 달아났다. 어떻게 살아남았는지조차 알 수 없다.\n";
+                            LogManager::TypePrint("거의 제정신이 아닌 채로 달아났다. 어떻게 살아남았는지조차 알 수 없다.", 5);
                         else
                         {
-                            cout << "거의 제정신이 아닌 채로 달아나려 했으나, 돌부리에 걸려 쓰러졌다.\n";
-                            cout << monster->getName() << "(이)가 공포의 냄새를 맡고 다가온다.\n";
+                            LogManager::TypePrint("거의 제정신이 아닌 채로 달아나려 했으나, 돌부리에 걸려 쓰러졌다.", 5);
+                            LogManager::TypePrint(monster->getName() + " (이)가 공포의 냄새를 맡고 다가온다.", 5);
                         }
                     }
                     else
                     {
                         if (escaped)
-                            cout << "당신은 어디로 가는지도 모른 채 달아났다. 본능만이 당신을 살렸다.\n";
+                            LogManager::TypePrint("당신은 어디로 가는지도 모른 채 달아났다. 본능만이 당신을 살렸다.", 5);
                         else
-                            cout << "아무것도 보이지 않는다. 다리는 땅을 내달렸으나, 활로를 찾지 못했다. 압도적인 공포와 함께 " << monster->getName() << "(이)가 천천히 다가온다.\n";
+                            LogManager::TypePrint("아무것도 보이지 않는다. 다리는 땅을 내달렸으나, 활로를 찾지 못했다. 압도적인 공포와 함께 " + monster->getName() + " (이)가 천천히 다가온다.", 5);
                     }
 
                     if (escaped)
@@ -355,23 +343,25 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
         }
         } // end if (!skipPlayerTurn)
 
+        LogManager::PressEnter();
         if (player->getHp() <= 0) break;
 
         if (monster->getHp() <= 0)
         {
-            cout << "\n" << monster->getName() << "(이)가 쓰러진다. 전장에 고요가 찾아왔다.\n";
+            LogManager::TypePrint("\n" + monster->getName() + " (이)가 쓰러진다. 전장에 고요가 찾아왔다.", 5);
             break;
         }
 
-        cout << "\n" << monster->getName() << "의 차례...\n";
+        LogManager::TypePrint("\n" + monster->getName() + " 의 차례...", 5);
+        LogManager::PressEnter();
 
         if (isInvincible)
         {
-            cout << "안개 속에 숨어든 당신을 향한 " << monster->getName() << "의 공격이 허공을 가른다.\n";
+            LogManager::TypePrint("안개 속에 숨어든 당신을 향한 " + monster->getName() + " 의 공격이 허공을 가른다.", 5);
 
             int counterDamage = DamageCalculate(player->getPower(), monster->getDefence());
             TakeDamage(monster, counterDamage);
-            cout << "허공을 가른 틈을 놓치지 않는다. " << monster->getName() << "에게 " << counterDamage << "의 피해!\n";
+            LogManager::TypePrint("허공을 가른 틈을 놓치지 않는다. " + monster->getName() + " 에게 " + to_string(counterDamage) + "의 피해!", 5);
 
             isInvincible = false;
         }
@@ -395,10 +385,11 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
                 if (isDefending)
                 {
                     monsterDamage /= 2;
-                    cout << "단단히 몸을 세운 방어 자세가 괴물의 충격을 흘려냈다.\n";
+                    LogManager::TypePrint("단단히 몸을 세운 방어 자세가 괴물의 충격을 흘려냈다.", 5);
                 }
 
                 TakeDamage(player, monsterDamage);
+                LogManager::TypePrint("당신은 " + to_string(monsterDamage) + "의 피해를 입었다.", 5);
             }
         }
 
@@ -407,12 +398,14 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
         if (player->getDefence() < effectiveDef)
             monsterDefDebuff += effectiveDef - player->getDefence();
 
+        LogManager::PressEnter();
+        LogManager::Clear();
         turn_cycle++;
     }
 
     if (player->getHp() <= 0)
     {
-        cout << "\n당신은 더 이상 몸을 가눌 수 없다. 의식이 흐려지는 가운데, 심연이 천천히 당신을 집어삼킨다.\n";
+        LogManager::TypePrint("\n당신은 더 이상 몸을 가눌 수 없다. 의식이 흐려지는 가운데, 심연이 천천히 당신을 집어삼킨다.", 5);
         cout << "\n========================================\n";
         cout << "               GAME  OVER               \n";
         cout << "========================================\n";
@@ -423,8 +416,9 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
     }
     else
     {
-        cout << "\n전투의 흔적이 여실한 전장에 침묵이 내려앉는다. 괴물은 쓰러졌고, 당신은 아직 살아 숨쉬고 있다.\n";
-        cout << "================================================================" << endl;
+
+        LogManager::TypePrint("\n전투의 흔적이 여실한 전장에 침묵이 내려앉는다. 괴물은 쓰러졌고, 당신은 아직 살아 숨쉬고 있다.", 5);
+
 
         player->setPower(OriginalAtk);
         player->setDefence(OriginalDef);
@@ -447,14 +441,14 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
         if (rand() % 100 < dropChance)
         {
             if (dropChance > 30)
-                cout << "예리한 눈썰미로 괴물의 시체를 훑었다. 쓸 만한 것이 눈에 띈다.\n";
+                LogManager::TypePrint("예리한 눈썰미로 괴물의 시체를 훑었다. 쓸 만한 것이 눈에 띈다.", 5);
             else
-                cout << "쓸 만한 것이 눈에 띈다.\n";
+                LogManager::TypePrint("쓸 만한 것이 눈에 띈다.", 5);
 
             Item drop = (rand() % 2 == 0)
-                ? Item::CreateHealPotion()
+                ? Item::CreateHealPotion(player->getLevel())
                 : Item::CreateSanPotion();
-            cout << drop.getName() << "을 손에 넣었다.\n";
+            LogManager::TypePrint(drop.getName() + "을 손에 넣었다.", 5);
             inventory.AddItem(drop);
         }
     }
@@ -465,7 +459,7 @@ void BattleSystem::EnterMissionMenu(Player& player, Inventory<Item>& inventory)
 {
     if (stageProgress >= 15)
     {
-        cout << "모든 스토리를 완료했습니다.\n";
+        LogManager::TypePrint("모든 스토리를 완료했습니다.", 5);
         return;
     }
 
@@ -514,7 +508,7 @@ void BattleSystem::EnterMissionMenu(Player& player, Inventory<Item>& inventory)
                     vector<Item> rewards = Item::CreateChapterClearReward();
                     for (const Item& reward : rewards)
                     {
-                        cout << "[챕터 클리어 보상] " << reward.getName() << "!\n";
+                        LogManager::TypePrint("[챕터 클리어 보상] " + reward.getName() + "!", 5);
                         inventory.AddItem(reward);
                     }
                 }
@@ -526,7 +520,6 @@ void BattleSystem::EnterMissionMenu(Player& player, Inventory<Item>& inventory)
             int chapter = stageProgress / 3 + 1;
             string stageStr = "CH" + to_string(chapter) + "_Normal_";
             stageStr += (rand() % 2 == 0) ? "A" : "B";
-            cout << "[CH" << chapter << " 지역] 일반 몬스터가 나타납니다.\n";
             StartBattle(player, inventory, stageStr);
             return;
         }
@@ -562,31 +555,31 @@ bool BattleSystem::StartBattle(Player& player, Inventory<Item>& inventory,
     if (stage == "CH1_MidBoss")
     {
         if (!RunSingleBattle(player, inventory, new MutatedSlime(player.getLevel()))) return false;
-        cout << "\n또 다른 적이 나타났다!\n";
+        LogManager::TypePrint("\n또 다른 적이 나타났다!", 5);
         return RunSingleBattle(player, inventory, new PlagueServant(player.getLevel()));
     }
     else if (stage == "CH2_MidBoss")
     {
         if (!RunSingleBattle(player, inventory, new DimensionEye(player.getLevel()))) return false;
-        cout << "\n또 다른 적이 나타났다!\n";
+        LogManager::TypePrint("\n또 다른 적이 나타났다!", 5);
         return RunSingleBattle(player, inventory, new AbyssHive(player.getLevel()));
     }
     else if (stage == "CH3_MidBoss")
     {
         if (!RunSingleBattle(player, inventory, new BloodFanatic(player.getLevel()))) return false;
-        cout << "\n또 다른 적이 나타났다!\n";
+        LogManager::TypePrint("\n또 다른 적이 나타났다!", 5);
         return RunSingleBattle(player, inventory, new FanaticLeader(player.getLevel()));
     }
     else if (stage == "CH4_MidBoss")
     {
         if (!RunSingleBattle(player, inventory, new FleshFusion(player.getLevel()))) return false;
-        cout << "\n또 다른 적이 나타났다!\n";
+        LogManager::TypePrint("\n또 다른 적이 나타났다!", 5);
         return RunSingleBattle(player, inventory, new CorruptedKnight(player.getLevel()));
     }
     else if (stage == "CH5_MidBoss")
     {
         if (!RunSingleBattle(player, inventory, nullptr)) return false; // TODO: CH5 일반 B
-        cout << "\n또 다른 적이 나타났다!\n";
+        LogManager::TypePrint("\n또 다른 적이 나타났다!", 5);
         return RunSingleBattle(player, inventory, nullptr);             // TODO: CH5 하수인급
     }
 
