@@ -88,3 +88,6 @@ Thumbs.db
 # 예외
 !SFML/
 !SFML/**
+!SFML/**/*.lib
+!SFML/**/*.dll
+!SFML/**/*.a 
