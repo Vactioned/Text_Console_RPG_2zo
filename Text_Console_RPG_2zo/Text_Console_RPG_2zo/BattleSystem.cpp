@@ -1,7 +1,24 @@
-#include "BattleSystem.h"
+﻿#include "BattleSystem.h"
 #include "Skill.h"
 #include "InventoryUI.h"
 #include "LogManager.h"
+
+#include "VoidHound.h"
+#include "MutatedSlime.h"
+#include "plagueServant.h"
+#include "CorpseGolem.h"
+#include "AbyssHive.h"
+#include "AbyssRemnant.h"
+#include "DimensionEye.h"
+#include "Oblivion.h"
+#include "AbyssFanatic.h"
+#include "BloodFanatic.h"
+#include "FanaticLeader.h"
+#include "Malachai.h"
+#include "Arkadia.h"
+#include "TwistedGuard.h"
+#include "FleshFusion.h"
+#include "CorruptedKnight.h"
 
 #include <iostream>
 #include <cstdlib>
@@ -456,9 +473,12 @@ void BattleSystem::EnterMissionMenu(Player& player, Inventory<Item>& inventory)
 
                 if (stageType == 2)
                 {
-                    Item reward = Item::CreateChapterClearReward();
-                    cout << "[챕터 클리어 보상] " << reward.getName() << "!\n";
-                    inventory.AddItem(reward);
+                    vector<Item> rewards = Item::CreateChapterClearReward();
+                    for (const Item& reward : rewards)
+                    {
+                        cout << "[챕터 클리어 보상] " << reward.getName() << "!\n";
+                        inventory.AddItem(reward);
+                    }
                 }
             }
             return;
@@ -503,27 +523,27 @@ bool BattleSystem::StartBattle(Player& player, Inventory<Item>& inventory,
 {
     if (stage == "CH1_MidBoss")
     {
-        if (!RunSingleBattle(player, inventory, nullptr)) return false; // TODO: CH1 일반 B
+        if (!RunSingleBattle(player, inventory, new MutatedSlime(player.getLevel()))) return false;
         cout << "\n또 다른 적이 나타났다!\n";
-        return RunSingleBattle(player, inventory, nullptr);             // TODO: CH1 하수인급
+        return RunSingleBattle(player, inventory, new PlagueServant(player.getLevel()));
     }
     else if (stage == "CH2_MidBoss")
     {
-        if (!RunSingleBattle(player, inventory, nullptr)) return false; // TODO: CH2 일반 B
+        if (!RunSingleBattle(player, inventory, new DimensionEye(player.getLevel()))) return false;
         cout << "\n또 다른 적이 나타났다!\n";
-        return RunSingleBattle(player, inventory, nullptr);             // TODO: CH2 하수인급
+        return RunSingleBattle(player, inventory, new AbyssHive(player.getLevel()));
     }
     else if (stage == "CH3_MidBoss")
     {
-        if (!RunSingleBattle(player, inventory, nullptr)) return false; // TODO: CH3 일반 B
+        if (!RunSingleBattle(player, inventory, new BloodFanatic(player.getLevel()))) return false;
         cout << "\n또 다른 적이 나타났다!\n";
-        return RunSingleBattle(player, inventory, nullptr);             // TODO: CH3 하수인급
+        return RunSingleBattle(player, inventory, new FanaticLeader(player.getLevel()));
     }
     else if (stage == "CH4_MidBoss")
     {
-        if (!RunSingleBattle(player, inventory, nullptr)) return false; // TODO: CH4 일반 B
+        if (!RunSingleBattle(player, inventory, new FleshFusion(player.getLevel()))) return false;
         cout << "\n또 다른 적이 나타났다!\n";
-        return RunSingleBattle(player, inventory, nullptr);             // TODO: CH4 하수인급
+        return RunSingleBattle(player, inventory, new CorruptedKnight(player.getLevel()));
     }
     else if (stage == "CH5_MidBoss")
     {
@@ -534,26 +554,26 @@ bool BattleSystem::StartBattle(Player& player, Inventory<Item>& inventory,
 
     Monster* monster = nullptr;
 
-    if      (stage == "CH1_Normal")   monster = nullptr; // TODO: CH1 일반 A
-    else if (stage == "CH2_Normal")   monster = nullptr; // TODO: CH2 일반 A
-    else if (stage == "CH3_Normal")   monster = nullptr; // TODO: CH3 일반 A
-    else if (stage == "CH4_Normal")   monster = nullptr; // TODO: CH4 일반 A
+    if      (stage == "CH1_Normal")   monster = new VoidHound(player.getLevel());
+    else if (stage == "CH2_Normal")   monster = new AbyssRemnant(player.getLevel());
+    else if (stage == "CH3_Normal")   monster = new AbyssFanatic(player.getLevel());
+    else if (stage == "CH4_Normal")   monster = new TwistedGuard(player.getLevel());
     else if (stage == "CH5_Normal")   monster = nullptr; // TODO: CH5 일반 A
 
-    else if (stage == "CH1_MainBoss") monster = nullptr; // TODO: CH1 보스급
-    else if (stage == "CH2_MainBoss") monster = nullptr; // TODO: CH2 보스급
-    else if (stage == "CH3_MainBoss") monster = nullptr; // TODO: CH3 보스급
-    else if (stage == "CH4_MainBoss") monster = nullptr; // TODO: CH4 보스급
+    else if (stage == "CH1_MainBoss") monster = new CorpseGolem(player.getLevel());
+    else if (stage == "CH2_MainBoss") monster = new Oblivion(player.getLevel());
+    else if (stage == "CH3_MainBoss") monster = new Malachai(player.getLevel());
+    else if (stage == "CH4_MainBoss") monster = new Arkadia(player.getLevel());
     else if (stage == "CH5_MainBoss") monster = nullptr; // TODO: CH5 보스급
 
-    else if (stage == "CH1_Normal_A") monster = nullptr; // TODO: CH1 일반 A (자유전투)
-    else if (stage == "CH1_Normal_B") monster = nullptr; // TODO: CH1 일반 B (자유전투)
-    else if (stage == "CH2_Normal_A") monster = nullptr; // TODO: CH2 일반 A (자유전투)
-    else if (stage == "CH2_Normal_B") monster = nullptr; // TODO: CH2 일반 B (자유전투)
-    else if (stage == "CH3_Normal_A") monster = nullptr; // TODO: CH3 일반 A (자유전투)
-    else if (stage == "CH3_Normal_B") monster = nullptr; // TODO: CH3 일반 B (자유전투)
-    else if (stage == "CH4_Normal_A") monster = nullptr; // TODO: CH4 일반 A (자유전투)
-    else if (stage == "CH4_Normal_B") monster = nullptr; // TODO: CH4 일반 B (자유전투)
+    else if (stage == "CH1_Normal_A") monster = new VoidHound(player.getLevel());
+    else if (stage == "CH1_Normal_B") monster = new MutatedSlime(player.getLevel());
+    else if (stage == "CH2_Normal_A") monster = new AbyssRemnant(player.getLevel());
+    else if (stage == "CH2_Normal_B") monster = new DimensionEye(player.getLevel());
+    else if (stage == "CH3_Normal_A") monster = new AbyssFanatic(player.getLevel());
+    else if (stage == "CH3_Normal_B") monster = new BloodFanatic(player.getLevel());
+    else if (stage == "CH4_Normal_A") monster = new TwistedGuard(player.getLevel());
+    else if (stage == "CH4_Normal_B") monster = new FleshFusion(player.getLevel());
     else if (stage == "CH5_Normal_A") monster = nullptr; // TODO: CH5 일반 A (자유전투)
     else if (stage == "CH5_Normal_B") monster = nullptr; // TODO: CH5 일반 B (자유전투)
 

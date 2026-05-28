@@ -60,7 +60,9 @@ void Skill_MindOverload(Player* player, Monster* monster)
     int heal = static_cast<int>(damage * (0.1 * player->getLevel()));
 
     TakeDamage(monster, damage);
-    player->setHp(player->getHp() + heal);
+    int newHp = player->getHp() + heal;
+    if (newHp > player->getMaxHp()) newHp = player->getMaxHp();
+    player->setHp(newHp);
 
     cout << "정신 과부화!\n";
     cout << "→ " << monster->getName() << "에게 " << damage << "의 피해!\n";
@@ -72,7 +74,9 @@ void Skill_MindOverload(Player* player, Monster* monster)
 // SAN 10 회복 후 기본 공격 1회. 쿨타임 있음
 void Skill_MindStrike(Player* player, Monster* monster, int& turn_cycle)
 {
-    player->setSan(player->getSan() + 10);
+    int newSan = player->getSan() + 10;
+    if (newSan > player->getMaxSan()) newSan = player->getMaxSan();
+    player->setSan(newSan);
     cout << "심안! 정신을 집중하며 공격을 가한다.\n";
 
     player->Attack(monster);
