@@ -63,7 +63,7 @@ int main()
 
    
 
-
+    delete player;
 
     return 0;
 }
