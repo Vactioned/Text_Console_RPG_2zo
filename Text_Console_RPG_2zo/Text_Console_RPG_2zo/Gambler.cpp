@@ -12,7 +12,7 @@ Gambler::Gambler(string name, string job)
 void Gambler::Attack(Monster* monster)
 {
     if (monster == nullptr) return;
-
+    cout << "================================================================" << endl;
     cout << "당신은 공격할 때마저 도박을 합니다. " << monster->getName()
          << "에게 주사위를 던지며 목숨을 건 베팅을 시작합니다!" << endl;
 }

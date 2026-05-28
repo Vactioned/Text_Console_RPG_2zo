@@ -12,7 +12,7 @@ Warlock::Warlock(string name, string job)
 void Warlock::Attack(Monster* monster)
 {
     if (monster == nullptr) return;
-
+    cout << "================================================================" << endl;
     cout << "당신은 기괴한 주문을 읊조리며, " << monster->getName()
          << "의 생명력을 갉아먹습니다!" << endl;
 }

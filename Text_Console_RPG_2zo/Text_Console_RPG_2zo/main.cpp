@@ -42,8 +42,8 @@ int main()
     else if (jobName == "Warlock") player = new Warlock(playerName, "흑마법사");
     else if (jobName == "Thief")   player = new Thief(playerName, "도적");
     else if (jobName == "Monk")    player = new Monk(playerName, "파계승");
-    else if (jobName == "Gambler") player = new Gambler(playerName, "도박사");
-    else                           player = new Poor(playerName, "거지");
+    else if (jobName == "Gambler") player = new Gambler(playerName, "도박꾼");
+    else                           player = new Poor(playerName, "부랑자");
 
     LogManager::PressEnter();
 
