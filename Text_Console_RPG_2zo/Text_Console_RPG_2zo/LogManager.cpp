@@ -57,6 +57,8 @@ void LogManager::PressEnter()
     cin.ignore(cin.rdbuf()->in_avail(), '\n');
 
     cin.get(); // 사용자가 엔터를 누를 때까지 대기
+
+    cout << "\r" << string(50, ' ') << "\r";
 }
 
 void LogManager::TypePrint(const string& message, int delayMs)
@@ -77,7 +79,17 @@ void LogManager::TypePrint(const string& message, int delayMs)
             continue;
         }
 
-        cout << message[i] << flush;
+        // UTF-8 한글 처리 (3바이트 패턴 확인: 1110xxxx)
+        if ((unsigned char)message[i] >= 0xE0 && i + 2 < message.length())
+        {
+            cout << message[i] << message[i + 1] << message[i + 2] << flush;
+            i += 2;
+        }
+        else
+        {
+            cout << message[i] << flush;
+        }
+
         this_thread::sleep_for(chrono::milliseconds(delayMs));
     }
     cout << endl;
@@ -139,12 +151,21 @@ void LogManager::CH1()      // 1막 메인 스토리
     if (!file.is_open())
     {
         cout << "파일을 열 수 없습니다.\n";
+        return;
     }
 
     string line;
+    bool isAsciiMode = false;
     while (getline(file, line))
     {
-        TypePrint(line);
+        if (line.find("@@@") != string::npos)
+        {
+            isAsciiMode = !isAsciiMode;
+            continue;
+        }
+
+        if (isAsciiMode) cout << line << endl;
+        else            TypePrint(line);
     }
 
     file.close();
@@ -157,12 +178,21 @@ void LogManager::CH1_Boss()     // 1막 보스전
     if (!file.is_open())
     {
         cout << "파일을 열 수 없습니다.\n";
+        return;
     }
 
     string line;
+    bool isAsciiMode = false;
     while (getline(file, line))
     {
-        TypePrint(line);
+        if (line.find("@@@") != string::npos)
+        {
+            isAsciiMode = !isAsciiMode;
+            continue;
+        }
+
+        if (isAsciiMode) cout << line << endl;
+        else            TypePrint(line);
     }
 
     file.close();
@@ -175,12 +205,21 @@ void LogManager::CH2()     // 2막 메인 스토리
     if (!file.is_open())
     {
         cout << "파일을 열 수 없습니다.\n";
+        return;
     }
 
     string line;
+    bool isAsciiMode = false;
     while (getline(file, line))
     {
-        TypePrint(line);
+        if (line.find("@@@") != string::npos)
+        {
+            isAsciiMode = !isAsciiMode;
+            continue;
+        }
+
+        if (isAsciiMode) cout << line << endl;
+        else            TypePrint(line);
     }
 
     file.close();
@@ -193,12 +232,21 @@ void LogManager::CH2_Boss()     // 2막 보스전
     if (!file.is_open())
     {
         cout << "파일을 열 수 없습니다.\n";
+        return;
     }
 
     string line;
+    bool isAsciiMode = false;
     while (getline(file, line))
     {
-        TypePrint(line);
+        if (line.find("@@@") != string::npos)
+        {
+            isAsciiMode = !isAsciiMode;
+            continue;
+        }
+
+        if (isAsciiMode) cout << line << endl;
+        else            TypePrint(line);
     }
 
     file.close();
@@ -210,12 +258,21 @@ void LogManager::CH3()     // 3막 메인 스토리
     if (!file.is_open())
     {
         cout << "파일을 열 수 없습니다.\n";
+        return;
     }
 
     string line;
+    bool isAsciiMode = false;
     while (getline(file, line))
     {
-        TypePrint(line);
+        if (line.find("@@@") != string::npos)
+        {
+            isAsciiMode = !isAsciiMode;
+            continue;
+        }
+
+        if (isAsciiMode) cout << line << endl;
+        else            TypePrint(line);
     }
 
     file.close();
@@ -227,12 +284,21 @@ void LogManager::CH3_Boss()     // 3막 보스전
     if (!file.is_open())
     {
         cout << "파일을 열 수 없습니다.\n";
+        return;
     }
 
     string line;
+    bool isAsciiMode = false;
     while (getline(file, line))
     {
-        TypePrint(line);
+        if (line.find("@@@") != string::npos)
+        {
+            isAsciiMode = !isAsciiMode;
+            continue;
+        }
+
+        if (isAsciiMode) cout << line << endl;
+        else            TypePrint(line);
     }
 
     file.close();
@@ -244,12 +310,21 @@ void LogManager::CH4()     // 4막 메인 스토리
     if (!file.is_open())
     {
         cout << "파일을 열 수 없습니다.\n";
+        return;
     }
 
     string line;
+    bool isAsciiMode = false;
     while (getline(file, line))
     {
-        TypePrint(line);
+        if (line.find("@@@") != string::npos)
+        {
+            isAsciiMode = !isAsciiMode;
+            continue;
+        }
+
+        if (isAsciiMode) cout << line << endl;
+        else            TypePrint(line);
     }
 
     file.close();
@@ -261,12 +336,21 @@ void LogManager::CH4_Boss()     // 4막 보스전
     if (!file.is_open())
     {
         cout << "파일을 열 수 없습니다.\n";
+        return;
     }
 
     string line;
+    bool isAsciiMode = false;
     while (getline(file, line))
     {
-        TypePrint(line);
+        if (line.find("@@@") != string::npos)
+        {
+            isAsciiMode = !isAsciiMode;
+            continue;
+        }
+
+        if (isAsciiMode) cout << line << endl;
+        else            TypePrint(line);
     }
 
     file.close();
@@ -278,12 +362,21 @@ void LogManager::CH5()     // 5막 메인 스토리
     if (!file.is_open())
     {
         cout << "파일을 열 수 없습니다.\n";
+        return;
     }
 
     string line;
+    bool isAsciiMode = false;
     while (getline(file, line))
     {
-        TypePrint(line);
+        if (line.find("@@@") != string::npos)
+        {
+            isAsciiMode = !isAsciiMode;
+            continue;
+        }
+
+        if (isAsciiMode) cout << line << endl;
+        else            TypePrint(line);
     }
 
     file.close();
@@ -295,12 +388,21 @@ void LogManager::CH5_Choice()     // 5막 엔딩 분기점
     if (!file.is_open())
     {
         cout << "파일을 열 수 없습니다.\n";
+        return;
     }
 
     string line;
+    bool isAsciiMode = false;
     while (getline(file, line))
     {
-        TypePrint(line);
+        if (line.find("@@@") != string::npos)
+        {
+            isAsciiMode = !isAsciiMode;
+            continue;
+        }
+
+        if (isAsciiMode) cout << line << endl;
+        else            TypePrint(line);
     }
 
     file.close();
@@ -313,12 +415,21 @@ void LogManager::Final_Boss()     // 최종 보스
     if (!file.is_open())
     {
         cout << "파일을 열 수 없습니다.\n";
+        return;
     }
 
     string line;
+    bool isAsciiMode = false;
     while (getline(file, line))
     {
-        TypePrint(line);
+        if (line.find("@@@") != string::npos)
+        {
+            isAsciiMode = !isAsciiMode;
+            continue;
+        }
+
+        if (isAsciiMode) cout << line << endl;
+        else            TypePrint(line);
     }
 
     file.close();
@@ -331,12 +442,21 @@ void LogManager::HAPPY_END()     // 해피 엔딩?
     if (!file.is_open())
     {
         cout << "파일을 열 수 없습니다.\n";
+        return;
     }
 
     string line;
+    bool isAsciiMode = false;
     while (getline(file, line))
     {
-        TypePrint(line);
+        if (line.find("@@@") != string::npos)
+        {
+            isAsciiMode = !isAsciiMode;
+            continue;
+        }
+
+        if (isAsciiMode) cout << line << endl;
+        else            TypePrint(line);
     }
 
     file.close();
@@ -349,12 +469,21 @@ void LogManager::BAD_END()     // 배드 엔딩
     if (!file.is_open())
     {
         cout << "파일을 열 수 없습니다.\n";
+        return;
     }
 
     string line;
+    bool isAsciiMode = false;
     while (getline(file, line))
     {
-        TypePrint(line);
+        if (line.find("@@@") != string::npos)
+        {
+            isAsciiMode = !isAsciiMode;
+            continue;
+        }
+
+        if (isAsciiMode) cout << line << endl;
+        else            TypePrint(line);
     }
 
     file.close();

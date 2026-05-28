@@ -1,4 +1,8 @@
-﻿#include <iostream>
+﻿#define NOMINMAX
+#define WIN32_LEAN_AND_MEAN
+#include <windows.h>
+
+#include <iostream>
 #include <string>
 
 #include "LogManager.h"
@@ -8,8 +12,13 @@
 
 using namespace std;
 
+
+
 int main()
 {
+    SetConsoleOutputCP(CP_UTF8);
+    SetConsoleCP(CP_UTF8);
+
     cout << "================================================================" << endl;
     cout << "                       금단의 의식: 이형의 당도                    " << endl;
     cout << "================================================================" << endl;
