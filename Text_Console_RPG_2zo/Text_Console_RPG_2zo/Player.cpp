@@ -44,10 +44,10 @@ int Player::getGold() const { return gold; }
 void Player::setHp(int HP) { this->hp = HP; }
 void Player::setMaxHp(int maxHP) { this->maxhp = maxHP; }
 
-void Player::setSan(int SAN) { this->san = SAN; }
+void Player::setSan(int SAN) { this->san = max(0, SAN); }
 void Player::setMaxSan(int maxSAN) { this->maxsan = maxSAN; }
 
-void Player::setPower(int power) { this->power = power; }
+void Player::setPower(int power) { this->power = max(0, power); }
 void Player::setDefence(int defence) { this->defence = defence; }
 void Player::setSanDefence(int sanDefence) { this->sandefence = sanDefence; }
 

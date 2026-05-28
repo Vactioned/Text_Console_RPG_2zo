@@ -186,6 +186,7 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
             cout << "3. 기술을 사용한다.\n";
             cout << "4. 가방을 연다.\n";
             cout << "5. 도주를 시도한다.\n";
+            cout << "================================================================" << endl;
             cout << "선택 : ";
             cin >> select;
             if (cin.fail())
@@ -423,6 +424,7 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
     else
     {
         cout << "\n전투의 흔적이 여실한 전장에 침묵이 내려앉는다. 괴물은 쓰러졌고, 당신은 아직 살아 숨쉬고 있다.\n";
+        cout << "================================================================" << endl;
 
         player->setPower(OriginalAtk);
         player->setDefence(OriginalDef);

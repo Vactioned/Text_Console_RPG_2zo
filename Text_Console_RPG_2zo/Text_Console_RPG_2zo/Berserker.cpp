@@ -7,12 +7,14 @@ using namespace std;
 Berserker::Berserker(string name, string job)
     : Player(name, job)
 {
+    this->san = 150;
+    this->maxsan = 150;    
 }
 
 void Berserker::Attack(Monster* monster)
 {
     if (monster == nullptr) return;
-
+    cout << "================================================================" << endl;
     cout << "당신은 광기에 찬 함성을 지르며, " << monster->getName()
          << "에게 수직으로 도끼를 내려찍습니다!" << endl;    
 }

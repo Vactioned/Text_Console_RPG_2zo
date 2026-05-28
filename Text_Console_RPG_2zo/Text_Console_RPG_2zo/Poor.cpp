@@ -12,7 +12,7 @@ Poor::Poor(string name, string job)
 void Poor::Attack(Monster* monster)
 {
     if (monster == nullptr) return;
-
+    cout << "================================================================" << endl;
     cout << "당신은 손을 벌벌 떨며.. " << monster->getName()
          << "에게 낡고 허름한 몽둥이를 휘두릅니다!" << endl;
 }

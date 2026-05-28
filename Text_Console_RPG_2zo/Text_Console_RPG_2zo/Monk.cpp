@@ -12,7 +12,7 @@ Monk::Monk(string name, string job)
 void Monk::Attack(Monster* monster)
 {
     if (monster == nullptr) return;
-
+    cout << "================================================================" << endl;
     cout << "당신은 숨을 깊게 들이 마신 뒤, " << monster->getName()
          << "에게 짧은 거리에서 뿜어낸 촌경으로 강타합니다!" << endl;
 }
