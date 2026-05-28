@@ -12,7 +12,7 @@ public:
         :Monster(rand() % (playerlevel * 10 + 1) + (playerlevel * 20), // 체력
             0, // 공격력
             5, // 정신공격력
-            30, // 방어력
+            20, // 방어력
             "[오블리비언]") //몬스터이름
             
 

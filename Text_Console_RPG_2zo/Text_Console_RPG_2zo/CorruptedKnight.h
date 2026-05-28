@@ -20,22 +20,37 @@ public:
 
     int NormalAttack(Player* player) override {
         std::cout << getName() << "이(가) 타락한 검을 휘둘러 공간 자체를 갈라버립니다!" << std::endl;
+        int physdamage = 0;
 
-        return getAttackPower();
+        if (player != nullptr) {
+
+            physdamage = (getAttackPower() *2) - player->getDefence();
+            if (physdamage < 1) physdamage = 1;
+
+            std::cout << "->" << physdamage << "의 물리 피해를 입었습니다!" << std::endl;
+        
+        }
+        return physdamage;
     }
 
     int SpecialAttack(Player* player) override {
         std::cout << getName() << "이 눈을 번득이며 검에 공허의 기운을 담아 [죽음의 참격]을 준비합니다!" << std::endl;
 
         
-        int physdamage = getAttackPower() * 2;
+        int physdamage = 0;
 
         if (player != nullptr) {
-            
-            int sandamage = (getSanPower() * 2);
+
+            physdamage = (getAttackPower() * 3) - player->getDefence();
+            if (physdamage < 1) physdamage = 1;
+
+            int sandamage = (getSanPower()*2) - player->getSanDefence();
+            if (sandamage < 1) sandamage = 1;
+
             player->setSan(player->getSan() - sandamage);
 
             std::cout << "-> 검 끝에서 뿜어져 나오는 공허가 영혼을 갉아먹습니다! 정신력이 무려 " << sandamage << " 감소합니다!" << std::endl;
+            std::cout << "->" << physdamage << "의 물리 피해를 입었습니다!" << std::endl;
         }
         return physdamage;
     }

@@ -135,9 +135,13 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="Allmonster.h" />
+    <ClInclude Include="Unknown.h" />
+    <ClInclude Include="VoidEhco.h" />
     <ClInclude Include="AbyssFanatic.h" />
     <ClInclude Include="AbyssHive.h" />
     <ClInclude Include="AbyssRemnant.h" />
+    <ClInclude Include="AltarGuardian.h" />
     <ClInclude Include="Arkadia.h" />
     <ClInclude Include="BattleSystem.h" />
     <ClInclude Include="Berserker.h" />
@@ -160,10 +164,10 @@
     <ClInclude Include="Monster.h" />
     <ClInclude Include="MutatedSlime.h" />
     <ClInclude Include="Oblivion.h" />
-    <ClInclude Include="OtherMonster.h" />
     <ClInclude Include="plagueServant.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Skill.h" />
+    <ClInclude Include="SoreArkadia.h" />
     <ClInclude Include="Thief.h" />
     <ClInclude Include="Poor.h" />
     <ClInclude Include="TwistedGuard.h" />

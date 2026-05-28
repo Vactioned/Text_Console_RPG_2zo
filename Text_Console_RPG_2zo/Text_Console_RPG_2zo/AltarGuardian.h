@@ -6,24 +6,24 @@
 
 
 
-class TwistedGuard : public Monster {
+class AltarGuardian : public Monster {
 public:
-    TwistedGuard(int playerlevel) //코드 간략화
+    AltarGuardian(int playerlevel) //코드 간략화
         :Monster(rand() % (playerlevel * 10 + 1) + (playerlevel * 20), // 체력
             rand() % (playerlevel * 5 + 1) + (playerlevel * 5),  // 공격력
-            5, // 정신공격력
+            0, // 정신공격력
             5, // 몬스터 방어력
-            "[뒤틀린 호위병]") // 몬스터이름
+            "[제단의 파수병]") // 몬스터이름
 
     {
     }
 
     int NormalAttack(Player* player) override {
-        std::cout << getName() << "이 녹슨 대검을 묵직하게 내리찍습니다!" << std::endl;
+        std::cout << getName() << "이(가) 육중한 발로 당신을 짓밟습니다!" << std::endl;
         int physdamage = 0;
 
         if (player != nullptr) {
-           
+            
             physdamage = getAttackPower() - player->getDefence();
             if (physdamage < 1) physdamage = 1;
 
@@ -33,26 +33,25 @@ public:
     }
 
     int SpecialAttack(Player* player) override {
-        std::cout << getName() << "이 방패로 전신을 가리고 강하게 돌진합니다! " << std::endl;
 
- 
+        std::cout << getName() << "이(가) 분노하며 주먹으로 땅을 내려칩니다!" << std::endl;
         int physdamage = 0;
 
         if (player != nullptr) {
+            
+            std::cout << ">>> 충격으로 인해 당신의 방어 장비가 파손되어 방어력이 5 감소합니다." << std::endl;
+            player->setDefence(player->getDefence() - 5);
+
+            
             physdamage = (getAttackPower() * 2) - player->getDefence();
             if (physdamage < 1) physdamage = 1;
 
-            
-            int sandamage = getSanPower() - player->getSanDefence();
-            if (sandamage < 1) sandamage = 1;
-
-            player->setSan(player->getSan() - sandamage);
-
-            std::cout << "-> 방패에 부딪힌 충격으로 정신이 아득해집니다. 정신력이 " << sandamage << "만큼 감소합니다!" << std::endl;
             std::cout << "->" << physdamage << "의 물리 피해를 입었습니다!" << std::endl;
+
+
+
         }
         return physdamage;
     }
-        
 };
 
