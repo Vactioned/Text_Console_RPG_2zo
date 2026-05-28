@@ -16,6 +16,7 @@ public:
             "공허의 메아리") // 몬스터이름
 
     {
+        std::cout << "\n(출력대사) " << getName() << "이(가) 앞을 가로막습니다!\n" << std::endl;
     }
 
     int NormalAttack(Player* player) override {
