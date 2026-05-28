@@ -136,13 +136,16 @@ sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClInclude Include="AbyssFanatic.h" />
     <ClInclude Include="AbyssHive.h" />
     <ClInclude Include="AbyssRemnant.h" />
+    <ClInclude Include="Arkadia.h" />
     <ClInclude Include="BattleSystem.h" />
     <ClInclude Include="Berserker.h" />
     <ClInclude Include="Classes.h" />
     <ClInclude Include="CorpseGolem.h" />
+    <ClInclude Include="CorruptedKnight.h" />
     <ClInclude Include="FanaticLeader.h" />
     <ClInclude Include="DimensionEye.h" />
     <ClInclude Include="BloodFanatic.h" />
+    <ClInclude Include="FleshFusion.h" />
     <ClInclude Include="Gambler.h" />
     <ClInclude Include="ImageManager.h" />
     <ClInclude Include="Inventory.h" />
@@ -161,6 +164,7 @@ sfml-system-d.lib;%(AdditionalDependencies)</AdditionalDependencies>
     <ClInclude Include="Skill.h" />
     <ClInclude Include="Thief.h" />
     <ClInclude Include="Poor.h" />
+    <ClInclude Include="TwistedGuard.h" />
     <ClInclude Include="VoidHound.h" />
     <ClInclude Include="Warlock.h" />
   </ItemGroup>
