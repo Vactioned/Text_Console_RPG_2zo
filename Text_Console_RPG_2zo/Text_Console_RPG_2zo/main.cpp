@@ -68,7 +68,7 @@ int main()
 
     LogManager::Clear();
 
-    Inventory<Item> inventory(30);
+    Inventory<Item> inventory(10);
 
     LogManager::MainMenu(*player, inventory);
 
