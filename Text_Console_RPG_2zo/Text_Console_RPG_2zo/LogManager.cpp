@@ -83,6 +83,7 @@ void LogManager::MainMenu(Player& player, Inventory<Item>& inventory)
         cout << "   3. 가방 확인" << endl;
         cout << "   4. 게임 종료" << endl;
         cout << "================================================================" << endl;
+        cout << "입력 : ";
         cin >> select;
 
         switch (select)
