@@ -23,6 +23,11 @@ public:
 
     virtual int SpecialAttack(Player* player) = 0; // 2. 특수공격
 
+    //조우대사 가상 함수 추가
+    virtual void Encounter() {
+        
+    }
+
      
 
     void setHp(int newhp) {
