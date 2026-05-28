@@ -36,6 +36,8 @@ int main()
     else if (jobName == "Gambler") player = new Gambler(playerName, "도박사");
     else                           player = new Poor(playerName, "거지");
 
+    LogManager::PressEnter();
+
     LogManager::Clear();
     cout << "================================================================" << endl;
     LogManager::TypePrint(" 세상은 생각보다 쉽게 무너진다.");
