@@ -5,12 +5,12 @@
 #include <iostream>
 #include <algorithm>
 #include <cstdlib>
+#include <vector>
 
 using namespace std;
 
 // 생성자
-Item::Item()
-    : name(""), type(ItemType::HealPotion), value(0)
+Item::Item() : name(""), type(ItemType::HealPotion), value(0)
 {
 }
 
@@ -215,52 +215,23 @@ Item Item::CreateMaxSanPotion()
     return Item("최대 정신력 포션", ItemType::MaxSanPotion, 15);
 }
 
-// 일반 전투 보상 (30% 확률, 체력/정신력 포션)
-bool Item::CreateBattleReward(Item& reward)
+// 챕터 클리어 보상
+vector<Item> Item::CreateChapterClearReward()
 {
-    int chance = rand() % 100;
+    vector<Item> rewards;
 
-    if (chance >= 30)
+    rewards.push_back(CreateAttackBoost());
+    rewards.push_back(CreateWeaknessPotion());
+    rewards.push_back(CreateVulnerabilityPotion());
+
+    if (rand() % 2 == 0)
     {
-        return false;
-    }
-
-    int potionType = rand() % 2;
-
-    if (potionType == 0)
-    {
-        reward = CreateHealPotion();
+        rewards.push_back(CreateMaxHpPotion());
     }
     else
     {
-        reward = CreateSanPotion();
+        rewards.push_back(CreateMaxSanPotion());
     }
 
-    return true;
-}
-
-// 챕터 클리어 보상 (5개 중 랜덤 지급)
-Item Item::CreateChapterClearReward()
-{
-    int rewardType = rand() % 5;
-
-    switch (rewardType)
-    {
-    case 0:
-        return CreateAttackBoost();
-
-    case 1:
-        return CreateWeaknessPotion();
-
-    case 2:
-        return CreateVulnerabilityPotion();
-
-    case 3:
-        return CreateMaxHpPotion();
-
-    case 4:
-        return CreateMaxSanPotion();
-    }
-
-    return CreateMaxHpPotion(); // return 없이 끝나면 경고날수도있다고함
+    return rewards;
 }
