@@ -1,4 +1,5 @@
 ﻿#include <iostream>
+#include <iomanip>
 #include <cstdlib>
 
 #include "Skill.h"
@@ -36,7 +37,8 @@ void Skill_Hellfire(Player* player, Monster* monster)
     if (damage < 1) damage = 1;
 
     TakeDamage(monster, damage);
-    cout << "지옥불길! " << monster->getName() << "에게 " << damage << "의 피해!\n";
+    cout << "지옥불길!\n";
+    cout << "→ " << monster->getName() << "에게 " << damage << "의 피해!\n";
 }
 
 // ── 흑마법사 : 정신 과부화 
@@ -60,8 +62,9 @@ void Skill_MindOverload(Player* player, Monster* monster)
     TakeDamage(monster, damage);
     player->setHp(player->getHp() + heal);
 
-    cout << "정신 과부화! " << monster->getName() << "에게 " << damage << "의 피해, "
-        << heal << " HP 흡수!\n";
+    cout << "정신 과부화!\n";
+    cout << "→ " << monster->getName() << "에게 " << damage << "의 피해!\n";
+    cout << "→ " << heal << "의 HP를 흡수했다!\n";
 }
 
 
@@ -76,7 +79,7 @@ void Skill_MindStrike(Player* player, Monster* monster, int& turn_cycle)
 
     int damage = DamageCalculate(player->getPower(), monster->getDefence());
     TakeDamage(monster, damage);
-    cout << monster->getName() << "에게 " << damage << "의 피해!\n";
+    cout << "→ " << monster->getName() << "에게 " << damage << "의 피해!\n";
     
 }
 
@@ -100,7 +103,7 @@ void Skill_RussianRoulette(Player* player, Monster* monster)
 
     for (int shot = 0; shot < 6; shot++)
     {
-        cout << "\n현재 배율 : " << multiplier << "배  |  확률 : 1/" << remainingChambers << "\n";
+        cout << "\n현재 배율 : " << fixed << setprecision(1) << multiplier << "배  |  확률 : 1/" << remainingChambers << defaultfloat << "\n";
         cout << "1. 나에게 방아쇠를 당긴다.\n";
         cout << "2. 적에게 방아쇠를 당긴다.\n";
         cout << "선택 : ";
@@ -123,7 +126,7 @@ void Skill_RussianRoulette(Player* player, Monster* monster)
             {
                 remainingChambers--;   // 약실 하나 소진 → 확률 상승
                 multiplier += 1.2f;
-                cout << "딸깍... 공탄이다. 배율이 " << multiplier << "배로 올랐다.\n";
+                cout << "딸깍... 공탄이다. 배율이 " << fixed << setprecision(1) << multiplier << defaultfloat << "배로 올랐다.\n";
             }
         }
         else if (choice == 2) // 적에게
@@ -137,13 +140,13 @@ void Skill_RussianRoulette(Player* player, Monster* monster)
             }
             else
             {
-                cout << "딸깍... 공탄이었다. 기회를 놓쳤다.\n";
+                cout << "딸깍... 공탄이다. 기회를 놓쳤다.\n";
             }
             return;
         }
         else
         {
-            cout << "올바른 선택이 아니다.\n";
+            cout << "올바른 행동이 아니다.\n";
             shot--;
         }
     }
