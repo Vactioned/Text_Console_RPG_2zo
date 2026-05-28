@@ -8,30 +8,30 @@
 class InventoryUI
 {
 private:
-    std::string GetItemName(const std::string& name)
+    sf::String GetItemName(const std::string& name)
     {
-        if (name == "체력 포션") return "HP\n포션";
-        if (name == "정신력 포션") return "정신력\n포션";
-        if (name == "공격력 증가") return "공격력\n증가";
-        if (name == "약화 포션") return "약화\n포션";
-        if (name == "취약 포션") return "취약\n포션";
-        if (name == "최대 체력 포션") return "최대 체력\n포션";
-        if (name == "최대 정신력 포션") return "최대 정신력\n포션";
+        if (name == "체력 포션") return L"HP\n포션";
+        if (name == "정신력 포션") return L"정신력\n포션";
+        if (name == "공격력 증가") return L"공격력\n증가";
+        if (name == "약화 포션") return L"약화\n포션";
+        if (name == "취약 포션") return L"취약\n포션";
+        if (name == "최대 체력 포션") return L"최대 체력\n포션";
+        if (name == "최대 정신력 포션") return L"최대 정신력\n포션";
 
-        return "?";
+        return L"?";
     }
 
-    std::string GetItemDescription(const std::string& name)
+    sf::String GetItemDescription(const std::string& name)
     {
-        if (name == "체력 포션") return "HP 포션\nHP +50";
-        if (name == "정신력 포션") return "SAN 포션\nSAN +50";
-        if (name == "공격력 증가") return "공격력 증가\n이번 전투 동안 공력력 +10";
-        if (name == "약화 포션") return "약화 포션\n이번 전투 동안 적의 공격력 -20%";
-        if (name == "취약 포션") return "취약 포션\n이번 전투 동안 적의 방어력 -20%";
-        if (name == "최대 체력 포션") return "최대 체력 포션\n최대 체력 +20";
-        if (name == "최대 정신력 포션") return "최대 정신력 포션\n최대 정신력 +20";
+        if (name == "체력 포션") return L"HP 포션\nHP +50";
+        if (name == "정신력 포션") return L"SAN 포션\nSAN +50";
+        if (name == "공격력 증가") return L"공격력 증가\n이번 전투 동안 공력력 +10";
+        if (name == "약화 포션") return L"약화 포션\n이번 전투 동안 적의 공격력 -20%";
+        if (name == "취약 포션") return L"취약 포션\n이번 전투 동안 적의 방어력 -20%";
+        if (name == "최대 체력 포션") return L"최대 체력 포션\n최대 체력 +20";
+        if (name == "최대 정신력 포션") return L"최대 정신력 포션\n최대 정신력 +15";
 
-        return "";
+        return L"";
     }
 
     // 아이템 슬롯
@@ -76,7 +76,11 @@ private:
             nameText.setString(GetItemName(item.getName()));
             nameText.setCharacterSize(14);
             nameText.setFillColor(sf::Color::Black);
-            nameText.setPosition(x + 6, y + 8);
+            sf::FloatRect textBounds = nameText.getLocalBounds();
+
+            nameText.setOrigin(textBounds.left + textBounds.width / 2.f, textBounds.top + textBounds.height / 2.f);
+
+            nameText.setPosition(x + slotSize / 2.f, y + slotSize / 2.f);
 
             window.draw(nameText);
 
@@ -128,26 +132,35 @@ private:
         {
             if (currentIndex == tooltipIndex)
             {
-                // 툴팁 박스
-                sf::RectangleShape tooltipBox(sf::Vector2f(230, 50));
-                tooltipBox.setFillColor(sf::Color(80, 60, 50));
-                tooltipBox.setOutlineColor(sf::Color::White);
-                tooltipBox.setOutlineThickness(1);
-                tooltipBox.setPosition(
-                    static_cast<float>(mousePos.x + 10),
-                    static_cast<float>(mousePos.y + 10)
-                );
-
                 // 툴팁 텍스트
                 sf::Text tooltipText;
                 tooltipText.setFont(font);
                 tooltipText.setString(GetItemDescription(item.getName()));
                 tooltipText.setCharacterSize(12);
                 tooltipText.setFillColor(sf::Color::White);
-                tooltipText.setPosition(
-                    static_cast<float>(mousePos.x + 18),
-                    static_cast<float>(mousePos.y + 18)
-                );
+
+                sf::FloatRect textBounds = tooltipText.getLocalBounds();
+
+                float boxPaddingX = 12.f;
+                float boxPaddingY = 8.f;
+
+                float boxWidth = textBounds.width + boxPaddingX * 2.f;
+                float boxHeight = textBounds.height + boxPaddingY * 2.f;
+
+                float boxX = static_cast<float>(mousePos.x + 10);
+                float boxY = static_cast<float>(mousePos.y + 10);
+
+                // 툴팁 박스
+                sf::RectangleShape tooltipBox(sf::Vector2f(boxWidth, boxHeight));
+                tooltipBox.setFillColor(sf::Color(80, 60, 50));
+                tooltipBox.setOutlineColor(sf::Color::White);
+                tooltipBox.setOutlineThickness(1);
+                tooltipBox.setPosition(boxX, boxY);
+
+                // 텍스트를 박스 중앙에 배치
+                tooltipText.setOrigin(textBounds.left + textBounds.width / 2.f, textBounds.top + textBounds.height / 2.f);
+
+                tooltipText.setPosition(boxX + boxWidth / 2.f, boxY + boxHeight / 2.f);
 
                 window.draw(tooltipBox);
                 window.draw(tooltipText);
@@ -209,16 +222,16 @@ public:
     template<typename T>
     bool Open(Inventory<T>& inventory, Player* player, bool isBattle, Monster* monster = nullptr)
     {
-        const int slotSize = 70;
-        const int columns = 4;
+        const int slotSize = 90;
+        const int columns = 5;
         const int padding = 8;
         const int gap = 4;
 
         int capacity = inventory.getCapacity();
         int rows = (capacity + columns - 1) / columns;
 
-        int windowWidth = (padding * 2 + columns * slotSize + (columns - 1) * gap) * 2;
-        int windowHeight = (padding * 2 + rows * slotSize + (rows - 1) * gap) * 2;
+        int windowWidth = padding * 2 + columns * slotSize + (columns - 1) * gap + 180;
+        int windowHeight = padding * 2 + rows * slotSize + (rows - 1) * gap + 100;
 
         // 창 생성
         sf::RenderWindow window(
