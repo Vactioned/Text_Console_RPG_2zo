@@ -19,8 +19,18 @@ public:
     static void TypePrint(const std::string& message, int delayMs = 10);
 
     static void CH1();
-
     static void CH1_Boss();
+    static void CH2();
+    static void CH2_Boss();
+    static void CH3();
+    static void CH3_Boss();
+    static void CH4();
+    static void CH4_Boss();
+    static void CH5();
+    static void CH5_Choice();
+    static void Final_Boss();
+    static void HAPPY_END();
+    static void BAD_END();
 
     static string InputPlayerName();
 

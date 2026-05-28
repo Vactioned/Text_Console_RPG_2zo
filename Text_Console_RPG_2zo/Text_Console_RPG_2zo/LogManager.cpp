@@ -168,6 +168,198 @@ void LogManager::CH1_Boss()     // 1막 보스전
     file.close();
 }
 
+void LogManager::CH2()     // 2막 메인 스토리
+{
+    ifstream file("CH2.txt");
+
+    if (!file.is_open())
+    {
+        cout << "파일을 열 수 없습니다.\n";
+    }
+
+    string line;
+    while (getline(file, line))
+    {
+        TypePrint(line);
+    }
+
+    file.close();
+}
+
+void LogManager::CH2_Boss()     // 2막 보스전
+{
+    ifstream file("CH2_Boss.txt");
+
+    if (!file.is_open())
+    {
+        cout << "파일을 열 수 없습니다.\n";
+    }
+
+    string line;
+    while (getline(file, line))
+    {
+        TypePrint(line);
+    }
+
+    file.close();
+}
+void LogManager::CH3()     // 3막 메인 스토리
+{
+    ifstream file("CH3.txt");
+
+    if (!file.is_open())
+    {
+        cout << "파일을 열 수 없습니다.\n";
+    }
+
+    string line;
+    while (getline(file, line))
+    {
+        TypePrint(line);
+    }
+
+    file.close();
+}
+void LogManager::CH3_Boss()     // 3막 보스전
+{
+    ifstream file("CH3_Boss.txt");
+
+    if (!file.is_open())
+    {
+        cout << "파일을 열 수 없습니다.\n";
+    }
+
+    string line;
+    while (getline(file, line))
+    {
+        TypePrint(line);
+    }
+
+    file.close();
+}
+void LogManager::CH4()     // 4막 메인 스토리
+{
+    ifstream file("CH4.txt");
+
+    if (!file.is_open())
+    {
+        cout << "파일을 열 수 없습니다.\n";
+    }
+
+    string line;
+    while (getline(file, line))
+    {
+        TypePrint(line);
+    }
+
+    file.close();
+}
+void LogManager::CH4_Boss()     // 4막 보스전
+{
+    ifstream file("CH4_Boss.txt");
+
+    if (!file.is_open())
+    {
+        cout << "파일을 열 수 없습니다.\n";
+    }
+
+    string line;
+    while (getline(file, line))
+    {
+        TypePrint(line);
+    }
+
+    file.close();
+}
+void LogManager::CH5()     // 5막 메인 스토리
+{
+    ifstream file("CH5.txt");
+
+    if (!file.is_open())
+    {
+        cout << "파일을 열 수 없습니다.\n";
+    }
+
+    string line;
+    while (getline(file, line))
+    {
+        TypePrint(line);
+    }
+
+    file.close();
+}
+void LogManager::CH5_Choice()     // 5막 엔딩 분기점
+{
+    ifstream file("CH5_Choice.txt");
+
+    if (!file.is_open())
+    {
+        cout << "파일을 열 수 없습니다.\n";
+    }
+
+    string line;
+    while (getline(file, line))
+    {
+        TypePrint(line);
+    }
+
+    file.close();
+}
+
+void LogManager::Final_Boss()     // 최종 보스
+{
+    ifstream file("Final_Boss.txt");
+
+    if (!file.is_open())
+    {
+        cout << "파일을 열 수 없습니다.\n";
+    }
+
+    string line;
+    while (getline(file, line))
+    {
+        TypePrint(line);
+    }
+
+    file.close();
+}
+
+void LogManager::HAPPY_END()     // 해피 엔딩?
+{
+    ifstream file("HAPPY_END.txt");
+
+    if (!file.is_open())
+    {
+        cout << "파일을 열 수 없습니다.\n";
+    }
+
+    string line;
+    while (getline(file, line))
+    {
+        TypePrint(line);
+    }
+
+    file.close();
+}
+
+void LogManager::BAD_END()     // 배드 엔딩
+{
+    ifstream file("BAD_END.txt");
+
+    if (!file.is_open())
+    {
+        cout << "파일을 열 수 없습니다.\n";
+    }
+
+    string line;
+    while (getline(file, line))
+    {
+        TypePrint(line);
+    }
+
+    file.close();
+}
+
 string LogManager::InputPlayerName()        // 이름 입력 함수
 {
     string name;
