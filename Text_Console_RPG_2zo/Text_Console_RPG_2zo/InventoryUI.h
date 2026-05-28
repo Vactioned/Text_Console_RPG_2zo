@@ -150,6 +150,19 @@ private:
                 float boxX = static_cast<float>(mousePos.x + 10);
                 float boxY = static_cast<float>(mousePos.y + 10);
 
+                if (boxX + boxWidth > window.getSize().x)
+                {
+                    boxX = static_cast<float>(mousePos.x) - boxWidth - 10.f;
+                }
+
+                if (boxY + boxHeight > window.getSize().y - 58)
+                {
+                    boxY = static_cast<float>(mousePos.y) - boxHeight - 10.f;
+                }
+
+                if (boxX < 0) boxX = 0;
+                if (boxY < 0) boxY = 0;
+
                 // 툴팁 박스
                 sf::RectangleShape tooltipBox(sf::Vector2f(boxWidth, boxHeight));
                 tooltipBox.setFillColor(sf::Color(80, 60, 50));
@@ -230,8 +243,8 @@ public:
         int capacity = inventory.getCapacity();
         int rows = (capacity + columns - 1) / columns;
 
-        int windowWidth = padding * 2 + columns * slotSize + (columns - 1) * gap + 180;
-        int windowHeight = padding * 2 + rows * slotSize + (rows - 1) * gap + 100;
+        int windowWidth = padding * 2 + columns * slotSize + (columns - 1) * gap;
+        int windowHeight = padding * 2 + rows * slotSize + (rows - 1) * gap + 58;// 취소 버튼과 gold때문에 58만큼 여백추가
 
         // 창 생성
         sf::RenderWindow window(

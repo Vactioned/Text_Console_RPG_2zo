@@ -37,6 +37,15 @@ void LevelUp::CheckLevelUp(Player* player)
             cout << "획득할 스탯을 선택해주세요" << endl;
             cout << "1. 방어력     2. 정신 방어력    3. 정신력 회복" << endl;
             cin >> choice;
+
+            if (cin.fail())
+            {
+                cin.clear();
+                cin.ignore(10000, '\n');
+                cout << "숫자를 입력해주세요.\n";
+                continue;
+            }
+
             switch (choice)
             {
             case 1:
