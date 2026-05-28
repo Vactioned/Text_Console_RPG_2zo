@@ -48,7 +48,7 @@ public:
             std::cout << "역병이 장비를 부식시키며 플레이어의 방어력이" << armorstealamount << "감소됩니다!" << std::endl;
             std::cout << "부식된 철가루가" << getName() << "의 방어력을" << armorstealamount << "증가시킵니다!" << std::endl;
 
-            int finaldamage = initialdamage = player->getDefence();
+            int finaldamage = initialdamage - player->getDefence();
             if (finaldamage < 1) finaldamage = 1;
 
             

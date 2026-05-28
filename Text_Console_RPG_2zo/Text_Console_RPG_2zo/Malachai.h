@@ -20,14 +20,19 @@ public:
 
     int NormalAttack(Player* player) override {
         std::cout << getName() << "가 공허의 에너지가 흘러넘치는 지팡이를 휘두르며 파멸의 주문을 외우기 시작합니다!" << std::endl;
-        int physdamage = getAttackPower();
+        int physdamage = 0;
 
         if (player != nullptr) {
+
+            physdamage = getAttackPower() - player->getDefence();
+            if (physdamage < 1) physdamage = 1;
+
             int sandamage = getSanPower() - player->getSanDefence();
             if (sandamage < 1) sandamage = 1;
 
             player->setSan(player->getSan() - sandamage);
             std::cout << "교주의 무자비한 저주가 온몸을 감싸며 정신력이 " << sandamage << "만큼 감소하였습니다!" << std::endl;
+            std::cout << "->" << physdamage << "의 물리 피해를 입었습니다!" << std::endl;
         }
         return physdamage;
     }
@@ -41,15 +46,19 @@ public:
         std::cout << "-> " << getName() << "가 주위의 핏빛 에너지를 흡수하여 HP를 30 회복합니다!" << std::endl;
 
        // 데미지도 3배
-        int physdamage = getAttackPower() * 3;
+        int physdamage = 0;
 
 
         if (player != nullptr) {
+            physdamage = (getAttackPower()*3) - player->getDefence();
+            if (physdamage < 1) physdamage = 1;
+
             int sandamage = (getSanPower() * 2) - player->getSanDefence();
             if (sandamage < 1) sandamage = 1;
 
             player->setSan(player->getSan() - sandamage);
             std::cout << "->  [교주의 위압감] 공포로 인해 심장이 터질 것 같습니다! 정신력이 " << sandamage << "만큼 감소합니다!" << std::endl;
+            std::cout << "->" << physdamage << "의 물리 피해를 입었습니다!" << std::endl;
         }
         return physdamage;
     }

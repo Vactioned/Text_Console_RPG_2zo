@@ -20,9 +20,12 @@ public:
 
     int NormalAttack(Player* player) override {
         std::cout << getName() << "이 불길한 기운이 감도는 집행검을 치켜들며 광신의 주문을 외웁니다!" << std::endl;
-        int physdamage = getAttackPower();
+        int physdamage = 0;
 
         if (player != nullptr) {
+            physdamage = getAttackPower() - player->getDefence();
+            if (physdamage < 1) physdamage = 1;
+
             int sandamage = getSanPower() - player->getSanDefence();
             if (sandamage < 1) sandamage = 1;
 
@@ -39,14 +42,18 @@ public:
         setHp(getHp() + 20);
         std::cout << "->" << getName() << "이 심연의 에너지를 흡수하여 HP를 20 회복합니다!" << std::endl;
 
-        int physdamage = getAttackPower() * 2;
+        int physdamage = 0;
 
         if (player != nullptr) {
+            physdamage = (getAttackPower()*2) - player->getDefence();
+            if (physdamage < 1) physdamage = 1;
+
             int sandamage = (getSanPower() * 2) - player->getSanDefence();
             if (sandamage < 1) sandamage = 1;
 
             player->setSan(player->getSan() - sandamage);
             std::cout << "-> 암흑의 환각이 시야를 가려 정신력이 " << sandamage << "만큼 감소합니다!" << std::endl;
+            std::cout << "->" << physdamage << "의 물리 피해를 입었습니다!" << std::endl;
         }
 
         return physdamage;

@@ -6,19 +6,19 @@
 
 
 
-class Arkadia : public Monster {
+class SoreArkadia : public Monster {
 
 private:
     bool isCharging; //차징 상태 확인용
-    
+
 public:
-    Arkadia(int playerlevel) //코드 간략화
+    SoreArkadia(int playerlevel) //코드 간략화
         :Monster(rand() % (playerlevel * 10 + 1) + (playerlevel * 20), // 체력
             rand() % (playerlevel * 5 + 1) + (playerlevel * 5),  // 공격력
             5, // 정신공격력
             5, // 몬스터 방어력
-            "[도달자, 아르카디아]"), // 몬스터이름
-            isCharging(false)
+            "[부상당한, 아르카디아]"), // 몬스터이름
+        isCharging(false)
 
 
     {
@@ -35,11 +35,11 @@ public:
         int physdamage = 0;
 
         if (player != nullptr) {
-            
+
             physdamage = getAttackPower() - player->getDefence();
             if (physdamage < 1) physdamage = 1;
 
-            
+
             int sandamage = (getSanPower() / 2) - player->getSanDefence();
             if (sandamage < 1) sandamage = 1;
 
@@ -69,7 +69,7 @@ public:
                 physdamage = (getAttackPower() * 4) - player->getDefence();
                 if (physdamage < 1) physdamage = 1;
 
-                
+
                 int sandamage = (getSanPower() * 3) - player->getSanDefence();
                 if (sandamage < 1) sandamage = 1;
 
@@ -79,7 +79,7 @@ public:
             }
             return physdamage;
         }
-        
+
     }
 };
 

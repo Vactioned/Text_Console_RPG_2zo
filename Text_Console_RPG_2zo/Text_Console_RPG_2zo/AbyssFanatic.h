@@ -20,15 +20,19 @@ public:
 
     int NormalAttack(Player* player) override {
         std::cout << getName() << "이 광기에 가득 찬 눈으로 기괴한 주문을 외우며 주먹을 휘두릅니다!" << std::endl;
-        int physdamage = getAttackPower();
+        int physdamage = 0;
 
         if (player != nullptr) {
+
+            physdamage = getAttackPower() - player->getDefence();
+            if (physdamage < 1) physdamage = 1;
 
             int sandamage = getSanPower() - player->getSanDefence();
             if (sandamage < 1) sandamage = 1;
 
             player->setSan(player->getSan() - sandamage);
             std::cout << "귀를 찢는 광신도의 주문이 이성을 오염시켜 정신력이" << sandamage << "만큼 감소하였습니다!" << std::endl;
+            std::cout << physdamage << "의 물리피해를 입었습니다!" << std::endl;
         }
         return physdamage;
     }
@@ -39,14 +43,19 @@ public:
         setHp(getHp() - 15);
         std::cout << "->" << getName() << "영혼을 대가로 힘이 증폭합니다! (몬스터 HP 15감소)" << std::endl;
 
-        int physdamage = getAttackPower() * 2;
+        int physdamage = 0;
 
         if (player != nullptr) {
+
+            physdamage = (getAttackPower() * 2) - player->getDefence();
+            if (physdamage < 1) physdamage = 1;
+
             int sandamage = (getSanPower() * 2) - player->getSanDefence();
             if (sandamage < 1) sandamage = 1;
 
             player->setSan(player->getSan() - sandamage);
-            std::cout << "->" << "암흑의 환각이 몰려와 정신력이" << sandamage << "만큼 감소합니다!" << std::endl;
+            std::cout << "암흑의 환각이 몰려와 정신력이" << sandamage << "만큼 감소합니다!" << std::endl;
+            std::cout << physdamage << "의 물리피해를 입었습니다!" << std::endl;
 
         }
         return physdamage;

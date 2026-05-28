@@ -37,6 +37,7 @@ public:
 
         if (player != nullptr) {
             int finalsandamage = (getSanPower() * 1.5) - player->getSanDefence();
+            if (finalsandamage < 1) finalsandamage = 1;
 
             player->setSan(player->getSan() - finalsandamage);
             std::cout << "눈앞이 흐려지며 극심한 정신적 스트레스가" << finalsandamage << "만큼 몰려옵니다!" << std::endl;

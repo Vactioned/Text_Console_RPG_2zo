@@ -31,6 +31,9 @@
     <Filter Include="Header Files\Act4Monster.h">
       <UniqueIdentifier>{a197bdec-fe8d-46bb-9641-e6c0829ecb9f}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\Act5Monster.h">
+      <UniqueIdentifier>{0fd1355b-afd7-47e9-bf70-0d972139e59a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Player.h">
@@ -43,9 +46,6 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Monster.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="OtherMonster.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="BattleSystem.h">
@@ -134,6 +134,21 @@
     </ClInclude>
     <ClInclude Include="Arkadia.h">
       <Filter>Header Files\Act4Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="SoreArkadia.h">
+      <Filter>Header Files\Act5Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="AltarGuardian.h">
+      <Filter>Header Files\Act5Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="VoidEhco.h">
+      <Filter>Header Files\Act5Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Unknown.h">
+      <Filter>Header Files\Act5Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Allmonster.h">
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
