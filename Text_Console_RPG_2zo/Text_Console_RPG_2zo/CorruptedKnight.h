@@ -16,6 +16,10 @@ public:
             "[부패한 기사단장]") // 몬스터이름
 
     {
+        
+    }
+
+    void Encounter() override {
         std::cout << "\n(출력대사) " << getName() << "이(가) 앞을 가로막습니다!\n" << std::endl;
     }
 

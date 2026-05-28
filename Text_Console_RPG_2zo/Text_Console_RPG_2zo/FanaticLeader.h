@@ -16,8 +16,13 @@ public:
             "[광신도 간부]") // 몬스터이름
 
     {
+        
+    }
+
+    void Encounter() override {
         std::cout << "\n(출력대사) " << getName() << "이(가) 앞을 가로막습니다!\n" << std::endl;
     }
+
 
     int NormalAttack(Player* player) override {
         std::cout << getName() << "이 불길한 기운이 감도는 집행검을 치켜들며 광신의 주문을 외웁니다!" << std::endl;
