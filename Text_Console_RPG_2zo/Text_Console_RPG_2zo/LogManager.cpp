@@ -15,6 +15,26 @@ void SetColor(int colorCode)
     SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorCode);
 }
 
+int GetSafeInput()
+{
+    int input;
+
+    while (true)
+    {
+        if (cin >> input)
+        {
+            cin.ignore(10000, '\n');
+            return input;
+        }
+        else
+        {
+            cin.clear();
+            cin.ignore(10000, '\n');
+            cout << "\n [오류] 숫자로만 입력해주세요 : ";
+        }
+    }
+}
+
 void LogManager::Clear()
 {
 #ifdef _WIN32
@@ -84,7 +104,7 @@ void LogManager::MainMenu(Player& player, Inventory<Item>& inventory)
         cout << "   4. 게임 종료" << endl;
         cout << "================================================================" << endl;
         cout << "입력 : ";
-        cin >> select;
+        select = GetSafeInput();
 
         switch (select)
         {
@@ -177,13 +197,13 @@ string LogManager::SelectJob()              // 직업 입력 함수
         cout << " [선택 5] : 도파민 상자 (당신의 운을 시험하세요)" << endl;
         cout << "================================================================" << endl;
         cout << "입력 : ";
-        cin >> choice;
+        choice = GetSafeInput();
         cout << endl;
 
         switch (choice)
         {
         case 1: job = "Berserker";
-            cout << "<광전사>" << endl;
+            cout << "<버서커>" << endl;
             cout << "\"닥치고 피나 쏟아내라. 이 미친 갈증을 채우려면 멀었어.\"" << endl;
             cout << "자신의 살점이 떨어져 나가는 고통마저 살육의 희열로 바꾸는 광전사" << endl;
             break;
@@ -214,7 +234,7 @@ string LogManager::SelectJob()              // 직업 입력 함수
             switch (randomRoll)
             {
             case 1: job = "Berserker";
-                cout << "<광전사>" << endl;
+                cout << "<버서커>" << endl;
                 cout << "\"닥치고 피나 쏟아내라. 이 미친 갈증을 채우려면 멀었어.\"" << endl;
                 cout << "자신의 살점이 떨어져 나가는 고통마저 살육의 희열로 바꾸는 광전사" << endl;
                 break;
