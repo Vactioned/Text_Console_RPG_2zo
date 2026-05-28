@@ -48,30 +48,35 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
     bool isDefending      = false;
     int  sanPanicTurns    = 0;
     int  powerBattleBoost = 0;
+    int  monsterAtkDebuff = 0;
+    int  monsterDefDebuff = 0;
+    int  effectiveAtk     = 0;
+    int  effectiveDef     = 0;
 
     while (player->getHp() > 0 && monster->getHp() > 0)
     {
         isDefending = false;
 
         {
-            int san          = player->getSan();
-            int baseAtk      = OriginalAtk + powerBattleBoost;
-            int effectiveAtk = baseAtk;
-            int effectiveDef = OriginalDef;
+            int san     = player->getSan();
+            int baseAtk = OriginalAtk + powerBattleBoost - monsterAtkDebuff;
+            int baseDef = OriginalDef - monsterDefDebuff;
+            effectiveAtk = baseAtk;
+            effectiveDef = baseDef;
 
             if (san <= 10)
             {
                 effectiveAtk = static_cast<int>(baseAtk * 0.80);
-                effectiveDef = static_cast<int>(OriginalDef * 0.80);
+                effectiveDef = static_cast<int>(baseDef * 0.80);
             }
             else if (san <= 30)
             {
                 effectiveAtk = static_cast<int>(baseAtk * 0.90);
-                effectiveDef = static_cast<int>(OriginalDef * 0.90);
+                effectiveDef = static_cast<int>(baseDef * 0.90);
             }
             else if (san <= 50)
             {
-                effectiveDef = static_cast<int>(OriginalDef * 0.90);
+                effectiveDef = static_cast<int>(baseDef * 0.90);
             }
 
             player->setPower(effectiveAtk);
@@ -379,6 +384,11 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
                 TakeDamage(player, monsterDamage);
             }
         }
+
+        if (player->getPower() < effectiveAtk)
+            monsterAtkDebuff += effectiveAtk - player->getPower();
+        if (player->getDefence() < effectiveDef)
+            monsterDefDebuff += effectiveDef - player->getDefence();
 
         turn_cycle++;
     }
