@@ -91,3 +91,4 @@ Thumbs.db
 !SFML/**/*.lib
 !SFML/**/*.dll
 !SFML/**/*.a 
+!x64/**/*.dll
