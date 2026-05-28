@@ -29,10 +29,10 @@ int main()
 
     Player* player = nullptr;
 
-    if (jobName == "Berserker") player = new Berserker(playerName, "광전사");
+    if (jobName == "Berserker") player = new Berserker(playerName, "버서커");
     else if (jobName == "Warlock") player = new Warlock(playerName, "흑마법사");
     else if (jobName == "Thief")   player = new Thief(playerName, "도적");
-    else if (jobName == "Monk")    player = new Monk(playerName, "수도승");
+    else if (jobName == "Monk")    player = new Monk(playerName, "파계승");
     else if (jobName == "Gambler") player = new Gambler(playerName, "도박사");
     else                           player = new Poor(playerName, "거지");
 
