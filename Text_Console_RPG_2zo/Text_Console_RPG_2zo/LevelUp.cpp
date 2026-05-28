@@ -30,7 +30,9 @@ void LevelUp::CheckLevelUp(Player* player)
             
             player->setHp(player->getMaxHp());
             LevelUpEffect(player);
-            
+
+            player->PrintPlayerStatus();
+
             int choice = 0;
             cout << "획득할 스탯을 선택해주세요" << endl;
             cout << "1. 방어력     2. 정신 방어력    3. 정신력 회복" << endl;
