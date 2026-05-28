@@ -84,3 +84,7 @@ Testing/
 
 .DS_Store
 Thumbs.db
+
+# 예외
+!SFML/
+!SFML/**
