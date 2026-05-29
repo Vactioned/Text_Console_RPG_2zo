@@ -5,6 +5,7 @@
 #include <chrono>       // 시간 단위를 쓰기 위한 라이브러리
 #include <fstream>      // .txt 파일을 업로드 하기 위해 필요한 라이브러리
 #include <windows.h>    // 색 변경을 위해 필요한 라이브러리
+#include <conio.h>   // 상단에 추가
 
 #include <iostream>
 
@@ -47,13 +48,21 @@ void LogManager::Clear()
 
 void LogManager::PressEnter()
 {
-    cout << "\n[ 엔터(Enter)를 누르면 계속합니다... ]" << flush;
+    HANDLE hOutput = GetStdHandle(STD_OUTPUT_HANDLE);
 
-    cin.clear();
-    cin.sync();  // 이전 cin >> 으로 남은 버퍼 비우기 (Windows MSVC 안정)
-    cin.get();   // 실제 엔터 대기
+    cout << "[ 엔터(Enter)를 누르면 계속합니다... ]" << flush;
 
-    cout << "\r" << string(80, ' ') << "\r" << flush;
+    CONSOLE_SCREEN_BUFFER_INFO csbi;
+    GetConsoleScreenBufferInfo(hOutput, &csbi);
+    COORD lineStart = { 0, csbi.dwCursorPosition.Y };
+
+    // 엔터(\r)만 통과, 다른 키는 무시
+    while (_getch() != '\r') {}
+
+    DWORD written;
+    FillConsoleOutputCharacter(hOutput, ' ', csbi.dwSize.X, lineStart, &written);
+    FillConsoleOutputAttribute(hOutput, csbi.wAttributes, csbi.dwSize.X, lineStart, &written);
+    SetConsoleCursorPosition(hOutput, lineStart);
 }
 
 void LogManager::TypePrint(const string& message, int delayMs)
