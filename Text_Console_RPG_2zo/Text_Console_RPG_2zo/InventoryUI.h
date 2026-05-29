@@ -353,8 +353,11 @@ public:
                                     item.use(player);
                                 }
                                 removeIndex = index;
-                                window.close();
                                 useItem = true;
+                                if (isBattle)
+                                {
+                                    window.close();
+                                }
                                 break;
                             }
 
