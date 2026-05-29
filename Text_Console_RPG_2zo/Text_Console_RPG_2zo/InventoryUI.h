@@ -23,7 +23,7 @@ private:
 
     sf::String GetItemDescription(const std::string& name)
     {
-        if (name == "체력 포션") return L"HP 포션\nHP + (50 + 레벨 X 100)";
+        if (name == "체력 포션") return L"HP 포션\nHP + 50 (10레벨 당 + 100)";
         if (name == "정신력 포션") return L"SAN 포션\nSAN +30";
         if (name == "공격력 증가") return L"공격력 증가\n이번 전투 동안 공력력 +10";
         if (name == "약화 포션") return L"약화 포션\n이번 전투 동안 적의 공격력 -20%";
@@ -252,8 +252,7 @@ public:
             "Inventory",
             sf::Style::Titlebar
         );
-        std::cout << "window 생성 완료\n";
-
+        
         sf::RectangleShape slot(sf::Vector2f(slotSize, slotSize));
         slot.setFillColor(sf::Color(240, 210, 190));
         slot.setOutlineColor(sf::Color::White);
