@@ -23,8 +23,8 @@ private:
 
     sf::String GetItemDescription(const std::string& name)
     {
-        if (name == "체력 포션") return L"HP 포션\nHP +50";
-        if (name == "정신력 포션") return L"SAN 포션\nSAN +50";
+        if (name == "체력 포션") return L"HP 포션\nHP + (50 + 레벨 X 100)";
+        if (name == "정신력 포션") return L"SAN 포션\nSAN +30";
         if (name == "공격력 증가") return L"공격력 증가\n이번 전투 동안 공력력 +10";
         if (name == "약화 포션") return L"약화 포션\n이번 전투 동안 적의 공격력 -20%";
         if (name == "취약 포션") return L"취약 포션\n이번 전투 동안 적의 방어력 -20%";
