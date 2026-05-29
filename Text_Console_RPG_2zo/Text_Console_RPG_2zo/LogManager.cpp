@@ -165,6 +165,12 @@ void LogManager::CH1()      // 1막 메인 스토리
     bool isAsciiMode = false;
     while (getline(file, line))
     {
+        if (line.find("[ENTER]") != string::npos)
+        {
+            LogManager::PressEnter();
+            continue;
+        }
+
         if (line.find("@@@") != string::npos)
         {
             isAsciiMode = !isAsciiMode;
