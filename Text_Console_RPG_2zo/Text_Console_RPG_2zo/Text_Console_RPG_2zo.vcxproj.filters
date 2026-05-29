@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Class.h">
+      <UniqueIdentifier>{fec0751e-25f4-4517-a721-ea63f1359cfd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Classes.cpp">
+      <UniqueIdentifier>{570c748c-c523-4e08-aaa3-fde1db3ad173}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Act1Monster.h">
+      <UniqueIdentifier>{8f3ceda9-a272-47a7-909c-5707c405ae34}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Act2Monster.h">
+      <UniqueIdentifier>{b8a8b3b3-d942-42e9-8df7-e13b4159e4a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Act3Monster.h">
+      <UniqueIdentifier>{89555b12-9549-48df-b91a-8181edd363ff}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Act4Monster.h">
+      <UniqueIdentifier>{a197bdec-fe8d-46bb-9641-e6c0829ecb9f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Act5Monster.h">
+      <UniqueIdentifier>{0fd1355b-afd7-47e9-bf70-0d972139e59a}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelUp.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Item.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Monster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="BattleSystem.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LogManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Berserker.h">
+      <Filter>Header Files\Class.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Warlock.h">
+      <Filter>Header Files\Class.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Monk.h">
+      <Filter>Header Files\Class.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Thief.h">
+      <Filter>Header Files\Class.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Classes.h">
+      <Filter>Header Files\Class.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Inventory.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Skill.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Poor.h">
+      <Filter>Header Files\Class.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Gambler.h">
+      <Filter>Header Files\Class.h</Filter>
+    </ClInclude>
+    <ClInclude Include="InventoryUI.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="VoidHound.h">
+      <Filter>Header Files\Act1Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="MutatedSlime.h">
+      <Filter>Header Files\Act1Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="CorpseGolem.h">
+      <Filter>Header Files\Act1Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="plagueServant.h">
+      <Filter>Header Files\Act1Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="DimensionEye.h">
+      <Filter>Header Files\Act2Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="AbyssRemnant.h">
+      <Filter>Header Files\Act2Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="AbyssHive.h">
+      <Filter>Header Files\Act2Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Oblivion.h">
+      <Filter>Header Files\Act2Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="BloodFanatic.h">
+      <Filter>Header Files\Act3Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="AbyssFanatic.h">
+      <Filter>Header Files\Act3Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="FanaticLeader.h">
+      <Filter>Header Files\Act3Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Malachai.h">
+      <Filter>Header Files\Act3Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="ImageManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="FleshFusion.h">
+      <Filter>Header Files\Act4Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="TwistedGuard.h">
+      <Filter>Header Files\Act4Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="CorruptedKnight.h">
+      <Filter>Header Files\Act4Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Arkadia.h">
+      <Filter>Header Files\Act4Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="SoreArkadia.h">
+      <Filter>Header Files\Act5Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="AltarGuardian.h">
+      <Filter>Header Files\Act5Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="VoidEhco.h">
+      <Filter>Header Files\Act5Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Unknown.h">
+      <Filter>Header Files\Act5Monster.h</Filter>
+    </ClInclude>
+    <ClInclude Include="Allmonster.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LevelUp.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="item.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Monster.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="BattleSystem.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="LogManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Berserker.cpp">
+      <Filter>Source Files\Classes.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Warlock.cpp">
+      <Filter>Source Files\Classes.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Monk.cpp">
+      <Filter>Source Files\Classes.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Thief.cpp">
+      <Filter>Source Files\Classes.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Skill.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Gambler.cpp">
+      <Filter>Source Files\Classes.cpp</Filter>
+    </ClCompile>
+    <ClCompile Include="Poor.cpp">
+      <Filter>Source Files\Classes.cpp</Filter>
+    </ClCompile>
+  </ItemGroup>
+</Project>
