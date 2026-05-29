@@ -23,3 +23,4 @@
 #include "SoreArkadia.h"
 #include "Unknown.h"
 #include "VoidEhco.h"
+#include "FinalBoss.h"

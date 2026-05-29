@@ -41,7 +41,7 @@ void Item::PrintInfo() const
     switch (type)
     {
     case ItemType::HealPotion:
-        cout << name << " | 체력 +" << value << '\n';
+        cout << name << " | 체력 회복 (레벨 비례)\n";
         break;
 
     case ItemType::SanPotion:
@@ -89,11 +89,14 @@ void Item::use(Player* player) const
     switch (type)
     {
     case ItemType::HealPotion:
+    {
+        int healValue = 50 + (player->getLevel() / 10) * 100;
         beforeValue = player->getHp();
-        afterValue = min(beforeValue + value, player->getMaxHp());
+        afterValue = min(beforeValue + healValue, player->getMaxHp());
         player->setHp(afterValue);
         cout << "[아이템 사용] " << name << " | 체력 회복: " << beforeValue << " -> " << afterValue << '\n';
         break;
+    }
 
     case ItemType::SanPotion:
         beforeValue = player->getSan();
@@ -188,7 +191,7 @@ Item Item::CreateHealPotion(int playerLevel)
 
 Item Item::CreateSanPotion()
 {
-    return Item("정신력 포션", ItemType::SanPotion, 50);
+    return Item("정신력 포션", ItemType::SanPotion, 30);
 }
 
 Item Item::CreateAttackBoost()
