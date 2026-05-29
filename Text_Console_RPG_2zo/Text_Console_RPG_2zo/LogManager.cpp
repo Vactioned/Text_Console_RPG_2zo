@@ -47,19 +47,13 @@ void LogManager::Clear()
 
 void LogManager::PressEnter()
 {
-    if (cin.fail())
-    {
-        cin.clear();
-        cin.ignore(10000, '\n');
-    }
+    cout << "\n[ 엔터(Enter)를 누르면 계속합니다... ]" << flush;
 
-    cout << "\n[ 엔터(Enter)를 누르면 계속합니다... ]";
+    cin.clear();
+    cin.sync();  // 이전 cin >> 으로 남은 버퍼 비우기 (Windows MSVC 안정)
+    cin.get();   // 실제 엔터 대기
 
-    cin.ignore(cin.rdbuf()->in_avail(), '\n');
-
-    cin.get(); // 사용자가 엔터를 누를 때까지 대기
-
-    cout << "\r" << string(50, ' ') << "\r";
+    cout << "\r" << string(80, ' ') << "\r" << flush;
 }
 
 void LogManager::TypePrint(const string& message, int delayMs)
@@ -141,6 +135,7 @@ void LogManager::MainMenu(Player& player, Inventory<Item>& inventory)
             break;
         default:          
             cout << "   잘못된 선택입니다. 다시 선택해주세요." << endl;
+            PressEnter();
             break;
         }
     }
@@ -156,6 +151,7 @@ void LogManager::CH1()      // 1막 메인 스토리
         return;
     }
 
+    cout << "\n";
     string line;
     bool isAsciiMode = false;
     while (getline(file, line))
@@ -170,6 +166,7 @@ void LogManager::CH1()      // 1막 메인 스토리
         else            TypePrint(line);
     }
 
+    cout << "\n";
     file.close();
 }
 
@@ -183,6 +180,7 @@ void LogManager::CH1_Boss()     // 1막 보스전
         return;
     }
 
+    cout << "\n";
     string line;
     bool isAsciiMode = false;
     while (getline(file, line))
@@ -197,6 +195,7 @@ void LogManager::CH1_Boss()     // 1막 보스전
         else            TypePrint(line);
     }
 
+    cout << "\n";
     file.close();
 }
 
@@ -210,6 +209,7 @@ void LogManager::CH2()     // 2막 메인 스토리
         return;
     }
 
+    cout << "\n";
     string line;
     bool isAsciiMode = false;
     while (getline(file, line))
@@ -224,6 +224,7 @@ void LogManager::CH2()     // 2막 메인 스토리
         else            TypePrint(line);
     }
 
+    cout << "\n";
     file.close();
 }
 
@@ -237,6 +238,7 @@ void LogManager::CH2_Boss()     // 2막 보스전
         return;
     }
 
+    cout << "\n";
     string line;
     bool isAsciiMode = false;
     while (getline(file, line))
@@ -251,6 +253,7 @@ void LogManager::CH2_Boss()     // 2막 보스전
         else            TypePrint(line);
     }
 
+    cout << "\n";
     file.close();
 }
 void LogManager::CH3()     // 3막 메인 스토리
@@ -263,6 +266,7 @@ void LogManager::CH3()     // 3막 메인 스토리
         return;
     }
 
+    cout << "\n";
     string line;
     bool isAsciiMode = false;
     while (getline(file, line))
@@ -277,6 +281,7 @@ void LogManager::CH3()     // 3막 메인 스토리
         else            TypePrint(line);
     }
 
+    cout << "\n";
     file.close();
 }
 void LogManager::CH3_Boss()     // 3막 보스전
@@ -289,6 +294,7 @@ void LogManager::CH3_Boss()     // 3막 보스전
         return;
     }
 
+    cout << "\n";
     string line;
     bool isAsciiMode = false;
     while (getline(file, line))
@@ -303,6 +309,7 @@ void LogManager::CH3_Boss()     // 3막 보스전
         else            TypePrint(line);
     }
 
+    cout << "\n";
     file.close();
 }
 void LogManager::CH4()     // 4막 메인 스토리
@@ -315,6 +322,7 @@ void LogManager::CH4()     // 4막 메인 스토리
         return;
     }
 
+    cout << "\n";
     string line;
     bool isAsciiMode = false;
     while (getline(file, line))
@@ -329,6 +337,7 @@ void LogManager::CH4()     // 4막 메인 스토리
         else            TypePrint(line);
     }
 
+    cout << "\n";
     file.close();
 }
 void LogManager::CH4_Boss()     // 4막 보스전
@@ -341,6 +350,7 @@ void LogManager::CH4_Boss()     // 4막 보스전
         return;
     }
 
+    cout << "\n";
     string line;
     bool isAsciiMode = false;
     while (getline(file, line))
@@ -355,6 +365,7 @@ void LogManager::CH4_Boss()     // 4막 보스전
         else            TypePrint(line);
     }
 
+    cout << "\n";
     file.close();
 }
 void LogManager::CH5()     // 5막 메인 스토리
@@ -367,6 +378,7 @@ void LogManager::CH5()     // 5막 메인 스토리
         return;
     }
 
+    cout << "\n";
     string line;
     bool isAsciiMode = false;
     while (getline(file, line))
@@ -381,6 +393,7 @@ void LogManager::CH5()     // 5막 메인 스토리
         else            TypePrint(line);
     }
 
+    cout << "\n";
     file.close();
 }
 void LogManager::CH5_Choice()     // 5막 엔딩 분기점
@@ -393,6 +406,7 @@ void LogManager::CH5_Choice()     // 5막 엔딩 분기점
         return;
     }
 
+    cout << "\n";
     string line;
     bool isAsciiMode = false;
     while (getline(file, line))
@@ -407,12 +421,13 @@ void LogManager::CH5_Choice()     // 5막 엔딩 분기점
         else            TypePrint(line);
     }
 
+    cout << "\n";
     file.close();
 }
 
-void LogManager::Final_Boss()     // 최종 보스
+void LogManager::Final_Boss_1()
 {
-    ifstream file("Final_Boss.txt");
+    ifstream file("Final_Boss_1.txt");
 
     if (!file.is_open())
     {
@@ -420,6 +435,7 @@ void LogManager::Final_Boss()     // 최종 보스
         return;
     }
 
+    cout << "\n";
     string line;
     bool isAsciiMode = false;
     while (getline(file, line))
@@ -434,6 +450,36 @@ void LogManager::Final_Boss()     // 최종 보스
         else            TypePrint(line);
     }
 
+    cout << "\n";
+    file.close();
+}
+
+void LogManager::Final_Boss_2()
+{
+    ifstream file("Final_Boss_2.txt");
+
+    if (!file.is_open())
+    {
+        cout << "파일을 열 수 없습니다.\n";
+        return;
+    }
+
+    cout << "\n";
+    string line;
+    bool isAsciiMode = false;
+    while (getline(file, line))
+    {
+        if (line.find("@@@") != string::npos)
+        {
+            isAsciiMode = !isAsciiMode;
+            continue;
+        }
+
+        if (isAsciiMode) cout << line << endl;
+        else            TypePrint(line);
+    }
+
+    cout << "\n";
     file.close();
 }
 
@@ -447,6 +493,7 @@ void LogManager::HAPPY_END()     // 해피 엔딩?
         return;
     }
 
+    cout << "\n";
     string line;
     bool isAsciiMode = false;
     while (getline(file, line))
@@ -461,6 +508,7 @@ void LogManager::HAPPY_END()     // 해피 엔딩?
         else            TypePrint(line);
     }
 
+    cout << "\n";
     file.close();
 }
 
@@ -474,6 +522,7 @@ void LogManager::BAD_END()     // 배드 엔딩
         return;
     }
 
+    cout << "\n";
     string line;
     bool isAsciiMode = false;
     while (getline(file, line))
@@ -488,6 +537,17 @@ void LogManager::BAD_END()     // 배드 엔딩
         else            TypePrint(line);
     }
 
+    cout << "\n";
+    file.close();
+}
+
+void LogManager::PrintAsciiFile(const string& filename)
+{
+    ifstream file(filename);
+    if (!file.is_open()) return;
+    string line;
+    while (getline(file, line))
+        cout << line << "\n";
     file.close();
 }
 
@@ -615,7 +675,16 @@ string LogManager::SelectJob()              // 직업 입력 함수
             cout << "\n [오류] 잘못된 선택입니다. 다시 입력해주세요." << endl;
             continue;
         }
-        if (job != "") break;
+        if (job != "")
+        {
+            if      (job == "Berserker") PrintAsciiFile("Berserker.txt");
+            else if (job == "Warlock")   PrintAsciiFile("Warlok.txt");
+            else if (job == "Thief")     PrintAsciiFile("Thief.txt");
+            else if (job == "Monk")      PrintAsciiFile("Monk.txt");
+            else if (job == "Poor")      PrintAsciiFile("Poor.txt");
+            else if (job == "Gambler")   PrintAsciiFile("Gambler.txt");
+            break;
+        }
     }
     return job;
 }

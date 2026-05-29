@@ -16,7 +16,7 @@ public:
 
     // 타이핑 효과 함수
     // delayMs: 글자 사이의 간격 (밀리초 단위)
-    static void TypePrint(const std::string& message, int delayMs = 10);
+    static void TypePrint(const std::string& message, int delayMs = 5);
 
     static void CH1();
     static void CH1_Boss();
@@ -28,9 +28,12 @@ public:
     static void CH4_Boss();
     static void CH5();
     static void CH5_Choice();
-    static void Final_Boss();
+    static void Final_Boss_1();
+    static void Final_Boss_2();
     static void HAPPY_END();
     static void BAD_END();
+
+    static void PrintAsciiFile(const std::string& filename);
 
     static string InputPlayerName();
 

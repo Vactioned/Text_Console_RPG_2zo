@@ -33,36 +33,40 @@ void LevelUp::CheckLevelUp(Player* player)
 
             player->PrintPlayerStatus();
 
-            int choice = 0;
-            cout << "획득할 스탯을 선택해주세요" << endl;
-            cout << "1. 방어력     2. 정신 방어력    3. 정신력 회복" << endl;
-            cin >> choice;
-
-            if (cin.fail())
+            while (true)
             {
-                cin.clear();
-                cin.ignore(10000, '\n');
-                cout << "숫자를 입력해주세요.\n";
-                continue;
-            }
+                int choice = 0;
+                cout << "획득할 스탯을 선택해주세요" << endl;
+                cout << "1. 방어력     2. 정신 방어력    3. 정신력 회복" << endl;
+                cin >> choice;
 
-            switch (choice)
-            {
-            case 1:
-                player->setDefence(player->getDefence() + 2);
+                if (cin.fail())
+                {
+                    cin.clear();
+                    cin.ignore(10000, '\n');
+                    cout << "숫자를 입력해주세요.\n";
+                    continue;
+                }
+
+                switch (choice)
+                {
+                case 1:
+                    player->setDefence(player->getDefence() + 2);
+                    break;
+
+                case 2:
+                    player->setSanDefence(player->getSanDefence() + 1);
+                    break;
+
+                case 3:
+                    player->setSan(min(player->getSan() + 20, player->getMaxSan()));
+                    break;
+
+                default:
+                    cout << endl << "잘못 입력되었습니다. 다시 입력해주세요" << endl;
+                    continue;
+                }
                 break;
-
-            case 2:
-                player->setSanDefence(player->getSanDefence() + 1);
-                break;
-
-            case 3:
-                player->setSan(min(player->getSan() + 20, player->getMaxSan()));
-                break;
-
-            default:
-                cout << endl << "잘못 입력되었습니다. 다시 입력해주세요" << endl;
-                continue;
             }
         }
         else
@@ -84,7 +88,7 @@ void LevelUp::LevelUpEffect(Player* player)
 {
 
     cout << "================" << endl;
-    cout << "   LEVLE UP!!" << endl;
+    cout << "   LEVEL UP!!" << endl;
     cout << "   Lv " << player->getLevel() - 1 << "->" << "Lv " << player->getLevel() << endl;
     if (player->getJob() == "버서커")
     {

@@ -212,7 +212,7 @@ int Skill_PassiveOnHit(SkillID id, Player* player, Monster* monster, int damage)
     case SkillID::CLEAR_MIND:
         if (player->getSan() > 90)
         {
-            int newDamage = monster->getAttackPower() - static_cast<int>(player->getDefence() * 1.5);
+            int newDamage = damage - static_cast<int>(player->getDefence() * 0.5);
             if (newDamage < 1) newDamage = 1;
             LogManager::TypePrint("정신이 고요하다. 충격이 밀려오지만, 고요함이 그것을 받아낸다.", 5);
             return newDamage;

@@ -29,9 +29,10 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
 
     int skillLastUsed[3];
     skillLastUsed[0] = skillLastUsed[1] = skillLastUsed[2] = -100;
-    bool isInvincible     = false;
-    bool isDefending      = false;
-    int  sanPanicTurns    = 0;
+    bool isInvincible        = false;
+    bool isDefending         = false;
+    bool sanRecoveryPending  = false;
+    int  sanPanicTurns       = 0;
     int  powerBattleBoost = 0;
     int  monsterAtkDebuff = 0;
     int  monsterDefDebuff = 0;
@@ -70,6 +71,12 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
 
         bool skipPlayerTurn = false;
 
+        if (sanRecoveryPending)
+        {
+            player->setSan(10);
+            sanRecoveryPending = false;
+        }
+
         if (player->getSan() == 0 && sanPanicTurns == 0)
         {
             LogManager::TypePrint("\n당신의 정신은 현실을 감당하지 못하고 무너져 내린다.", 5);
@@ -92,7 +99,7 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
             {
                 LogManager::TypePrint("압도적인 공포가 온몸을 옥죄어 온다. 손가락 하나 움직일 수 없다.", 5);
                 LogManager::PressEnter();
-                player->setSan(10);
+                sanRecoveryPending = true;
                 skipPlayerTurn = true;
             }
             else // 35%: 최대 체력 50% 자해
@@ -112,7 +119,7 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
         if (!skipPlayerTurn && sanPanicTurns > 0)
         {
             skipPlayerTurn = true;
-            LogManager::TypePrint("\n당신은 공포에 잠식된 짐승이 되어 몸이 이끄는 대로 움직인다. (" + to_string(4 - sanPanicTurns) + "턴 남음)", 5);
+            LogManager::TypePrint("\n당신은 공포에 잠식된 짐승이 되어 몸이 이끄는 대로 움직인다. (" + to_string(sanPanicTurns) + "턴 남음)", 5);
 
             switch (rand() % 3)
             {
@@ -156,7 +163,7 @@ void BattleStart(Player* player, Monster* monster, Inventory<Item>& inventory)
             sanPanicTurns--;
             if (sanPanicTurns == 0)
             {
-                player->setSan(10);
+                sanRecoveryPending = true;
                 LogManager::TypePrint("머리를 뒤덮던 공포가 조금 가신다. 당신은 다시 자신을 되찾았다.", 5);
             }
         }
@@ -484,14 +491,43 @@ void BattleSystem::EnterMissionMenu(Player& player, Inventory<Item>& inventory)
 
             if (stageType == 0)
             {
-                if (chapter == 1) LogManager::CH1();
-                // TODO: CH2~5 스토리 함수 추가 필요 (LogManager 담당자)
+                if      (chapter == 1) LogManager::CH1();
+                else if (chapter == 2) LogManager::CH2();
+                else if (chapter == 3) LogManager::CH3();
+                else if (chapter == 4) LogManager::CH4();
+                else if (chapter == 5) LogManager::CH5();
             }
 
             if (stageType == 2)
             {
-                if (chapter == 1) LogManager::CH1_Boss();
-                // TODO: CH2~5 보스 연출 함수 추가 필요 (LogManager 담당자)
+                if      (chapter == 1) LogManager::CH1_Boss();
+                else if (chapter == 2) LogManager::CH2_Boss();
+                else if (chapter == 3) LogManager::CH3_Boss();
+                else if (chapter == 4) LogManager::CH4_Boss();
+                else if (chapter == 5)
+                {
+                    LogManager::CH5_Choice();
+
+                    int endingChoice = 0;
+                    while (true)
+                    {
+                        cout << "선택 (1 / 2) : ";
+                        cin >> endingChoice;
+                        if (cin.fail()) { cin.clear(); cin.ignore(10000, '\n'); continue; }
+                        if (endingChoice == 1 || endingChoice == 2) break;
+                    }
+
+                    if (endingChoice == 1)
+                    {
+                        LogManager::HAPPY_END();
+                        LogManager::PressEnter();
+                        exit(0);
+                    }
+
+                    LogManager::Final_Boss_1();
+                    LogManager::PressEnter();
+                    LogManager::Final_Boss_2();
+                }
             }
 
             string stageStr = "CH" + to_string(chapter) + "_";
@@ -578,9 +614,14 @@ bool BattleSystem::StartBattle(Player& player, Inventory<Item>& inventory,
     }
     else if (stage == "CH5_MidBoss")
     {
-        if (!RunSingleBattle(player, inventory, nullptr)) return false; // TODO: CH5 일반 B
+        if (!RunSingleBattle(player, inventory, new AltarGuardian(player.getLevel()))) return false;
         LogManager::TypePrint("\n또 다른 적이 나타났다!", 5);
-        return RunSingleBattle(player, inventory, nullptr);             // TODO: CH5 하수인급
+        return RunSingleBattle(player, inventory, new SoreArkadia(player.getLevel()));
+    }
+    else if (stage == "CH5_MainBoss")
+    {
+        RunFinalBossBattle(&player, inventory);
+        return false;
     }
 
     Monster* monster = nullptr;
@@ -589,13 +630,13 @@ bool BattleSystem::StartBattle(Player& player, Inventory<Item>& inventory,
     else if (stage == "CH2_Normal")   monster = new AbyssRemnant(player.getLevel());
     else if (stage == "CH3_Normal")   monster = new AbyssFanatic(player.getLevel());
     else if (stage == "CH4_Normal")   monster = new TwistedGuard(player.getLevel());
-    else if (stage == "CH5_Normal")   monster = nullptr; // TODO: CH5 일반 A
+    else if (stage == "CH5_Normal")   monster = new VoidEcho(player.getLevel());
 
     else if (stage == "CH1_MainBoss") monster = new CorpseGolem(player.getLevel());
     else if (stage == "CH2_MainBoss") monster = new Oblivion(player.getLevel());
     else if (stage == "CH3_MainBoss") monster = new Malachai(player.getLevel());
     else if (stage == "CH4_MainBoss") monster = new Arkadia(player.getLevel());
-    else if (stage == "CH5_MainBoss") monster = nullptr; // TODO: CH5 보스급
+    else if (stage == "CH5_MainBoss") monster = nullptr; // RunFinalBossBattle 에서 처리
 
     else if (stage == "CH1_Normal_A") monster = new VoidHound(player.getLevel());
     else if (stage == "CH1_Normal_B") monster = new MutatedSlime(player.getLevel());
@@ -605,8 +646,8 @@ bool BattleSystem::StartBattle(Player& player, Inventory<Item>& inventory,
     else if (stage == "CH3_Normal_B") monster = new BloodFanatic(player.getLevel());
     else if (stage == "CH4_Normal_A") monster = new TwistedGuard(player.getLevel());
     else if (stage == "CH4_Normal_B") monster = new FleshFusion(player.getLevel());
-    else if (stage == "CH5_Normal_A") monster = nullptr; // TODO: CH5 일반 A (자유전투)
-    else if (stage == "CH5_Normal_B") monster = nullptr; // TODO: CH5 일반 B (자유전투)
+    else if (stage == "CH5_Normal_A") monster = new VoidEcho(player.getLevel());
+    else if (stage == "CH5_Normal_B") monster = new AltarGuardian(player.getLevel());
 
     return RunSingleBattle(player, inventory, monster);
 }

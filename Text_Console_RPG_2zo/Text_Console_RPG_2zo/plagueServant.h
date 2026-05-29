@@ -49,7 +49,7 @@ public:
 
             LogManager::TypePrint("\n역병이 장비를 부식시켜 방어력이 " + std::to_string(armorstealamount) + "만큼 감소합니다.", 5);
 
-            int finaldamage = initialdamage - player->getDefence();
+            finaldamage = initialdamage - player->getDefence();
             if (finaldamage < 1) finaldamage = 1;
 
             LogManager::TypePrint("\n떨어져 나온 철가루가 " + getName() + " 에게 달라붙어 방어력이 " + std::to_string(armorstealamount) + " 증가합니다.", 5);
