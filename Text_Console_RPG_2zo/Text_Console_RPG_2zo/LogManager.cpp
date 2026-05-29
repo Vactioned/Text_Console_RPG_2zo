@@ -200,6 +200,12 @@ void LogManager::CH1_Boss()     // 1막 보스전
     bool isAsciiMode = false;
     while (getline(file, line))
     {
+        if (line.find("[ENTER]") != string::npos)
+        {
+            LogManager::PressEnter();
+            continue;
+        }
+
         if (line.find("@@@") != string::npos)
         {
             isAsciiMode = !isAsciiMode;
@@ -229,6 +235,12 @@ void LogManager::CH2()     // 2막 메인 스토리
     bool isAsciiMode = false;
     while (getline(file, line))
     {
+        if (line.find("[ENTER]") != string::npos)
+        {
+            LogManager::PressEnter();
+            continue;
+        }
+
         if (line.find("@@@") != string::npos)
         {
             isAsciiMode = !isAsciiMode;
@@ -258,6 +270,12 @@ void LogManager::CH2_Boss()     // 2막 보스전
     bool isAsciiMode = false;
     while (getline(file, line))
     {
+        if (line.find("[ENTER]") != string::npos)
+        {
+            LogManager::PressEnter();
+            continue;
+        }
+
         if (line.find("@@@") != string::npos)
         {
             isAsciiMode = !isAsciiMode;
@@ -286,6 +304,12 @@ void LogManager::CH3()     // 3막 메인 스토리
     bool isAsciiMode = false;
     while (getline(file, line))
     {
+        if (line.find("[ENTER]") != string::npos)
+        {
+            LogManager::PressEnter();
+            continue;
+        }
+
         if (line.find("@@@") != string::npos)
         {
             isAsciiMode = !isAsciiMode;
@@ -314,6 +338,12 @@ void LogManager::CH3_Boss()     // 3막 보스전
     bool isAsciiMode = false;
     while (getline(file, line))
     {
+        if (line.find("[ENTER]") != string::npos)
+        {
+            LogManager::PressEnter();
+            continue;
+        }
+
         if (line.find("@@@") != string::npos)
         {
             isAsciiMode = !isAsciiMode;
@@ -342,6 +372,12 @@ void LogManager::CH4()     // 4막 메인 스토리
     bool isAsciiMode = false;
     while (getline(file, line))
     {
+        if (line.find("[ENTER]") != string::npos)
+        {
+            LogManager::PressEnter();
+            continue;
+        }
+
         if (line.find("@@@") != string::npos)
         {
             isAsciiMode = !isAsciiMode;
@@ -370,6 +406,12 @@ void LogManager::CH4_Boss()     // 4막 보스전
     bool isAsciiMode = false;
     while (getline(file, line))
     {
+        if (line.find("[ENTER]") != string::npos)
+        {
+            LogManager::PressEnter();
+            continue;
+        }
+
         if (line.find("@@@") != string::npos)
         {
             isAsciiMode = !isAsciiMode;
@@ -398,6 +440,12 @@ void LogManager::CH5()     // 5막 메인 스토리
     bool isAsciiMode = false;
     while (getline(file, line))
     {
+        if (line.find("[ENTER]") != string::npos)
+        {
+            LogManager::PressEnter();
+            continue;
+        }
+
         if (line.find("@@@") != string::npos)
         {
             isAsciiMode = !isAsciiMode;
@@ -426,6 +474,12 @@ void LogManager::CH5_Choice()     // 5막 엔딩 분기점
     bool isAsciiMode = false;
     while (getline(file, line))
     {
+        if (line.find("[ENTER]") != string::npos)
+        {
+            LogManager::PressEnter();
+            continue;
+        }
+
         if (line.find("@@@") != string::npos)
         {
             isAsciiMode = !isAsciiMode;
@@ -455,6 +509,12 @@ void LogManager::Final_Boss_1()
     bool isAsciiMode = false;
     while (getline(file, line))
     {
+        if (line.find("[ENTER]") != string::npos)
+        {
+            LogManager::PressEnter();
+            continue;
+        }
+
         if (line.find("@@@") != string::npos)
         {
             isAsciiMode = !isAsciiMode;
@@ -484,6 +544,12 @@ void LogManager::Final_Boss_2()
     bool isAsciiMode = false;
     while (getline(file, line))
     {
+        if (line.find("[ENTER]") != string::npos)
+        {
+            LogManager::PressEnter();
+            continue;
+        }
+
         if (line.find("@@@") != string::npos)
         {
             isAsciiMode = !isAsciiMode;
@@ -513,6 +579,12 @@ void LogManager::HAPPY_END()     // 해피 엔딩?
     bool isAsciiMode = false;
     while (getline(file, line))
     {
+        if (line.find("[ENTER]") != string::npos)
+        {
+            LogManager::PressEnter();
+            continue;
+        }
+
         if (line.find("@@@") != string::npos)
         {
             isAsciiMode = !isAsciiMode;
@@ -542,6 +614,12 @@ void LogManager::BAD_END()     // 배드 엔딩
     bool isAsciiMode = false;
     while (getline(file, line))
     {
+        if (line.find("[ENTER]") != string::npos)
+        {
+            LogManager::PressEnter();
+            continue;
+        }
+
         if (line.find("@@@") != string::npos)
         {
             isAsciiMode = !isAsciiMode;
