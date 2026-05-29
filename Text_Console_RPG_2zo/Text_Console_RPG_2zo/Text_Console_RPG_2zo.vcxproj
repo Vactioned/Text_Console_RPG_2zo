@@ -178,6 +178,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="BattleSystem.cpp" />
+    <ClCompile Include="FinalBoss.cpp" />
     <ClCompile Include="Berserker.cpp" />
     <ClCompile Include="Gambler.cpp" />
     <ClCompile Include="Item.cpp" />
