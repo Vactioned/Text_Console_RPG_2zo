@@ -62,7 +62,7 @@ void LevelUp::CheckLevelUp(Player* player)
 
             default:
                 cout << endl << "잘못 입력되었습니다. 다시 입력해주세요" << endl;
-                break;
+                continue;
             }
         }
         else
